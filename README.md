@@ -1,0 +1,1 @@
+# Sogeti-Safety-Check
