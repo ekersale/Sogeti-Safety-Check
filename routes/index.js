@@ -22,9 +22,8 @@ var router = express.Router();
  */
 router.get('/', function(req, res, next) {
   res.status(200).json({
-    message : "online"
+    status : "online"
   });
-  next();
 });
 
 module.exports = router;
