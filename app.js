@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/admin', mongo_express(mongo_express_config));
 app.use('/users', users);
+app.use('/doc', express.static(__dirname + '/docAPI'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
