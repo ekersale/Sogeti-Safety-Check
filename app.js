@@ -14,6 +14,8 @@ var users = require('./routes/users/users');
 
 var app = express();
 
+process.env.jwtSecretKey = '234619F40F12BC5825938FBEBA02725F3A50C4B5468CED70872C0C1D57B915BF3BA5F20880DFD34F122061B708426A85AF6622839B58DD4683688C82FD9E2893';
+
 
 mongoose.connection.on('connected', function() {
   console.log("Mongodb connected on port 27017");
@@ -55,28 +57,6 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
 
 mongoose.connect('mongodb://127.0.0.1/sogeti-safety-check');
 

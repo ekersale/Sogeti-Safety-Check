@@ -24,12 +24,7 @@ app.set('port', port);
  * Listen on provided port, on all network interfaces.
  */
 
-app.use(function(err, req, res, next) {
-  res.status(parseInt((err.status != undefined) ? err.status: 500)).json({
-    message: err.message,
-    error: err
-  });
-});
+
 
 app.listen(port, function(){
   console.log("All right ! I'm using port " + port  + ".");
@@ -61,6 +56,13 @@ app.delete('*', function(req, res, next) {
   err.message = "Not found.";
   err.status = 404;
   next(err);
+});
+
+app.use(function(err, req, res, next) {
+  res.status(parseInt((err.status != undefined) ? err.status: 500)).json({
+    message: err.message,
+    error: err
+  });
 });
 
 /**

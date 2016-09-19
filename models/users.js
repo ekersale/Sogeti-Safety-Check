@@ -12,7 +12,8 @@ var userSchema = new Schema({
         last        : String
     },
     credentials     : {
-        password    : String
+        password    : String,
+        token       : String
     },
     email           : String,
     phone           : String,
@@ -29,6 +30,7 @@ var userSchema = new Schema({
     allowGeoloc     : { type: Boolean },
     location        : { type: ObjectId, ref: "location" },
     groups          : [{ type: ObjectId, ref: "groups"}],
+    participations  : [{ type: ObjectId, ref: "events" }],
     events          : [{ type: ObjectId, ref: "events"}],
     profileImg      : { type: ObjectId, ref: "media" },
     contacts        : [{ type: ObjectId, ref: "users"}],
@@ -44,6 +46,7 @@ userSchema.pre('save', function(next) {
         this.created_at = currentDate;
     next();
 });
+
 
 var users = mongoose.model('users', userSchema);
 
