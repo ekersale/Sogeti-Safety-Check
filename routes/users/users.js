@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require('bluebird');
+var expressjwt = require("express-jwt");
 /*
-** BD models requires --> mongodb
+ ** BD models requires --> mongodb
  */
 var Users = require("../../models/users");
 
@@ -26,7 +27,7 @@ var Users = require("../../models/users");
  * @apiSuccess {String}     data.state          User activity
  * @apiSuccess {String}     data.home           User living place
  * @apiSuccess {Boolean}    data.geoloc         User choice regarding geolocalization authorization
- * @apiSuccess {ObjectID}   data.site           User place of work referring to a site model
+ * @apiSuccess {ObjectID}   data.sites           User place of work referring to a sites model
  * @apiSuccess {ObjectID}   data.events         User events referring to an array of event model
  * @apiSuccess {ObjectID}   data.profileImg     User profile image referring to media model
  * @apiSuccess {ObjectID}   data.contacts       User favorites contacts referring to an array of user model
@@ -86,27 +87,30 @@ var Users = require("../../models/users");
  *       "stacktrace"   : {}
  *     }
  */
-router.get('/', function(req, res, next) {
-    var limit = parseInt((req.query.limit != undefined && req.query.limit > 0) ? req.query.limit : 20);
-    var query = {};
-  if (req.query.q != undefined) {
-    query.$or = [
-        { 'name.last': { $regex: new RegExp(req.query.q, "i") } },
-        { 'name.first' : { $regex: new RegExp(req.query.q, "i") } },
-        { email: { $regex: new RegExp(req.query.q, "i") } }
-        ];
-  }
-  Promise.all([
-      Users.find(query, { credentials: 0 })
-          .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
-          .exec(),
-      Users.find(query).count().exec()
-  ]).spread(function(users, count) {
-      res.status(200).json({ message : "OK", data : { count: count, users: users }});
-  }, function(err) {
-     return next(err);
-  });
-});
+router.get('/',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    function(req, res, next) {
+        var limit = parseInt((req.query.limit != undefined && req.query.limit > 0) ? req.query.limit : 20);
+        var query = {};
+        if (req.query.q != undefined) {
+            query.$or = [
+                { 'name.last': { $regex: new RegExp(req.query.q, "i") } },
+                { 'name.first' : { $regex: new RegExp(req.query.q, "i") } },
+                { email: { $regex: new RegExp(req.query.q, "i") } }
+            ];
+        }
+        Promise.all([
+            Users.find(query, { credentials: 0 })
+                .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
+                .exec(),
+            Users.find(query).count().exec()
+        ]).spread(function(users, count) {
+            res.status(200).json({ message : "OK", data : { count: count, users: users }});
+        }, function(err) {
+            return next(err);
+        });
+    }
+);
 
 
 /**
@@ -126,19 +130,19 @@ router.get('/', function(req, res, next) {
  *     }
  */
 router.post('/', function(req, res, next) {
-  next();
+    next();
 });
 
 router.get('/:id', function(req, res, next) {
-  next();
+    next();
 });
 
 router.put('/:id', function(req, res, next) {
-  next();
+    next();
 });
 
 router.delete('/:id', function(req, res, next) {
-  next();
+    next();
 });
 
 module.exports = router;

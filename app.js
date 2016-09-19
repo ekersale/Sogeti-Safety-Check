@@ -11,10 +11,10 @@ var mongo_express_config = require('./node_modules/mongo-express/config');
 
 var routes = require('./routes/index');
 var users = require('./routes/users/users');
+var sites = require('./routes/sites/sites');
 
 var app = express();
 
-process.env.jwtSecretKey = '234619F40F12BC5825938FBEBA02725F3A50C4B5468CED70872C0C1D57B915BF3BA5F20880DFD34F122061B708426A85AF6622839B58DD4683688C82FD9E2893';
 
 
 mongoose.connection.on('connected', function() {
@@ -34,7 +34,6 @@ mongoose.connection.on('disconnected', function() {
 // view engine setup
 
 
-process.env.NODE_ENV = "development";
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -47,7 +46,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/admin', mongo_express(mongo_express_config));
 app.use('/users', users);
+app.use('/sites', sites);
 app.use('/doc', express.static(__dirname + '/docAPI'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
