@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/admin', mongo_express(mongo_express_config));
 app.use('/users', users);
-app.use('/sites', sites);
+app.use('/locations', sites);
 app.use('/doc', express.static(__dirname + '/docAPI'));
 
 
