@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login">
+  <img  padding-vertical src="images/sogeti-hightech-logo.png"/>
+  <h2 padding-vertical>Social Safety Check</h2>
+  <h4  padding-vertical>Se connecter à office 365</h4>
+  <ion-item  padding-vertical class="padding-more">
+    <ion-label primary>Email</ion-label>
+    <ion-input #email type="email" value="" placeholder="example@sogeti.com"></ion-input>
+  </ion-item>
+  <button full sogeti  padding-vertical (click)="login(email.value)" >Login</button>
+  <p>Utilisez l'identifiant CORP et le token obtenu sur MobilPass</p>
+</ion-content>

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "doc": "apidoc -i . -o docAPI"
+    "doc": "apidoc -i ./routes -o docAPI",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -19,6 +20,10 @@
     "mongo-express": "^0.31.2",
     "mongoose": "^4.6.0",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
-  }
+    "node-outlook": "^1.1.6",
+    "passport": "^0.3.2",
+    "serve-favicon": "~2.3.0",
+    "simple-oauth2": "^1.0.0"
+  },
+  "devDependencies": {}
 }

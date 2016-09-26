@@ -1,0 +1,571 @@
+[
+  {
+    "type": "get",
+    "url": "/authentication",
+    "title": "Request user authentication",
+    "name": "GetAuthentication",
+    "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Auto login token, no other credentials required</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>User mobile enter on his profile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email enter on his profile</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password defined by himself</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Specify authentication succeeded</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.token",
+            "description": "<p>Authorization token</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.userID",
+            "description": "<p>Authenticated user ID</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\"  : \"User authenticated\",\n  \"data\"     : {\n     \"token\" : \"XCVBNDDFGHJ23457890.DHJejfoezjez145efzekjezljcc890086544cce7efezfefz7fezfez\",\n     \"userID\": \"ef578fezpok123\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad request\n{\n   \"error\" : {\n       \"message\" : \"Credentials partially incorrect\"\n   }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n   \"error\" : {\n       \"message\" : \"Authentication failed\"\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/index.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "get",
+    "url": "/locations?q=\"\"&limit=\"\"&page=\"\"",
+    "title": "Request locations information",
+    "name": "GetLocation",
+    "group": "Locations",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "q",
+            "description": "<p>Search query in name - lastname - email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>Limit the number of return results</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Specify page wanted</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Specific message return by server, OK by default</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.count",
+            "description": "<p>Number of results without limit</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data._id",
+            "description": "<p>Location ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.name",
+            "description": "<p>Location name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.employeesNb",
+            "description": "<p>Location employees number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID[]",
+            "optional": false,
+            "field": "data.admin",
+            "description": "<p>Groups admin of that location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID[]",
+            "optional": false,
+            "field": "data.members",
+            "description": "<p>Users referring to that location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "data.created_at",
+            "description": "<p>Creation date of the object location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "data.updated_at",
+            "description": "<p>Updated date of the object location</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"OK\",\n  \"data\": {\n      \"count\": 1,\n      \"locations\": {\n           \"_id\"         : \"57d692f861ce72068fa04697\",\n            \"name\"       : \"Mougins\",\n            \"employeesNb\": 120,\n            \"created_at\" : \"2016-09-12T11:35:20.000Z\",\n            \"updated_at\" : \"2016-09-12T11:35:20.000Z\",\n            \"admin\"      : [],\n            \"members\"    : [\n                 \"57d6a05f61ce72068fa0469b\"\n            ]\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal server error\n{\n  \"error\"        : \"\",\n  \"stacktrace\"   : {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/sites/sites.js",
+    "groupTitle": "Locations"
+  },
+  {
+    "type": "get",
+    "url": "/locations/:id",
+    "title": "Request locations information",
+    "name": "GetLocationByID",
+    "group": "Locations",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Search query in name - lastname - email</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Specific message return by server, OK by default</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.count",
+            "description": "<p>Number of results without limit</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data._id",
+            "description": "<p>Location ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.name",
+            "description": "<p>Location name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.employeesNb",
+            "description": "<p>Location employees number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID[]",
+            "optional": false,
+            "field": "data.admin",
+            "description": "<p>Groups admin of that location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID[]",
+            "optional": false,
+            "field": "data.members",
+            "description": "<p>Users referring to that location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "data.created_at",
+            "description": "<p>Creation date of the object location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "data.updated_at",
+            "description": "<p>Updated date of the object location</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"OK\",\n  \"data\": {\n      \"location\": {\n           \"_id\"         : \"57d692f861ce72068fa04697\",\n            \"name\"       : \"Mougins\",\n            \"employeesNb\": 120,\n            \"created_at\" : \"2016-09-12T11:35:20.000Z\",\n            \"updated_at\" : \"2016-09-12T11:35:20.000Z\",\n            \"admin\"      : [],\n            \"members\"    : [\n                 \"57d6a05f61ce72068fa0469b\"\n            ]\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal server error\n{\n  \"error\"        : \"\",\n  \"stacktrace\"   : {}\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Internal server error\n{\n  \"error\"        : {\n     \"message\"   : \"Location nof found\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/sites/sites.js",
+    "groupTitle": "Locations"
+  },
+  {
+    "type": "get",
+    "url": "/status",
+    "title": "Request User information",
+    "name": "GetStatus",
+    "group": "Status",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Specify if the API is active</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"status\": \"online\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/index.js",
+    "groupTitle": "Status"
+  },
+  {
+    "type": "get",
+    "url": "/users?q=\"\"&limit=\"\"&page=\"\"",
+    "title": "Request user's informations",
+    "name": "GetUsers",
+    "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "q",
+            "description": "<p>Search query in name - lastname - email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>Limit the number of return results</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Specify page wanted</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Specific message return by server, OK by default</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.count",
+            "description": "<p>Number of results without limit</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data._id",
+            "description": "<p>User ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.name.first",
+            "description": "<p>User first name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.name.last",
+            "description": "<p>User last name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.email",
+            "description": "<p>User email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.phone",
+            "description": "<p>User phone number</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.function",
+            "description": "<p>User function in the company</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.state",
+            "description": "<p>User activity</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.home",
+            "description": "<p>User living place</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "data.geoloc",
+            "description": "<p>User choice regarding geolocalization authorization</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data.sites",
+            "description": "<p>User place of work referring to a sites model</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data.events",
+            "description": "<p>User events referring to an array of event model</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data.profileImg",
+            "description": "<p>User profile image referring to media model</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data.contacts",
+            "description": "<p>User favorites contacts referring to an array of user model</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "data.permission",
+            "description": "<p>User permissions referring to permission model</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"message\": \"OK\",\n  \"data\": {\n      \"count\": 1,\n      \"users\": [\n         {\n             \"_id\": \"57d6a05f61ce72068fa0469b\",\n             \"email\": \"john.doe@gmail.com\",\n             \"phone\": \"0698128977\",\n             \"function\": \"Developer de génie\",\n             \"state\": \"active\",\n             \"allowGeoloc\": true,\n             \"location\": \"57d692f861ce72068fa04697\",\n             \"profileImg\": \"57d695e261ce72068fa04699\",\n             \"created_at\": \"2016-09-12T12:32:31.000Z\",\n             \"updated_at\": \"2016-09-12T12:32:31.000Z\",\n             \"chat\": [\n                 \"57d6a47861ce72068fa0469f\"\n             ],\n             \"contacts\": [\n                 \"57d6a10761ce72068fa0469d\"\n             ],\n             \"events\": [\n                 \"57d68e2061ce72068fa04691\"\n             ],\n             \"participations\": [],\n             \"groups\": [\n                 \"57d68eb361ce72068fa04695\"\n             ],\n             \"geoloc\": {\n                 \"latitude\": null,\n                 \"longitude\": null\n             },\n             \"living\": {\n             \"latitude\": null,\n             \"longitude\": null\n             },\n             \"name\": {\n                 \"first\": \"John\",\n                 \"last\": \"Doe\"\n             }\n         }\n     }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 4xx Not Found\n{\n  \"error\"        : \"User not found\",\n  \"stacktrace\"   : {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users/users.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/users",
+    "title": "Add a new user",
+    "name": "PostUsers",
+    "group": "Users",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "ObjectID",
+            "optional": false,
+            "field": "message",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 4xx Not Found\n{\n  \"error\"        : \"User not found\",\n  \"stacktrace\"   : {}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/users/users.js",
+    "groupTitle": "Users"
+  }
+]

@@ -4,6 +4,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var jwt = require('jsonwebtoken');
 
 var Users = require("../models/users");
+var authHelper = require("../authHelper");
+
 /**
  * @api {get} /status Request User information
  * @apiName GetStatus
@@ -24,9 +26,9 @@ var Users = require("../models/users");
  *     }
  */
 router.get('/', function(req, res) {
-  res.status(200).json({
-    status : "online"
-  });
+    res.status(200).json({
+        status : "online"
+    });
 });
 
 
@@ -73,47 +75,75 @@ router.get('/', function(req, res) {
  */
 router.get('/authentication',
     function(req, res, next) {
-      if (req.query.token != undefined || ((req.query.email != undefined || req.query.phone != undefined)  && req.query.password != undefined))
-        next();
-      else return res.status(400).json({
-        error : {
-          message : "Credentials partially incorrect"
-        }
-      });
+        if (req.query.token != undefined || ((req.query.email != undefined || req.query.phone != undefined)  && req.query.password != undefined))
+            next();
+        else return res.status(400).json({
+            error : {
+                message : "Credentials partially incorrect"
+            }
+        });
     },
     function(req, res, next) {
-      var id = "";
-      Users.findOne( { $or : [
-              { email: req.body.email, 'credentials.password' : req.body.password},
-              { phone: req.body.phone, 'credentials.password' : req.body.password },
-              { token: req.body.token, _id: new ObjectId(id) }
+        var id = "";
+        Users.findOne( { $or : [
+                { email: req.body.email, 'credentials.password' : req.body.password},
+                { phone: req.body.phone, 'credentials.password' : req.body.password },
+                { token: req.body.token, _id: new ObjectId(id) }
             ]
-          }
-      ).exec(function(err, user) {
-              if (err) return next(err);
-              if (!user) return res.status(401).json({
-                error: {
-                  message   : "Authentication failed"
-                }
-              });
-              else {
-                var token = jwt.sign({id : user._id}, process.env.jwtSecretKey);
-                user.credentials.token = token;
-                user.save(function(err) {
-                  if (err) return next(err);
-                    res.status(200).json({
-                      message :  "User authenticated",
-                      data    : {
-                        token : token,
-                        userID: user._id
+            }
+        ).exec(function(err, user) {
+                if (err) return next(err);
+                if (!user) return res.status(401).json({
+                    error: {
+                        message   : "Authentication failed"
                     }
-                  });
                 });
-              }
-          }
-      );
+                else {
+                    var token = jwt.sign({id : user._id}, process.env.jwtSecretKey);
+                    user.credentials.token = token;
+                    user.save(function(err) {
+                        if (err) return next(err);
+                        res.status(200).json({
+                            message :  "User authenticated",
+                            data    : {
+                                token : token,
+                                userID: user._id
+                            }
+                        });
+                    });
+                }
+            }
+        );
     }
 );
+
+var outlook = require("node-outlook");
+
+router.get("/oauth", function(req, res, next) {
+    return res.status(200).json({
+        message : "OK",
+        data    : {
+            url : authHelper.getAuthUrl()
+        }
+    });
+});
+
+router.get("/authorize",
+    function(req, res, next) {
+        var code = req.query.code;
+        authHelper.getTokenFromCode(code, tokenReceived, res, next);
+    }
+);
+
+function tokenReceived(res, token) {
+    console.log("index.js - l.139");
+    return res.status(200).json({
+           message : "OK",
+           data : {
+               token: token
+           }
+       })
+    }
 
 
 
