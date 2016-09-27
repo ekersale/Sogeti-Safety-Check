@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 var Users = require("../models/users");
 var authHelper = require("../authHelper");
+var CryptoJS = require('crypto-js');
 
 /**
  * @api {get} /status Request User information
@@ -86,9 +87,9 @@ router.get('/authentication',
     function(req, res, next) {
         var id = "";
         Users.findOne( { $or : [
-                { email: req.body.email, 'credentials.password' : req.body.password},
-                { phone: req.body.phone, 'credentials.password' : req.body.password },
-                { token: req.body.token, _id: new ObjectId(id) }
+                { email: req.query.email, 'credentials.password' : req.query.password},
+                { phone: req.query.phone, 'credentials.password' : req.query.password },
+                { token: req.query.token, _id: new ObjectId(id) }
             ]
             }
         ).exec(function(err, user) {
@@ -145,6 +146,62 @@ function tokenReceived(res, token) {
        })
     }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+router.post('/registration',
+    function(req, res, next) {
+        console.log(req.body);
+        if (req.body.email != undefined &&
+            validateEmail(req.body.email) == true &&
+            req.body.email.indexOf("@sogeti.com") >= 0 &&
+            req.body.password != undefined &&
+            req.body.password.length >= 8)
+            return next();
+        else
+            return next(req.app.getError(400, "Bad request", { state: "Missing or incorrect parameters"}))
+    }, function(req, res, next) {
+        var user = new Users();
+        user.credentials.password = CryptoJS.SHA256(req.body.password).toString();
+        user.email = req.body.email;
+        user.save(function(err){
+            if (err) return next(err);
+            else return res.status(200).json({
+                message     : "User successfully registered",
+                data        : {
+                    token   : jwt.sign({id: user._id}, process.env.jwtSecretKey),
+                    userID  : user._id
+                }
+            });
+        });
+    }
+);
+
+router.get('/session',
+    function(req, res, next) {
+        if (req.query.email == undefined || req.query.password == undefined)
+            return next(req.app.getError(400, "Bad request", {state: "Missing or incorrect parameters"}));
+        else
+            return next();
+    }, function(req, res, next) {
+        Users.findOne({"email": req.query.email, "credentials.password": CryptoJS.SHA256(req.query.password).toString()})
+            .exec(function(err, user) {
+                if (err) return next(err);
+                else if (user == null || user == undefined){
+                    return next(req.app.getError(401, "Bad credentials", {state: "Incorrect credentials"}));
+                }
+                else return res.status(200).json({
+                        message     : "User authenticated",
+                        data        : {
+                            token   : jwt.sign({id: user._id}, process.env.jwtSecretKey),
+                            userID  : user._id
+                        }
+                    });
+            });
+    }
+);
 
 
 module.exports = router;

@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var Promise = require('bluebird');
 var expressjwt = require("express-jwt");
+var permissions = require("../../permissions");
+var CryptoJS = require('crypto-js');
+
 /*
  ** BD models requires --> mongodb
  */
@@ -89,6 +92,7 @@ var Users = require("../../models/users");
  */
 router.get('/',
     expressjwt({secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
     function(req, res, next) {
         var limit = parseInt((req.query.limit != undefined && req.query.limit > 0) ? req.query.limit : 20);
         var query = {};
@@ -100,49 +104,95 @@ router.get('/',
             ];
         }
         Promise.all([
-            Users.find(query, { credentials: 0 })
+            Users.find(query, { credentials: 0, chat: 0, contacts: 0 })
                 .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
                 .exec(),
             Users.find(query).count().exec()
         ]).spread(function(users, count) {
-            res.status(200).json({ message : "OK", data : { count: count, users: users }});
+            res.status(200).json({ message : "OK", data : { count: count, limit: limit, users: users }});
         }, function(err) {
             return next(err);
         });
     }
 );
 
+router.get('/:id',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        if (req.user.id == req.params.id) {
+            Users.findOne({_id : req.params.id}, {credentials: 0})
+                .exec(function(err, user) {
+                    if (err) return next(err);
+                    else if (!user) return next(req.app.getError(404, "User not found",
+                        {state: "ID may be incorrect"}));
+                    else return res.status(200).json({
+                            message     : "OK",
+                            data        : {
+                                user    : user
+                            }
+                        });
+                });
+        } else {
+            Users.findOne({_id: req.params.id}, {credentials: 0, created_at: 0, updated_at: 0, chat: 0, contacts: 0})
+                .exec(function(err,  user){
+                    if (err) return next(err);
+                    else if (!user) return next(req.app.getError(404, "User not found",
+                        {state: "ID may be incorrect"}));
+                    else return res.status(200).json({
+                            message     : "OK",
+                            data        : {
+                                user    : user
+                            }
+                        });
+                });
+        }
+    });
 
-/**
- * @api {post} /users Add a new user
- * @apiName PostUsers
- * @apiGroup Users
- *
- *
- * @apiSuccess {ObjectID} message
- *
- *
- * @apiErrorExample {json} Error-Response:
- *     HTTP/1.1 4xx Not Found
- *     {
- *       "error"        : "User not found",
- *       "stacktrace"   : {}
- *     }
- */
-router.post('/', function(req, res, next) {
-    next();
-});
+router.put('/:id',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    permissions(["me", "adminGroups"]),
+    function(req, res, next) {
+        Users.findOne({_id: req.params.id})
+            .exec(function(err, user) {
+                if (err) return next(err);
+                else if (!user) return next(req.app.getError(404, "User not found",
+                    {state: "Impossible to update a user not found"}));
+                else {
+                    for (var key in req.body) {
+                        if (user[key] != undefined && req.body[key] != ""){
+                            user[key] = req.body[key];
+                        }
+                        if (key == "password" && req.body[key] != "")
+                            user.credentials.password = CryptoJS.SHA256(req.body.password).toString();
+                    }
+                    user.save(function(err) {
+                        if (err) return next(err);
+                        else return res.status(200).json({
+                            message      : "OK",
+                            data         : {
+                                user     : user
+                            }
+                        });
+                    });
+                }
+            });
+    });
 
-router.get('/:id', function(req, res, next) {
-    next();
-});
-
-router.put('/:id', function(req, res, next) {
-    next();
-});
-
-router.delete('/:id', function(req, res, next) {
-    next();
-});
+router.delete('/:id',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    permissions(["me", "adminGroups"]),
+    function(req, res, next) {
+        Users.findOneAndRemove({_id : req.params.id})
+            .exec(function(err, report) {
+                if (err) return next(err);
+                else return res.status(200).json({
+                    message     : "OK",
+                    data        : {
+                        report  : report
+                    }
+                })
+            });
+    });
 
 module.exports = router;

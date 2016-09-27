@@ -33,7 +33,13 @@ mongoose.connection.on('disconnected', function() {
 });
 // view engine setup
 
-
+app.getError = function(status,message, err) {
+  var error = new Error;
+  error.message = message;
+  error.status = status;
+  error.error = err;
+  return error;
+};
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -42,6 +48,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use('/', routes);
 app.use('/admin', mongo_express(mongo_express_config));

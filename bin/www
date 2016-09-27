@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 process.env.jwtSecretKey = '234619F40F12BC5825938FBEBA02725F3A50C4B5468CED70872C0C1D57B915BF3BA5F20880DFD34F122061B708426A85AF6622839B58DD4683688C82FD9E2893';
 
 
@@ -11,17 +12,12 @@ var http = require('http');
 var mongoose = require('mongoose');
 
 
-
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
-/**
- * Create HTTP server.
- */
 
 
 /**

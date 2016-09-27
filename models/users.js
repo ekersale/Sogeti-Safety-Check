@@ -8,26 +8,26 @@ var ObjectId = Schema.Types.ObjectId;
 
 var userSchema = new Schema({
     name            : {
-        first       : String,
-        last        : String
+        first       : {type: String, default: ''},
+        last        : {type: String, default: ''}
     },
     credentials     : {
         password    : String,
         token       : String
     },
     email           : String,
-    phone           : String,
-    function        : String,
-    state           : String,
+    phone           : {type: String, default: ''},
+    function        : {type: String, default: ''},
+    state           : {type: String, default: ''},
     living          : {
-        latitude    : Number,
-        longitude   : Number
+        latitude    : {type: Number, default: 0},
+        longitude   : {type: Number, default: 0}
     },
     geoloc          : {
-        latitude    : Number,
-        longitude   : Number
+        latitude    : {type: Number, default: 0},
+        longitude   : {type: Number, default: 0}
     },
-    allowGeoloc     : { type: Boolean },
+    allowGeoloc     : { type: Boolean, default: true },
     location        : { type: ObjectId, ref: "location" },
     groups          : [{ type: ObjectId, ref: "groups"}],
     participations  : [{ type: ObjectId, ref: "events" }],
@@ -45,6 +45,11 @@ userSchema.pre('save', function(next) {
     if (!this.created_at)
         this.created_at = currentDate;
     next();
+});
+
+userSchema.pre('remove', function(next) {
+    // Remove all the assignment docs that reference the removed person.
+    // this.model('Assignment').remove({ person: this._id }, next);
 });
 
 
