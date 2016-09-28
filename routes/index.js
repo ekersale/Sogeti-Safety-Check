@@ -6,6 +6,17 @@ var jwt = require('jsonwebtoken');
 var Users = require("../models/users");
 var authHelper = require("../authHelper");
 var CryptoJS = require('crypto-js');
+var randomstring = require('randomstring');
+var nodemailer = require("nodemailer");
+var smtpTransport = require('nodemailer-smtp-transport');
+var transporter = nodemailer.createTransport(smtpTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+        user: 'noreply.orh.sht@gmail.com',
+        pass: 'Sogeti99#'
+    }
+}));
 
 /**
  * @api {get} /status Request User information
@@ -153,7 +164,6 @@ function validateEmail(email) {
 
 router.post('/registration',
     function(req, res, next) {
-        console.log(req.body);
         if (req.body.email != undefined &&
             validateEmail(req.body.email) == true &&
             req.body.email.indexOf("@sogeti.com") >= 0 &&
@@ -176,6 +186,42 @@ router.post('/registration',
                 }
             });
         });
+    }
+);
+
+router.get("/recoverPwd",
+    function(req, res, next) {
+        if (req.query.email == undefined || req.query.email == "")
+            return next(req.app.getError(400, "Incorrect or missing parameter 'email'"));
+        else
+            Users.findOne({email: req.query.email})
+                .exec(function(err, user) {
+                    if(err) return next(err);
+                    else if (!user) return next(req.app.getError(404, "User not found. Please verify email address"));
+                    else {
+                        var pwd =  randomstring.generate(10);
+                        user.credentials.password = CryptoJS.MD5(CryptoJS.SHA256(pwd));
+                        user.save();
+                        var mailOptions = {
+                            from: '"noreply-sogeti" <noreply@sogeti.com>"',
+                            to  : user.email,
+                            subject : 'Password reset',
+                            html: '<p>Hi ' + user.name.first + " !</p><br/><br/>" +
+                                "<p>It appear you asked for a new password. Please find the new password above: </p><br />" +
+                                "<p><b>" + pwd + "</b></p><br />" +
+                                "<p>Please change this default password and take care to remember your credentials next time !</p><br /><br />" +
+                                "<p><i>Best regards</i></p>"
+
+                        };
+                        transporter.sendMail(mailOptions, function(err, info) {
+                            if (err) return next(err);
+                            else res.status(200).json({
+                                message     : info.response
+                            });
+                        });
+                        return ;
+                    }
+                })
     }
 );
 

@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { APIService } from '../../services/server';
 import { RegistrationPage } from "../register/register";
+import { PwdRecuperationPage } from '../PwdRecover/pwdRecover'
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -27,6 +28,10 @@ export class LoginPage {
   }
 
   goToRegistration() {
-    this.navCtrl.push(RegistrationPage);
+    this.navCtrl.push(RegistrationPage, {}, {animate: true, animation: 'ios-transition'});
+  }
+
+  goToRecover() {
+    this.navCtrl.push(PwdRecuperationPage, {}, {animate: true, animation: 'ios-transition'});
   }
 }

@@ -22,8 +22,13 @@ export class APIService {
 
   postRegistration(username, password) {
     password = md5(password);
-    let registration = this.http.get(this.serverAdd + `registration?email=${username}&password=${password}`);
+    let registration = this.http.post(this.serverAdd + 'registration', { email: username, password: password });
     return registration;
+  }
+
+  getEmailRecover(email) {
+    let recover = this.http.get(this.serverAdd + `recoverPwd?email=${email}`);
+    return recover;
   }
 }
 

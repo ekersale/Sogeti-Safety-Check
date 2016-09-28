@@ -7,7 +7,7 @@
 <ion-content padding class="login" >
   <img  padding-vertical src="images/sogeti-hightech-logo.png"/>
 
-  <h2 padding-vertical>Social Safety Check</h2>
+  <h2 padding-vertical>Sogeti Safety Check</h2>
   <div class="separator"></div>
   <div style="text-align:center; margin-bottom: 5%;">
     <span class="LogOrSign" translate="LOG">Log in</span>
@@ -24,7 +24,6 @@
   </ion-item>
   <button full padding-vertical (click)="login(email.value, password.value)" >Login</button>
   <div style="text-align:center; margin-top: 5%;">
-    <span class="ForgotPwd" translate="FORGOTPASS">Forgot password ?</span>
-    <span class="ForgotPwd" translate="RECOVERHERE">Recover here</span>
+    <span class="ForgotPwd" translate="FORGOTPASS"  (click)="goToRecover()">Forgot password ?</span>
   </div>
 </ion-content>
