@@ -3,7 +3,7 @@
  */
 
 import { Component } from '@angular/core';
-import {NavController, LoadingController, ToastController, ViewController} from 'ionic-angular';
+import {NavController, ToastController, ViewController} from 'ionic-angular';
 import { APIService } from '../../services/server';
 
 
@@ -14,7 +14,7 @@ import { APIService } from '../../services/server';
 
 export class PwdRecuperationPage {
 
-  constructor(public viewCtrl : ViewController,public navCtrl: NavController, private api : APIService, private loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public viewCtrl : ViewController,public navCtrl: NavController, private api : APIService, private toastCtrl: ToastController) {
   }
 
   ionViewWillEnter() {
@@ -22,7 +22,32 @@ export class PwdRecuperationPage {
   }
 
   getPwd(email) {
-    var recover = this.api.getEmailRecover(email);
+    let message;
+    this.api.getEmailRecover(email).subscribe(
+      data => {
+        message = "Email just been sent. Please check your mailbox.";
+        var toast = this.toastCtrl.create({
+          message: message,
+          duration: 2000,
+          position: 'bottom'
+        });
+        toast.onDidDismiss(() => this.navCtrl.pop());
+        toast.present();
+      },
+      err => {
+        if (err.status >= 500)
+          message = "Server unreachable, please verify your connectivity and try again.";
+        else if (err.status >= 400 && err.status < 500)
+          message = "Please specify a valid email address.";
+        else
+          message = "Unexpected error, try again and contact the administrators if persistent error.";
+        this.toastCtrl.create({
+          message: message,
+          duration: 4000,
+          position: 'bottom'
+        }).present();
+      }
+    );
   }
 
 }

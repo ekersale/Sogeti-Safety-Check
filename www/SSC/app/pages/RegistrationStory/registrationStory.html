@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<ion-header hidden="true">
+  <ion-navbar>
+    <ion-title item-left>Registration Story</ion-title>
+  </ion-navbar>
+</ion-header>
 
-</body>
-</html>
+<ion-content padding class="RegistrationStory" >
+  <ion-label class="animated fadeInLeft item-remove-animate title">Hello !</ion-label>
+  <ion-label class="animated fadeIn item-remove-animate info">Sign up is almost done...</ion-label>
+  <ion-item  padding-vertical class="animated fadeIn item-remove-animate margin-more">
+    <ion-icon name="person" item-left></ion-icon>
+    <ion-input type="email" [(ngModel)]="lastName" placeholder="Last name"  ></ion-input>
+    <ion-input type="email"  [(ngModel)]="firstName" placeholder="First name"  ></ion-input>
+  </ion-item>
+  <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate">
+    <ion-icon name="pulse" item-left></ion-icon>
+    <ion-label>Working state</ion-label>
+    <ion-select [(ngModel)]="state" >
+      <ion-option value="Working" >Working</ion-option>
+      <ion-option value="Holidays">Taking holidays</ion-option>
+      <ion-option value="None">Other</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate">
+    <ion-icon name="briefcase" item-left></ion-icon>
+    <ion-input  type="email" [(ngModel)]="jobType" placeholder="Job function" ></ion-input>
+  </ion-item>
+  <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate">
+    <ion-icon name="call" item-left></ion-icon>
+    <ion-input type="text" maxlength="15"  [(ngModel)]="phone" [textMask]="{mask: maskPhone}"></ion-input>
+  </ion-item>
+  <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate">
+    <ion-icon name="navigate" item-left></ion-icon>
+    <ion-label>Authorize geolocation</ion-label>
+    <ion-toggle [(ngModel)]="authGeoloc"></ion-toggle>
+  </ion-item>
+  <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate">
+    <ion-icon name="locate" item-left></ion-icon>
+    <ion-label>Working place</ion-label>
+    <ion-select [(ngModel)]="state" >
+      <ion-option value="Aix-en-Provence" >Aix-en-Provence</ion-option>
+      <ion-option value="Bagnol s/ Cèze">Bagnol s/ Cèze</ion-option>
+      <ion-option value="Carquefou">Carquefou</ion-option>
+      <ion-option value="Grenoble">Grenoble</ion-option>
+      <ion-option value="Ile de France">Ile de France</ion-option>
+      <ion-option value="Lyon">Lyon</ion-option>
+      <ion-option value="Normandie">Normandie</ion-option>
+      <ion-option value="Rennes">Rennes</ion-option>
+      <ion-option value="Strasbourg">Strasbourg</ion-option>
+      <ion-option value="Bordeaux">Bordeaux</ion-option>
+      <ion-option value="Digulleville">Digulleville</ion-option>
+      <ion-option value="Guyancourt">Guyancourt</ion-option>
+      <ion-option value="La Rochelle">La Rochelle</ion-option>
+      <ion-option value="Melun">Melun</ion-option>
+      <ion-option value="Sophia Antipolis">Sophia Antipolis</ion-option>
+      <ion-option value="Toulouse">Toulouse</ion-option>
+    </ion-select>
+  </ion-item>
+  <button ion-button class="{{classMap}}" (click)="saveProfileInfo()" style="margin-top: 10%;">
+    <ion-icon name="arrow-dropright"></ion-icon>
+  </button>
+</ion-content>

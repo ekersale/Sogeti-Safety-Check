@@ -50,10 +50,10 @@ export class RegistrationPage {
         if (err.status >= 500)
           message = "Server unreachable, please verify your connectivity and try again.";
         else
-          message = "Missing or incorrect parameters. Please check email validity.";
+          message = "Missing or incorrect parameters. Please check email validity. Must be a SOGETI address.";
         let toast = this.toastCtrl.create({
           message: message,
-          duration: 3000,
+          duration: 4000,
           position: 'bottom'
         });
         toast.present();

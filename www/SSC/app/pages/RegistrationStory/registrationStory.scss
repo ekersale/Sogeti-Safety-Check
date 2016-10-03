@@ -1,0 +1,75 @@
+
+.RegistrationStory {
+  background-color: #e9ebee;
+  font-family: 'SanFranciscoTextLight' ;
+
+  ion-item {
+    background: transparent;
+  }
+
+  .input-wrapper#lbl-1 {
+    display: none;
+  }
+
+  .input-wrapper ion-select {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0px;
+  }
+
+  .title {
+    font-family: "SanFranciscoDisplayLight" !important;
+    font-size: 40px;
+    text-align:center;
+    margin-bottom: 7%;
+    margin-top: 7%;
+  }
+
+  .toggle-checked {
+    background-color: rgb(239, 69, 39);
+  }
+
+  .info {
+    font-size: 15px;
+    text-align:center;
+    margin-bottom: 5%;
+  }
+
+  .margin-more {
+    margin-top: 20px;
+  }
+
+  .registerItem {
+    -webkit-animation: fadeInLeft 1s;
+    animation: fadeInLeft 1s;
+  }
+
+  .NextButton {
+    color: rgb(239, 69, 39);
+    font-size: 36px !important;
+    background-color: transparent !important;
+    text-align: center;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+
+
+  .NextButtonAnimation {
+    color: rgb(239, 69, 39);
+    font-size: 36px !important;
+    background-color: transparent !important;
+    text-align: center;
+    width: 3000px !important;
+    transition: 2s ease-in-out;
+    box-shadow: none !important;
+  }
+
+
+  .NextButtonAnimation .button-inner ion-icon {
+    font-size: 1.8em !important;
+    padding: 0.5em !important;
+    line-height: .67;
+    pointer-events: none;
+  }
+}
