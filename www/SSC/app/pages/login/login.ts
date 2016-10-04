@@ -7,6 +7,7 @@ import { NavController } from 'ionic-angular';
 import { APIService } from '../../services/server';
 import { RegistrationPage } from "../register/register";
 import { PwdRecuperationPage } from '../PwdRecover/pwdRecover'
+import {HomePage} from '../home/home';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
@@ -20,7 +21,9 @@ export class LoginPage {
   login(email, password) {
       this.api.getConnexion(email, password).subscribe(
         data => {
-          console.log(data.json());
+          this.api.setCredentials(data.json());
+            this.navCtrl.pop();
+            this.navCtrl.setRoot(HomePage, {}, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         err => console.error(err),
         () => console.log("Authentication completed")

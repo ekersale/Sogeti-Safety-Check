@@ -15,7 +15,7 @@ var userSchema = new Schema({
         password    : String,
         token       : String
     },
-    email           : String,
+    email           : {type: String, unique: true},
     phone           : {type: String, default: ''},
     function        : {type: String, default: ''},
     state           : {type: String, default: ''},
