@@ -50,7 +50,7 @@ export class RegistrationPage {
               loading.dismiss();
               let message;
               if (error.status == 0)
-                message = "Server unreachable, please verify your connectivity and try again. If the problem persist please contact the administrator.";
+                this.api.DisplayServerError(this.toastCtrl, error);
               else if (error.status >= 500) {
                 message = "Email address seems to be already associated to an account.";
               }

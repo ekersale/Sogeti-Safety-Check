@@ -9063,6 +9063,30 @@ body {
   font-size: 1.4rem;
   background-color: #fff; }
 
+.home {
+  background-color: #e9ebee; }
+  .home .searchbar-input {
+    color: white;
+    border-radius: 0px;
+    border: 0px !important;
+    background-color: #ef4527 !important;
+    border-bottom: 1px solid white !important;
+    box-shadow: none; }
+  .home .show-tabbar {
+    background: #ef4527 !important; }
+  .home .tab-button {
+    color: white !important; }
+  .home ion-searchbar {
+    background: none !important;
+    border-bottom: none !important; }
+  .home *::-webkit-input-placeholder {
+    color: white !important; }
+  .home *:-moz-placeholder {
+    color: white !important; }
+  .home *:-ms-input-placeholder {
+    /* IE10+ */
+    color: white !important; }
+
 .bar-button-default {
   color: #ef4527 !important; }
 
@@ -9320,3 +9344,13 @@ body {
     margin-left: 9px; }
   .PwdRecover .padding-more {
     margin-bottom: 5%; }
+
+.profile {
+  background-color: #e9ebee; }
+  .profile img {
+    text-align: center;
+    margin: auto;
+    width: 30%; }
+  .profile scroll-content {
+    margin-top: 20%;
+    text-align: center; }

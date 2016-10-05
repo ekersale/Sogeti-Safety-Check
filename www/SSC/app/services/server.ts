@@ -10,7 +10,7 @@ import {Platform} from 'ionic-angular';
 
 @Injectable()
 export class APIService {
-  private serverAdd = "http://localhost:3000/";
+  private serverAdd = "http://198.27.65.200:3000/";
   private header = new Headers();
   private userID= "";
 
@@ -18,6 +18,15 @@ export class APIService {
       /*platform.ready().then(() => {
         this.getHeader();
       });*/
+  }
+
+  DisplayServerError(toastCtrl, err) {
+    if (err.status == 0)
+      toastCtrl.create({
+        message: "Server unreachable please contact the administrator.",
+        duration: 4000,
+        position: 'bottom'
+      }).present();
   }
 
   getConnexion(username, password) {

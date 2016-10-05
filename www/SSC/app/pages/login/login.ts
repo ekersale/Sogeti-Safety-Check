@@ -3,7 +3,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 import { APIService } from '../../services/server';
 import { RegistrationPage } from "../register/register";
 import { PwdRecuperationPage } from '../PwdRecover/pwdRecover'
@@ -15,7 +15,7 @@ import {HomePage} from '../home/home';
 })
 
 export class LoginPage {
-  constructor(public navCtrl: NavController, private api : APIService) {
+  constructor(public navCtrl: NavController, private api : APIService, private toastCtrl : ToastController) {
   }
 
   login(email, password) {
@@ -25,9 +25,18 @@ export class LoginPage {
             this.navCtrl.pop();
             this.navCtrl.setRoot(HomePage, {}, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
-        err => console.error(err),
-        () => console.log("Authentication completed")
-      );
+        err => {
+          if (err.status == 0)
+            this.api.DisplayServerError(this.toastCtrl, err);
+          else
+            this.toastCtrl.create({
+              message: "Incorrect email or password. Try again.",
+              duration: 4000,
+              position: 'bottom'
+            }).present();
+        },
+      () => console.log("Authentication completed")
+  );
   }
 
   goToRegistration() {

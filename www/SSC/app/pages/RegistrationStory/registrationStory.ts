@@ -3,12 +3,13 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import { NavController, AlertController, NavParams } from 'ionic-angular';
+import {NavController, AlertController, NavParams, Platform, ToastController} from 'ionic-angular';
 import { APIService } from '../../services/server';
 import {Directive} from 'ionic2-input-mask';
 import {FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CORE_DIRECTIVES} from "@angular/common";
+import {HomePage} from '../home/home';
 
 @Component({
     templateUrl: 'build/pages/RegistrationStory/registrationStory.html',
@@ -24,8 +25,11 @@ export class RegistrationStoryPage implements OnInit {
 
     classMap: any = "NextButton";
 
-    constructor(public navCtrl: NavController, private navParams: NavParams, private api : APIService, public alertCtrl: AlertController, private fb : FormBuilder) {
+    constructor(public navCtrl: NavController, private navParams: NavParams,
+                private api : APIService, public alertCtrl: AlertController,
+                private fb : FormBuilder, private plateform: Platform, private toastCtrl: ToastController) {
         api.setCredentials(navParams.get('credentials'));
+        plateform.registerBackButtonAction((e) => { e.preventDefault();}, 501)
         console.log(api.getCredentials());
     }
 
@@ -54,10 +58,12 @@ export class RegistrationStoryPage implements OnInit {
         if (this.registrationForm.valid) {
             this.api.sendRegistrationUserInfo(this.registrationForm.controls).subscribe(
                 data => {
-                    console.log("success babyyyyy doll");
                     this.classMap = "animated NextButtonAnimation item-remove-animate";
+                    this.navCtrl.setRoot(HomePage, {}, {animate: true, animation: 'ios-transition', direction:'forward'});
                 },
                 error => {
+                    if (error.status == 0)
+                        this.api.DisplayServerError(this.toastCtrl, error);
                     console.error(error);
                 }
             );
