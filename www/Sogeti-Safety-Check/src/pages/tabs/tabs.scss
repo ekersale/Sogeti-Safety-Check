@@ -1,0 +1,50 @@
+.tabs {
+
+
+  background-color: #e9ebee;
+
+  .searchbar-input {
+    color: white;;
+    border-radius: 0px;
+    border: 0px !important;
+    background-color: rgb(239, 69, 39) !important;
+    border-bottom: 1px solid white !important;
+    box-shadow: none;
+  }
+
+  .show-tabbar {
+    background: rgb(239, 69, 39) !important;
+  }
+
+  .tabs-ios .tab-button {
+    color: white !important;
+  }
+
+  .tab-button[aria-selected=true] {
+    color: white !important;
+  }
+
+    /*  .tab-button {
+        color: white !important;
+      }*/
+
+  ion-searchbar {
+    background: none !important;
+    border-bottom: none !important;
+  }
+
+  *::-webkit-input-placeholder {
+    color: white !important;
+  }
+  *:-moz-placeholder {
+    color: white !important;
+  }
+  *:-ms-input-placeholder { /* IE10+ */
+    color: white !important;
+  }
+
+  scroll-content {
+    padding-top: 7%;
+    text-align:center;
+  }
+}

@@ -1,0 +1,102 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+$text-color:        #000;
+$background-color:  #fff;
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #387ef5,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  favorite:   #69BB7B,
+  sogeti:     rgb(239, 69, 39),
+  sogetiActive: rgb(211, 64, 39)
+);
+
+@font-face {
+  font-family: 'OpenSansLight';
+  src: url('../assets/fonts/OpenSansLight.eot');
+  src: url('../assets/fonts/OpenSansLight.eot') format('embedded-opentype'),
+  url('../assets/fonts/OpenSansLight.woff2') format('woff2'),
+  url('../assets/fonts/OpenSansLight.woff') format('woff'),
+  url('../assets/fonts/OpenSansLight.ttf') format('truetype'),
+  url('../assets/fonts/OpenSansLight.svg#OpenSansLight') format('svg');
+}
+
+@font-face {
+  font-family: 'SanFranciscoTextMedium';
+  src: url('../assets/fonts/SanFranciscoTextMedium.eot');
+  src: url('../assets/fonts/SanFranciscoTextMedium.eot') format('embedded-opentype'),
+  url('../assets/fonts/SanFranciscoTextMedium.woff2') format('woff2'),
+  url('../assets/fonts/SanFranciscoTextMedium.woff') format('woff'),
+  url('../assets/fonts/SanFranciscoTextMedium.ttf') format('truetype'),
+  url('../assets/fonts/SanFranciscoTextMedium.svg#SanFranciscoTextMedium') format('svg');
+}
+
+@font-face {
+  font-family: 'SanFranciscoDisplayMedium';
+  src: url('../assets/fonts/SanFranciscoDisplayMedium.eot');
+  src: url('../assets/fonts/SanFranciscoDisplayMedium.eot') format('embedded-opentype'),
+  url('../assets/fonts/SanFranciscoDisplayMedium.woff2') format('woff2'),
+  url('../assets/fonts/SanFranciscoDisplayMedium.woff') format('woff'),
+  url('../assets/fonts/SanFranciscoDisplayMedium.ttf') format('truetype'),
+  url('../assets/fonts/SanFranciscoDisplayMedium.svg#SanFranciscoDisplayMedium') format('svg');
+}
+
+@font-face {
+  font-family: 'SanFranciscoDisplayLight';
+  src: url('../assets/fonts/SanFranciscoDisplayLight.eot');
+  src: url('../assets/fonts/SanFranciscoDisplayLight.eot') format('embedded-opentype'),
+  url('../assets/fonts/SanFranciscoDisplayLight.woff2') format('woff2'),
+  url('../assets/fonts/SanFranciscoDisplayLight.woff') format('woff'),
+  url('../assets/fonts/SanFranciscoDisplayLight.ttf') format('truetype'),
+  url('../assets/fonts/SanFranciscoDisplayLight.svg#SanFranciscoDisplayLight') format('svg');
+}
+
+@font-face {
+  font-family: 'SanFranciscoTextLight';
+  src: url('../assets/fonts/SanFranciscoTextLight.eot');
+  src: url('../assets/fonts/SanFranciscoTextLight.eot') format('embedded-opentype'),
+  url('../assets/fonts/SanFranciscoTextLight.woff2') format('woff2'),
+  url('../assets/fonts/SanFranciscoTextLight.woff') format('woff'),
+  url('../assets/fonts/SanFranciscoTextLight.ttf') format('truetype'),
+  url('../assets/fonts/SanFranciscoTextLight.svg#SanFranciscoTextLight') format('svg');
+}
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+$ionicons-font-path: "../assets/fonts";
+@import "ionicons";

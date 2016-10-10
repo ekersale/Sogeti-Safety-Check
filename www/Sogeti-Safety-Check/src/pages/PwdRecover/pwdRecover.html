@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title item-left>Recover password</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="PwdRecover" >
+  <img  padding-vertical src="./assets/images/sogeti-hightech-logo.png"/>
+  <h2 padding-vertical>Sogeti Safety Check</h2>
+  <div class="separator"></div>
+  <p class="padding-more">Please enter the email address used to create your account.</p>
+  <ion-item  padding-vertical class="padding-more">
+    <ion-icon name="mail" item-left></ion-icon>
+    <ion-input #email type="email" value="" placeholder="example@sogeti.com" class="RemoveUnderLine" ></ion-input>
+  </ion-item>
+  <button full padding-vertical (click)="getPwd(email.value)" >Send</button>
+  <p padding-vertical class="padding-more" style="margin-top: 5%;">You will receive a new password by email. Nevertheless think about changing the default password.</p>
+</ion-content>

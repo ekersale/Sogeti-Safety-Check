@@ -1,0 +1,120 @@
+
+
+.profile {
+  background-color: #e9ebee;
+  font-family: 'SanFranciscoTextDisplay';
+
+  ion-item.img
+  {
+    text-align:center;
+    background-color: transparent;
+
+    img {
+      margin: auto;
+      width: 50%;
+      border-radius: 50%; // half for rounding */
+      object-fit: cover; /* Scale the image - Center and crop image*/
+      object-position: center; /* Center the image within the element - Center and crop image*/
+      margin: auto;
+      /*
+      width: 50%;
+      */
+    }
+
+    ion-label {
+      margin-bottom: 0px;
+    }
+
+    .item-inner {
+      border: none;
+    }
+  }
+
+  h2 {
+    text-align:center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+    color: rgb(239, 69, 39);
+  }
+
+  h3 {
+    text-align:center;
+    margin-top: 0;
+    font-size: 15px;
+  }
+
+
+
+  .contacts {
+    background: #ef4527;
+    padding:0;
+
+    ion-label {
+      margin: 5px;
+    }
+
+    .item-inner {
+      border: none;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .input-wrapper {
+      text-align:center;
+    }
+
+    button {
+      width: 54px !important;
+      height: 54px !important;
+      color: #fff;
+      background-color: transparent;
+      border: 1px solid white;
+      margin-left: 5.2%;
+
+      ion-icon {
+        font-size: 2.2em;
+      }
+    }
+  }
+
+  .more-info {
+    display: inline-flex;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+
+    .boxes {
+      width: 50%;
+      margin: 0;
+      border: 1px solid #cacaca;
+      background: transparent;
+
+      .item-inner {
+        border-bottom: none;
+        color: #ef4527;
+      }
+
+      ion-icon {
+        color: #ef4527;
+      }
+    }
+  }
+
+  .eventsParticipation {
+    text-align:center;
+    margin-top: 20px;
+    backgroud: transparent;
+
+    ion-item {
+      background: transparent;
+    }
+
+    h1 {
+      font-family: 'SanFranciscoTextDisplay';
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+}
