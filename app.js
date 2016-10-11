@@ -12,6 +12,7 @@ var mongo_express_config = require('./node_modules/mongo-express/config');
 var routes = require('./routes/index');
 var users = require('./routes/users/users');
 var sites = require('./routes/sites/sites');
+var events = require('./routes/events/events');
 
 var app = express();
 
@@ -62,6 +63,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/admin', mongo_express(mongo_express_config));
 app.use('/users', users);
+app.use('/events', events);
 app.use('/locations', sites);
 app.use('/doc', express.static(__dirname + '/docAPI'));
 

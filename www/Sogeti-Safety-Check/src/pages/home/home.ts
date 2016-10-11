@@ -13,6 +13,5 @@ import {Component} from '@angular/core';
 export class TabHomePage {
 
     constructor() {
-
     }
 }

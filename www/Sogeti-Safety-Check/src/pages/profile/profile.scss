@@ -3,7 +3,6 @@
 .profile {
   background-color: #e9ebee;
   font-family: 'SanFranciscoTextDisplay';
-
   ion-item.img
   {
     text-align:center;
@@ -12,6 +11,9 @@
     img {
       margin: auto;
       width: 50%;
+      min-width: 50%;
+      max-width: 50%;
+      height: auto;
       border-radius: 50%; // half for rounding */
       object-fit: cover; /* Scale the image - Center and crop image*/
       object-position: center; /* Center the image within the element - Center and crop image*/

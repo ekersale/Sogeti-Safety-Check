@@ -21,6 +21,7 @@ export class TabProfilePage {
   public phone: string = '';
   public email: string = '';
   public profileImg: string = 'https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png';
+  public events = [];
 
   constructor(private api: APIService, public navCtrl: NavController) {
     this.api.getUserInfo().subscribe(
@@ -36,12 +37,17 @@ export class TabProfilePage {
         this.phone = (data.data.user.phone) ? data.data.user.phone : 'undefined';
         this.email = (data.data.user.email) ? data.data.user.email : 'undefined';
         this.profileImg = (data.data.user.profileImg) ? data.data.user.profileImg.relativePath : 'https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png';
+        this.events = (data.data.user.participations) ? data.data.user.participations : []
       },
       error => console.log(error)
     );
   }
 
   ionViewDidLoad() {
+
+  }
+
+  eventSelected(item) {
 
   }
 }

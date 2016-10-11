@@ -123,7 +123,21 @@ router.get('/:id',
     function(req, res, next) {
         if (req.user.id == req.params.id) {
             Users.findOne({_id : req.params.id}, {credentials: 0})
-                .populate("profileImg")
+                .populate("profileImg", "relativePath")
+                .populate([
+                    {
+                        path: "participations", model:"events", populate:
+                        [
+                            {
+                                path: "author", model: "users", select: 'name profileImg _id',
+                                populate: {path: "profileImg", model: "media", select: "relativePath -_id"}
+                            },
+                            {
+                                path: "images", model: "media", select: "relativePath -_id"
+                            }
+                        ]
+                    }
+                ])
                 .exec(function(err, user) {
                     if (err) return next(err);
                     else if (!user) return next(req.app.getError(404, "User not found",
@@ -137,7 +151,21 @@ router.get('/:id',
                 });
         } else {
             Users.findOne({_id: req.params.id}, {credentials: 0, created_at: 0, updated_at: 0, chat: 0, contacts: 0})
-                .populate("profileImg")
+                .populate("profileImg", "relativePath")
+                .populate([
+                    {
+                        path: "participations", model:"events", populate:
+                        [
+                            {
+                                path: "author", model: "users", select: 'name profileImg _id',
+                                populate: {path: "profileImg", model: "media", select: "relativePath -_id"}
+                            },
+                            {
+                                path: "images", model: "media", select: "relativePath -_id"
+                            }
+                        ]
+                    }
+                ])
                 .exec(function(err,  user) {
                     if (err) return next(err);
                     else if (!user) return next(req.app.getError(404, "User not found",

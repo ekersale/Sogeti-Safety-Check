@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
 var eventsSchema = new Schema({
-    name            : String,
+    name            : {type: String, required: true, default: ""},
     zone            : {
         latitude    : Number,
         longitude   : Number,
@@ -17,6 +17,7 @@ var eventsSchema = new Schema({
     message         : String,
     images          : [{ type: ObjectId, ref: "media"}],
     admin           : { type: ObjectId, ref: "groups"},
+    target          : [{type: ObjectId, ref: "groups"}],
     start_at        : Date,
     end_at          : Date,
     created_at      : Date,
