@@ -8,6 +8,10 @@
   <ion-label class="animated fadeInLeft item-remove-animate title">Hello !</ion-label>
   <ion-label class="animated fadeIn item-remove-animate info">Sign up is almost done...</ion-label>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <ion-item  padding-vertical class="margin-more" class="item-camera">
+      <button (click)="takePicture()"><ion-icon name="camera" item-left></ion-icon></button>
+      <img src="{{base64Image}}" />
+    </ion-item>
     <ion-item  padding-vertical class="animated fadeIn item-remove-animate margin-more">
       <ion-icon name="person" item-left></ion-icon>
       <ion-input type="text"  [formControl]="registrationForm.controls['firstName']" placeholder="First name"  ></ion-input>

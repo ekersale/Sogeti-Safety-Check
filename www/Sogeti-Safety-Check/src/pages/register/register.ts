@@ -44,8 +44,7 @@ export class RegistrationPage {
         .subscribe(
             data => {
               loading.dismiss();
-              console.log("coucou la vue est pushé normalement");
-              /*this.api.setCredentials(data.json());*/
+              this.api.setCredentials(data.json());
               this.navCtrl.push(RegistrationStoryPage, {credentials: data.json()}, {animate: true, animation: 'ios-transition'});
             },
             error => {

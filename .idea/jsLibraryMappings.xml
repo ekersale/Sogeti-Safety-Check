@@ -2,6 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{Sogeti-Safety-Check/node_modules}" />
-    <file url="file://$PROJECT_DIR$/www/SSC" libraries="{Sogeti-Safety-Check/www/SSC/node_modules}" />
+    <file url="file://$PROJECT_DIR$/www/Sogeti-Safety-Check" libraries="{Sogeti-Safety-Check/www/Sogeti-Safety-Check/node_modules}" />
   </component>
 </project>

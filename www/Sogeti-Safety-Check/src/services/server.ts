@@ -14,9 +14,15 @@ import 'rxjs/add/operator/map';
 export class APIService {
   private serverAdd = "http://198.27.65.200:3000/";
   private header = new Headers();
-  private userID= "";
+  private userID;
+  private token;
 
   constructor(private http: Http, platform: Platform) {
+    this.token = window.localStorage.getItem('token');
+    this.userID = window.localStorage.getItem('userID');
+    if (this.token && this.userID) {
+      this.header.append('Authorization', `Bearer ${this.token}`);
+    }
       /*platform.ready().then(() => {
         this.getHeader();
       });*/
@@ -33,22 +39,20 @@ export class APIService {
 
   public getConnexion(username, password): Observable<any> {
     password = md5(password);
-    let connexion = this.http.get(`${this.serverAdd}session?email=${username}&password=${password}`);
-    return connexion;
+    return this.http.get(`${this.serverAdd}session?email=${username}&password=${password}`);
   }
 
   public postRegistration(username, password): Observable<any> {
     password = md5(password);
-    let registration = this.http.post(`${this.serverAdd}registration`, { email: username, password: password });
-    return registration;
+    return this.http.post(`${this.serverAdd}registration`, { email: username, password: password });
   }
 
   public getEmailRecover(email): Observable<any> {
-    let recover = this.http.get(`${this.serverAdd}recoverPwd?email=${email}`);
-    return recover;
+    return this.http.get(`${this.serverAdd}recoverPwd?email=${email}`);
   }
 
   sendRegistrationUserInfo(userInfos): Observable<any> {
+    console.log(userInfos.base64Image.value);
     var obj =  {
       "name": {
         "first": userInfos.firstName.value,
@@ -56,21 +60,19 @@ export class APIService {
       },
       "function": userInfos.jobType.value,
       "phone": userInfos.phone.value.substr(0, 14),
-      "state": userInfos.state.value
+      "state": userInfos.state.value,
+      "profileImg": userInfos.base64Image.value
     };
-    let registrationInfo = this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header});
-    return registrationInfo;
+    return this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header});
   }
 
-  isUserLog(): boolean {
-    if (this.userID != "")
-      return true;
-    else
-      return false;
+  public isUserLog(): boolean {
+    console.log('token ' + this.token);
+    console.log('userID ' + this.userID);
+    return (this.token != null && this.userID != null);
   }
 
   getHeader() {
-    var those = this;
 /*    NativeStorage.getItem('Credentials')
         .then(
             data => {
@@ -81,13 +83,13 @@ export class APIService {
         );*/
   }
 
-  getCredentials() : any {
-    return { userID: this.userID};
-  }
-
   setCredentials(data) {
+
     this.header.append('Authorization', `Bearer ${data.data.token}`);
     this.userID = data.data.userID;
+
+    window.localStorage.setItem("userID", data.data.userID);
+    window.localStorage.setItem("token", data.data.token);
       /*NativeStorage.setItem('Credentials', {token: data.data.token, userID: data.data.userID})
           .then(
           error => console.error('Error storing item', error)

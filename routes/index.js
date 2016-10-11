@@ -162,6 +162,8 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+var Media = new require('../models/media');
+
 router.post('/registration',
     function(req, res, next) {
         if (req.body.email != undefined &&
@@ -176,6 +178,13 @@ router.post('/registration',
         var user = new Users();
         user.credentials.password = CryptoJS.SHA256(req.body.password).toString();
         user.email = req.body.email;
+        var media = new Media();
+        media.name = "imageProfile";
+        media.absolutePath = "";
+        media.relativePath = "https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png";
+        media.author = user._id;
+        media.save();
+        user.profileImg = media._id;
         user.save(function(err){
             if (err) return next(err);
             else return res.status(200).json({

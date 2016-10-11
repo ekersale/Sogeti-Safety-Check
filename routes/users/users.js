@@ -4,6 +4,7 @@ var Promise = require('bluebird');
 var expressjwt = require("express-jwt");
 var permissions = require("../../permissions");
 var CryptoJS = require('crypto-js');
+var shortid = require('shortid');
 
 /*
  ** BD models requires --> mongodb
@@ -122,6 +123,7 @@ router.get('/:id',
     function(req, res, next) {
         if (req.user.id == req.params.id) {
             Users.findOne({_id : req.params.id}, {credentials: 0})
+                .populate("profileImg")
                 .exec(function(err, user) {
                     if (err) return next(err);
                     else if (!user) return next(req.app.getError(404, "User not found",
@@ -135,7 +137,8 @@ router.get('/:id',
                 });
         } else {
             Users.findOne({_id: req.params.id}, {credentials: 0, created_at: 0, updated_at: 0, chat: 0, contacts: 0})
-                .exec(function(err,  user){
+                .populate("profileImg")
+                .exec(function(err,  user) {
                     if (err) return next(err);
                     else if (!user) return next(req.app.getError(404, "User not found",
                         {state: "ID may be incorrect"}));
@@ -149,6 +152,8 @@ router.get('/:id',
         }
     });
 
+var Media = require('../../models/media');
+
 router.put('/:id',
     expressjwt({secret: process.env.jwtSecretKey}),
     permissions(["me", "adminGroups"]),
@@ -160,11 +165,29 @@ router.put('/:id',
                     {state: "Impossible to update a user not found"}));
                 else {
                     for (var key in req.body) {
-                        if (user[key] != undefined && req.body[key] != ""){
-                            user[key] = req.body[key];
-                        }
                         if (key == "password" && req.body[key] != "")
                             user.credentials.password = CryptoJS.SHA256(req.body.password).toString();
+                        else if (key == "profileImg" && req.body[key] != "") {
+                            var media = new Media();
+                            var filename = shortid.generate() + ".jpeg";
+                            media.absolutePath = '/home/Sogeti/uploads/users/images/' + filename;
+                            media.relativePath = 'http://198.27.65.200:3000/uploads/users/images/' + filename;
+                            media.save();
+                            var base64Data = req.body.profileImg.replace(/^data:image\/jpeg;base64,/, "");
+                            var old = user.profileImg;
+                            user.profileImg = media._id;
+                            require("fs").writeFile(media.absolutePath, base64Data, 'base64', function(err) {
+                                if (err) user.profileImg =  "https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png";
+                                else {
+                                    Media.findOneAndRemove({_id: old});
+                                }
+                            });
+                        }
+                        else if (user[key] != undefined && req.body[key] != "") {
+                            user[key] = req.body[key];
+                        }
+                        else {}
+
                     }
                     user.save(function(err) {
                         if (err) return next(err);

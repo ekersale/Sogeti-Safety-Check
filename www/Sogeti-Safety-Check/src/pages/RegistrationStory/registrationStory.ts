@@ -3,10 +3,12 @@
  */
 
 import {Component} from '@angular/core';
-import {NavController, AlertController, NavParams, Platform, ToastController} from 'ionic-angular';
+import {NavController, AlertController, Platform, ToastController} from 'ionic-angular';
 import { APIService } from '../../services/server';
 import {TabsPage} from '../tabs/tabs';
 import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Camera, CameraOptions} from 'ionic-native';
+
 
 @Component({
   templateUrl: 'registrationStory.html',
@@ -16,14 +18,13 @@ import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class RegistrationStoryPage {
   registrationForm: FormGroup;
   public maskPhone = [/[0-9]/, /\d/, '.', /\d/, /\d/, '.',/\d/, /\d/, '.', /\d/, /\d/, '.', /\d/, /\d/];
-
+  base64Image : any;
 
   classMap: any = "NextButton";
 
-  constructor(public navCtrl: NavController, private navParams: NavParams,
+  constructor(public navCtrl: NavController,
               private api : APIService, public alertCtrl: AlertController,
               private fb : FormBuilder, private plateform: Platform, private toastCtrl: ToastController) {
-    api.setCredentials(navParams.get('credentials'));
     plateform.registerBackButtonAction((e) => { e.preventDefault();}, 501);
   }
 
@@ -35,7 +36,8 @@ export class RegistrationStoryPage {
       'jobType': ['', Validators.compose([Validators.required])],
       'authGeoloc': true,
       'state': ['Working', Validators.compose([Validators.required])],
-      'workingPlace': ['Sophia Antipolis', Validators.compose([Validators.required])]
+      'workingPlace': ['Sophia Antipolis', Validators.compose([Validators.required])],
+      'base64Image': ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -46,6 +48,25 @@ export class RegistrationStoryPage {
         validateEqual: false
       };
     return null;
+  }
+
+  takePicture(){
+    Camera.getPicture({
+      quality : 75,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : Camera.PictureSourceType.CAMERA,
+      allowEdit : true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 150,
+      targetHeight: 200,
+      saveToPhotoAlbum: false
+    }).then((imageData) => {
+      // imageData is a base64 encoded string
+      this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.registrationForm.patchValue({base64Image: "data:image/jpeg;base64," + imageData});
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   onSubmit(value: string) : void {

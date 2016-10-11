@@ -3,10 +3,10 @@
 </ion-header>
 <ion-content class="profile">
   <ion-item class="img">
-    <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png"/>
+    <img src="{{profileImg}}"/>
   </ion-item>
-  <h2>Stephane NIVOT</h2>
-  <h3>Developer</h3>
+  <h2>{{name.first}} {{name.last}}</h2>
+  <h3>{{function}}</h3>
   <ion-item class="contacts">
     <button ion-button   round color="sogeti" style="margin-left: 0 !important;"><ion-icon name="call"></ion-icon></button>
     <button ion-button  round color="sogeti"><ion-icon name="chatbubbles"></ion-icon></button>
@@ -16,11 +16,11 @@
   <div class="more-info">
   <ion-item class="boxes" style="border-left:none; border-right: none;">
     <ion-icon name="call" item-left></ion-icon>
-    <ion-label>06.98.12.89.58</ion-label>
+    <ion-label>{{phone}}</ion-label>
   </ion-item>
   <ion-item class="boxes" style="border-right:none;">
     <ion-icon name="mail" item-left></ion-icon>
-    <ion-label>elliot.kersale@sogeti.com</ion-label>
+    <ion-label>{{email}}</ion-label>
   </ion-item>
   </div>
   <div class="more-info" >
@@ -30,7 +30,7 @@
     </ion-item>
     <ion-item class="boxes" style="border-top: none; border-right:none;">
       <ion-icon name="thermometer" item-left></ion-icon>
-      <ion-label>Working</ion-label>
+      <ion-label>{{state}}</ion-label>
     </ion-item>
   </div>
   <div class="eventsParticipation">

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import { Platform} from 'ionic-angular';
 import {StatusBar} from "ionic-native";
 import { TabProfilePage } from '../profile/profile';
@@ -16,14 +16,16 @@ export class TabsPage {
   tabTwo: any = TabChatPage;
   tabFour: any = TabProfilePage;
 
-  constructor(public navCtrl: NavController, platform: Platform, public api : APIService, private navParams: NavParams) {
-    console.log("coucou tab page displayed");
+  constructor(public navCtrl: NavController, platform: Platform, public api : APIService) {
     platform.ready().then(() => {
       StatusBar.overlaysWebView(false); // let status bar overlay webview
       StatusBar.styleDefault();
       StatusBar.backgroundColorByHexString('#ef4527'); // set status bar to white
     });
-    api.setCredentials(navParams.get('credentials'));
     platform.registerBackButtonAction((e) => { e.preventDefault();}, 501);
+  }
+
+  onViewDidLoad() {
+
   }
 }

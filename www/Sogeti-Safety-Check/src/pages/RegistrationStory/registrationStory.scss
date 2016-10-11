@@ -78,4 +78,26 @@
     line-height: .67;
     pointer-events: none;
   }
+
+  .item-camera {
+    button {
+      background: #EF4527;
+      border-radius: 20px;
+      height: 38px;
+      width: 38px;
+    }
+
+    ion-icon {
+      font-size: 20px;
+      text-align: center;
+      margin: auto;
+      color: white;
+    }
+
+    img {
+      text-align:center;
+      margin: auto;
+    }
+  }
+
 }

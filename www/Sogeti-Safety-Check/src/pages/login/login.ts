@@ -22,9 +22,8 @@ export class LoginPage {
   login(email, password) {
       this.api.getConnexion(email, password).subscribe(
         data => {
-          this.api.setCredentials(data.json());
-
-            this.navCtrl.setRoot(TabsPage, {credentials: data.json()}, {animate: true, animation: 'ios-transition', direction:'forward'});
+            this.api.setCredentials(data.json());
+            this.navCtrl.setRoot(TabsPage, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         err => {
           if (err.status == 0)
