@@ -26,6 +26,18 @@ router.get('/',
         Promise.all([
             Events.find(query)
                 .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
+                .populate([
+                    {
+                        path: "images", model: "media", select: "relativePath -_id"
+                    },
+                    {
+                        path: "participants", model: "users", select: "name id"
+                    },
+                    {
+                        path: "author", model: "users", select: "name id profileImg",
+                        populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                    }
+                ])
                 .exec(),
             Events.find(query).count().exec()
         ]).spread(function(events, count) {

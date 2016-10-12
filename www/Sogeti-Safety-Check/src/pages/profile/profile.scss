@@ -10,9 +10,9 @@
 
     img {
       margin: auto;
-      width: 50%;
-      min-width: 50%;
-      max-width: 50%;
+      width: 47vw;
+      min-width: 0;
+      min-height: 0;
       height: auto;
       border-radius: 50%; // half for rounding */
       object-fit: cover; /* Scale the image - Center and crop image*/

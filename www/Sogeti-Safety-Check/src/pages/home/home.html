@@ -1,21 +1,25 @@
-<ion-header style="background:rgb(239, 69, 39);">
+<ion-header style="background:rgb(239, 69, 39);" >
     <ion-searchbar [showCancelButton]="true"></ion-searchbar>
 </ion-header>
 <ion-content class="home">
+  <ion-list  [virtualScroll]="events" approxItemHeight="500px">
+    <ion-item *virtualItem="let event" text-wrap>
     <ion-card>
-
       <ion-item>
         <ion-avatar item-left>
-          <img src="img/marty-avatar.png">
+          <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
         </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
+        <h2>{{event.name}}</h2>
+        <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
       </ion-item>
 
-      <img src="img/advance-card-bttf.png">
-
-      <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+      <ion-slides [options]="mySlideOptions">
+        <ion-slide *ngFor="let item of event.images" style="margin:auto;">
+          <ion-img src="{{item.relativePath}}"></ion-img>
+        </ion-slide>
+      </ion-slides>
+      <ion-card-content >
+        <p>{{event.message}}</p>
       </ion-card-content>
 
       <ion-row>
@@ -38,6 +42,13 @@
         </ion-col>
       </ion-row>
     </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="Loading more events..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
   <ion-fab right bottom >
     <button ion-fab color="sogeti"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="top">

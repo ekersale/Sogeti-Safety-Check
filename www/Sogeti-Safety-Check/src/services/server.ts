@@ -3,12 +3,13 @@
  */
 
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import {md5} from './md5';
 //import {NativeStorage} from 'ionic-native';
 import {Platform} from 'ionic-angular';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class APIService {
@@ -97,13 +98,15 @@ export class APIService {
   }
 
   public getUserInfo(): Observable<any> {
-    let userInfo = this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header});
-    return userInfo;
+    return this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header});
   }
 
   public getChatHistory(): Observable<any> {
-    let chatHistory = this.http.get(`${this.serverAdd}users/${this.userID}/chat`, {headers: this.header});
-    return chatHistory;
+    return this.http.get(`${this.serverAdd}users/${this.userID}/chat`, {headers: this.header});
+  }
+
+  public getEvents(page) : Observable<any> {
+    return this.http.get(`${this.serverAdd}events?page=${page}`, {headers: this.header}).map((res:Response) => res.json());
   }
 }
 

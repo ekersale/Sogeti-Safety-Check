@@ -2,19 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dbeca2b-ddad-4542-b5a5-be8c563d16ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/routes/events/events.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-hdpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-hdpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-ldpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-ldpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-mdpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-mdpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xhdpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xhdpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xxhdpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xxhdpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xxxhdpi-icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/icon/drawable-xxxhdpi-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-hdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-hdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-ldpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-ldpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-mdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-mdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xxhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xxhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xxxhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-land-xxxhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-hdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-hdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-ldpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-ldpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-mdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-mdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xxhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xxhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xxxhdpi-screen.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40@3x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-40@3x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-50.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-50.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-50@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-50@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60@3x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-60@3x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-72.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-72.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-72@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-72@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-76.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-76.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-76@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-76@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-83.5@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-83.5@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small@3x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon-small@3x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon@2x.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/icon/icon@2x.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-568h@2x~iphone.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-568h@2x~iphone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-667h.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-667h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-736h.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-736h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape-736h.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape-736h.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape@2x~ipad.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape@2x~ipad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape~ipad.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Landscape~ipad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Portrait@2x~ipad.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Portrait@2x~ipad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Portrait~ipad.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default-Portrait~ipad.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default@2x~iphone.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default@2x~iphone.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default~iphone.png" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/resources/ios/splash/Default~iphone.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/events.js" afterPath="$PROJECT_DIR$/models/events.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/users/users.js" afterPath="$PROJECT_DIR$/routes/users/users.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/events/events.js" afterPath="$PROJECT_DIR$/routes/events/events.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/alesogetisafetycheckwwwsogetisafetycheck/modulepaths.json" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/alesogetisafetycheckwwwsogetisafetycheck/modulepaths.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.scss" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.html" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.ts" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.html" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts" afterPath="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts" />
     </list>
     <ignored path="Sogeti-Safety-Check.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,24 +81,14 @@
     <favorites_list name="Sogeti-Safety-Check" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.61473525">
+    <splitter split-orientation="horizontal" split-proportion="0.6101305">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="tabs.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="events.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/events/events.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="90">
-                  <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+                <state relative-caret-position="270">
+                  <caret line="37" column="99" selection-start-line="37" selection-start-column="99" selection-end-line="37" selection-end-column="99" />
                   <folding>
                     <element signature="e#0#45#0" expanded="false" />
                   </folding>
@@ -61,31 +96,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="profile.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="664">
-                  <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="profile.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="119" selection-end-column="3" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="205">
-                  <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+                <state relative-caret-position="240">
+                  <caret line="39" column="42" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="42" />
                   <folding>
                     <element signature="n#style#0;n#h2#0;n#ion-item#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#div#2;n#ion-content#0;n#!!top" expanded="true" />
                     <element signature="n#style#0;n#p#0;n#ion-card-content#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#div#2;n#ion-content#0;n#!!top" expanded="true" />
@@ -94,31 +109,31 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app.js">
+          <file leaf-file-name="profile.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="915">
-                  <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+                <state relative-caret-position="150">
+                  <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="events.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/models/events.js">
+          <file leaf-file-name="config.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="90">
+                  <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="sites.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/routes/sites/sites.js">
+          <file leaf-file-name="tabs.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="754">
-                  <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
+                <state relative-caret-position="45">
+                  <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -127,20 +142,56 @@
           <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/users/users.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="359">
+                <state relative-caret-position="318">
                   <caret line="135" column="90" selection-start-line="135" selection-start-column="90" selection-end-line="135" selection-end-column="90" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+                <state relative-caret-position="609">
+                  <caret line="45" column="13" selection-start-line="4" selection-start-column="2" selection-end-line="45" selection-end-column="13" />
                   <folding>
                     <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#ion-slide#0;n#ion-slides#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#ion-content#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="home.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="423">
+                  <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#47#98#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="home.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="75">
+                  <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="server.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="873">
+                  <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
+                  <folding>
+                    <element signature="e#47#88#0" expanded="true" />
+                    <element signature="e#217#256#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -149,8 +200,8 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf>
-          <file leaf-file-name="media.js" pinned="false" current-in-tab="true">
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="media.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/models/media.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="180">
@@ -180,6 +231,16 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="tabs.scss" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="360">
+                  <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
         </leaf>
       </split-second>
     </splitter>
@@ -201,8 +262,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/www/SSC/app/pages/login/login.html" />
-        <option value="$PROJECT_DIR$/config/config.js" />
         <option value="$PROJECT_DIR$/www/SSC/app/validators/CustomValidators.ts" />
         <option value="$PROJECT_DIR$/www/SSC/app/pages/RegistrationStory/registrationStory.html" />
         <option value="$PROJECT_DIR$/www/SSC/app/pages/RegistrationStory/registrationStory.scss" />
@@ -237,21 +296,23 @@
         <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/RegistrationStory/registrationStory.html" />
         <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/RegistrationStory/registrationStory.ts" />
         <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/RegistrationStory/registrationStory.scss" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts" />
         <option value="$PROJECT_DIR$/models/users.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts" />
         <option value="$PROJECT_DIR$/models/media.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/models/events.js" />
-        <option value="$PROJECT_DIR$/routes/events/events.js" />
         <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.ts" />
         <option value="$PROJECT_DIR$/routes/users/users.js" />
-        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss" />
         <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.html" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts" />
+        <option value="$PROJECT_DIR$/routes/events/events.js" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.scss" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.html" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts" />
+        <option value="$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html" />
       </list>
     </option>
   </component>
@@ -270,8 +331,9 @@
     <handled-path value="$PROJECT_DIR$/www/Sogeti-Safety-Check/platforms/ios/cordova/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1680" />
-    <option name="height" value="1013" />
+    <option name="x" value="383" />
+    <option name="width" value="1297" />
+    <option name="height" value="1014" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -353,6 +415,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Sogeti-Safety-Check" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -507,20 +625,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sogeti-Safety-Check" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sogeti-Safety-Check" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -705,26 +809,28 @@
       <workItem from="1475861475402" duration="847000" />
       <workItem from="1476085126767" duration="5076000" />
       <workItem from="1476113682939" duration="157000" />
-      <workItem from="1476171404709" duration="23699000" />
+      <workItem from="1476171404709" duration="23739000" />
+      <workItem from="1476216920446" duration="108000" />
+      <workItem from="1476257598778" duration="16341000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199856000" />
+    <option name="totallyTimeSpent" value="216345000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1013" extended-state="6" />
-    <editor active="false" />
+    <frame x="383" y="0" width="1297" height="1014" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22440477" sideWeight="0.55694443" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29067078" sideWeight="0.5450763" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23728813" sideWeight="0.43511903" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.4952381" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22440477" sideWeight="0.44305557" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23703703" sideWeight="0.44333076" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32910052" sideWeight="0.49285713" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29067078" sideWeight="0.45492372" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18239796" sideWeight="0.47845373" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23728813" sideWeight="0.56488097" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23703703" sideWeight="0.55666924" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39867842" sideWeight="0.48569158" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -771,8 +877,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/SSC/src/app/pages/PwdRecover/pwdRecover.scss" />
-    <entry file="file://$PROJECT_DIR$/www/SSC/src/app/pages/register/register.ts" />
     <entry file="file://$PROJECT_DIR$/www/SSC/src/app/pages/RegistrationStory/registrationStory.scss" />
     <entry file="file://$PROJECT_DIR$/www/SSC/src/app/pages/profile/profile.scss" />
     <entry file="file://$PROJECT_DIR$/www/SSC/src/app/pages/register/register.html" />
@@ -802,9 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -812,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -820,9 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -830,7 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="613">
           <caret line="98" column="19" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,20 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="46" column="49" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="54" column="45" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
-          <folding>
-            <element signature="e#788#857#0" expanded="false" />
-            <element signature="e#2330#2597#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -875,10 +956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
           <caret line="57" column="13" selection-start-line="53" selection-start-column="2" selection-end-line="68" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#47#87#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -886,39 +963,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="71" selection-start-line="10" selection-start-column="71" selection-end-line="10" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="26" column="6" selection-start-line="25" selection-start-column="4" selection-end-line="26" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/sites/sites.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
+        <state relative-caret-position="2085">
           <caret line="139" column="23" selection-start-line="139" selection-start-column="23" selection-end-line="139" selection-end-column="23" />
           <folding />
         </state>
@@ -932,28 +982,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/events/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="32" column="57" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/events.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -966,44 +998,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/users/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="135" column="90" selection-start-line="135" selection-start-column="90" selection-end-line="135" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
+        <state relative-caret-position="675">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss">
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/services/server.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="119" selection-end-column="3" />
-          <folding />
+        <state relative-caret-position="873">
+          <caret line="108" column="87" selection-start-line="108" selection-start-column="87" selection-end-line="108" selection-end-column="87" />
+          <folding>
+            <element signature="e#47#88#0" expanded="true" />
+            <element signature="e#217#256#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html">
+    <entry file="file://$PROJECT_DIR$/routes/events/events.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+          <caret line="37" column="99" selection-start-line="37" selection-start-column="99" selection-end-line="37" selection-end-column="99" />
           <folding>
-            <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
+            <element signature="e#0#45#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/users/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="135" column="90" selection-start-line="135" selection-start-column="90" selection-end-line="135" selection-end-column="90" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+        <state relative-caret-position="240">
+          <caret line="39" column="42" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="42" />
           <folding>
             <element signature="n#style#0;n#h2#0;n#ion-item#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#div#2;n#ion-content#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#ion-card-content#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#div#2;n#ion-content#0;n#!!top" expanded="true" />
@@ -1011,8 +1046,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="25" column="43" selection-start-line="25" selection-start-column="43" selection-end-line="25" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/events.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="56" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/tabs/tabs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/profile/profile.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/Sogeti-Safety-Check/src/pages/home/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="45" column="13" selection-start-line="4" selection-start-column="2" selection-end-line="45" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#ion-header#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#ion-slide#0;n#ion-slides#0;n#ion-card#0;n#ion-item#0;n#ion-list#0;n#ion-content#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="webServersAuthStorage">
-    <data>AAAAsDgMKEDJz1TwdDRDNMaFOWFMvM2RbUZ8Y6ctzXz7b+4tUbvQEg1Tf6aRQPzQWba2CNgkDWdYGXOC4aYnkLmtOB5+RYPfQuRvZMmrBwvozNT1uynoDtwCssclVaL4GOBIIG2MD8RoObWmlzZ1FLlYNRUbWfsnucyub2XqjGc5GgaSBXoKu02gY6C3G/FS2+innRgqcsvN9byyNdLu+4oRaUzabi3Gp07NhHjLQbbuNB7mNBLP+pAKHW5mckgSwD2zew==</data>
+    <data>AAAAsGPUWFFD2rvk8/3da+wvJ5Pd50ObZ7MJw5zVIXV6ojfknfKAZcf+vTnFqHxMqjAr1B7HtkCV1866ikA2h4m8BV+6m/pN9rlUoEwN7EkqN9ghn65S1H6vHw1tlACb5dD9YZO3VrP0WhEhsygr1gIGTMrQvOnx0RcA2XEVl0RrAX1tq29UBxOxf4k4r3S0tYRdcwb2wVw853zLRyT/f0E5spfo54sV6iOeNoGXwPc22MiyOeR0g97RzPHV47apPqzn2Q==</data>
   </component>
 </project>

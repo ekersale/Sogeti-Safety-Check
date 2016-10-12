@@ -3,7 +3,7 @@
 </ion-header>
 <ion-content class="profile">
   <ion-item class="img">
-    <img src="{{profileImg}}"/>
+    <ion-img src="{{profileImg}}"></ion-img>
   </ion-item>
   <h2>{{name.first}} {{name.last}}</h2>
   <h3>{{function}}</h3>
@@ -41,13 +41,13 @@
         <ion-card>
           <ion-item>
             <ion-avatar item-left>
-              <img src="{{item.author.profileImg.relativePath}}">
+              <ion-img src="{{item.author.profileImg.relativePath}}"></ion-img>
             </ion-avatar>
             <h2 style="text-align: left;">{{item.name}}</h2>
             <p>{{item.start_at | date : 'dd/MM/yyyy'}}</p>
           </ion-item>
 
-          <img src="{{item.images[0].relativePath}}">
+          <ion-img src="{{item.images[0].relativePath}}"></ion-img>
 
           <ion-card-content text-wrap >
             <p style="word-wrap: break-word">{{item.message}}</p>
