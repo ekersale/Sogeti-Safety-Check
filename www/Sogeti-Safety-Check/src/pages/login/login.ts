@@ -8,26 +8,38 @@ import { APIService } from '../../services/server';
 import { RegistrationPage } from "../register/register";
 import { PwdRecuperationPage } from '../PwdRecover/pwdRecover'
 import {TabsPage} from '../tabs/tabs';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   templateUrl: 'login.html',
-  selector: 'page-login',
   providers: [APIService]
 })
 
 export class LoginPage {
-  constructor(public navCtrl: NavController, private api : APIService, private toastCtrl : ToastController) {
+  loginForm : FormGroup;
+
+  constructor(public navCtrl: NavController, private api : APIService,
+              private toastCtrl : ToastController, private fb : FormBuilder)
+  {
   }
 
-  login(email, password) {
-      this.api.getConnexion(email, password).subscribe(
+  ionViewDidLoad() {
+    this.loginForm = this.fb.group({
+      'username' : ['', Validators.compose([Validators.required])],
+      'password' : ['', Validators.compose([Validators.required])]
+    });
+  }
+
+  onSubmit() {
+      this.api.getConnexion(this.loginForm.controls).subscribe(
         data => {
-            this.api.setCredentials(data.json());
+            this.api.setCredentials(data);
             this.navCtrl.setRoot(TabsPage, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         err => {
           if (err.status == 0)
-            this.api.DisplayServerError(this.toastCtrl, err);
+            this.api.DisplayServerError(this.toastCtrl, err, this);
           else
             this.toastCtrl.create({
               message: "Incorrect email or password. Try again.",

@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
 import {NavController, LoadingController, ToastController, ViewController} from 'ionic-angular';
 import { APIService } from '../../services/server';
 import { RegistrationStoryPage } from '../RegistrationStory/registrationStory';
+import {LoginPage} from "../login/login"
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   templateUrl: 'register.html',
@@ -14,16 +16,28 @@ import { RegistrationStoryPage } from '../RegistrationStory/registrationStory';
 
 export class RegistrationPage {
   inputType : string = "password";
+  registrationForm : FormGroup;
 
-  constructor(public viewCtrl : ViewController,public navCtrl: NavController, private api : APIService, private loadingCtrl: LoadingController, private toastCtrl: ToastController) {
+  constructor(public viewCtrl : ViewController,
+              public navCtrl: NavController,
+              private api : APIService,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController,
+              private fb : FormBuilder) {
   }
 
   ionViewWillEnter() {
     this.viewCtrl.setBackButtonText('Login');
   }
 
-  register(email, password) {
-    if (password.length < 8) {
+  ionViewDidLoad() {
+    this.registrationForm = this.fb.group({
+      'username' : ['', Validators.compose([Validators.required])],
+      'password' : ['', Validators.compose([Validators.required])]});
+  }
+
+  onSubmit() {
+    if (this.registrationForm.controls['password'].value.length < 8) {
       let toast = this.toastCtrl.create({
         message: "Password must be equal or longer than 8 characters.",
         duration: 3000,
@@ -40,18 +54,18 @@ export class RegistrationPage {
       if (loading != null)
         loading.dismiss();
     }, 5000);
-    this.api.postRegistration(email, password)
+    this.api.postRegistration(this.registrationForm.controls)
         .subscribe(
             data => {
               loading.dismiss();
-              this.api.setCredentials(data.json());
-              this.navCtrl.push(RegistrationStoryPage, {credentials: data.json()}, {animate: true, animation: 'ios-transition'});
+              this.api.setCredentials(data);
+              this.navCtrl.push(RegistrationStoryPage,{}, {animate: true, animation: 'ios-transition'});
             },
             error => {
               loading.dismiss();
               let message;
               if (error.status == 0)
-                this.api.DisplayServerError(this.toastCtrl, error);
+                this.api.DisplayServerError(this.toastCtrl, error, LoginPage);
               else if (error.status >= 500) {
                 message = "Email address seems to be already associated to an account.";
               }

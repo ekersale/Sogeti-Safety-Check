@@ -7,7 +7,8 @@ import {NavController, AlertController, Platform, ToastController} from 'ionic-a
 import { APIService } from '../../services/server';
 import {TabsPage} from '../tabs/tabs';
 import {FormControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Camera, CameraOptions} from 'ionic-native';
+import {Camera} from 'ionic-native';
+import {LoginPage} from "../login/login"
 
 
 @Component({
@@ -52,12 +53,12 @@ export class RegistrationStoryPage {
 
   takePicture(){
     Camera.getPicture({
-      quality : 75,
+      quality : 100,
       destinationType : Camera.DestinationType.DATA_URL,
       sourceType : Camera.PictureSourceType.CAMERA,
       allowEdit : true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 150,
+      targetWidth: 200,
       targetHeight: 200,
       saveToPhotoAlbum: false
     }).then((imageData) => {
@@ -77,9 +78,7 @@ export class RegistrationStoryPage {
           this.navCtrl.setRoot(TabsPage, {}, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         error => {
-          if (error.status == 0)
-            this.api.DisplayServerError(this.toastCtrl, error);
-          console.error(error);
+          this.api.DisplayServerError(this.toastCtrl, error, LoginPage);
         }
       );
     }

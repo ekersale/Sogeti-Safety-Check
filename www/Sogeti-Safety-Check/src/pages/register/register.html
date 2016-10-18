@@ -8,17 +8,19 @@
   <img  padding-vertical src="./assets/images/sogeti-hightech-logo.png"/>
   <h2 padding-vertical>Sogeti Safety Check</h2>
   <div class="separator"></div>
-  <ion-item  padding-vertical class="padding-more">
-    <ion-icon name="mail" item-left></ion-icon>
-    <ion-input #email type="email" value="" placeholder="example@sogeti.com" class="RemoveUnderLine" ></ion-input>
-  </ion-item>
-  <ion-item  padding-vertical class="padding-more">
-    <ion-icon name="lock" item-left></ion-icon>
-    <ion-input #password type="{{inputType}}" value="" placeholder="********" ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label> Reveal my password</ion-label>
-    <ion-toggle enable sogeti (click)="changeInputType()" checked="false" ></ion-toggle>
-  </ion-item>
-  <button ion-button full padding-vertical (click)="register(email.value, password.value)" >Sign up</button>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <ion-item  padding-vertical class="padding-more">
+      <ion-icon name="mail" item-left></ion-icon>
+      <ion-input  type="email" value="" placeholder="example@sogeti.com" class="RemoveUnderLine" [formControl]="registrationForm.controls['username']"></ion-input>
+    </ion-item>
+    <ion-item  padding-vertical class="padding-more">
+      <ion-icon name="lock" item-left></ion-icon>
+      <ion-input type="{{inputType}}" value="" placeholder="********" [formControl]="registrationForm.controls['password']"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> Reveal my password</ion-label>
+      <ion-toggle enable sogeti (click)="changeInputType()" checked="false"></ion-toggle>
+    </ion-item>
+    <button ion-button full padding-vertical type="submit" [disabled]="!registrationForm.valid" >Sign up</button>
+  </form>
 </ion-content>

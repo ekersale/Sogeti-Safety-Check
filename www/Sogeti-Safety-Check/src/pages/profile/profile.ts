@@ -4,8 +4,9 @@
 
 import {Component} from '@angular/core';
 import {APIService} from '../../services/server'
-import {NavController} from "ionic-angular";
+import {NavController, ToastController} from "ionic-angular";
 import {LoginPage} from "../login/login"
+import {App} from 'ionic-angular';
 
 @Component({
   templateUrl: 'profile.html',
@@ -23,10 +24,9 @@ export class TabProfilePage {
   public profileImg: string = 'https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png';
   public events = [];
 
-  constructor(private api: APIService, public navCtrl: NavController) {
+  constructor(private api: APIService, public navCtrl: NavController, private _app : App, private toastCtrl : ToastController) {
     this.api.getUserInfo().subscribe(
       data => {
-        data = data.json();
         if (!data.data.user) {
           this.navCtrl.setRoot(LoginPage);
         }
@@ -39,15 +39,15 @@ export class TabProfilePage {
         this.profileImg = (data.data.user.profileImg) ? data.data.user.profileImg.relativePath : 'https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png';
         this.events = (data.data.user.participations) ? data.data.user.participations : []
       },
-      error => console.log(error)
+      error => this.api.DisplayServerError(toastCtrl, error, LoginPage)
     );
   }
 
-  ionViewDidLoad() {
-
+  logout() {
+      this.api.removeCredentials();
+      const root = this._app.getRootNav();
+      root.setRoot(LoginPage);
   }
 
-  eventSelected(item) {
 
-  }
 }

@@ -11,6 +11,69 @@ var ObjectId = require('mongoose').Types.ObjectId;
 var Events = require('../../models/events');
 var Media = require('../../models/media');
 var User = require('../../models/users');
+var Groups = require('../../models/groupes');
+
+var gcmApiKey = 'AIzaSyBQnYq835Gdnsz4lb5qX5v8EseRhrxOZNQ'; // GCM API KEY OF YOUR GOOGLE CONSOLE PROJECT
+var FCM = require("fcm-node");
+
+router.post('/push',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+/*
+    permissions(["adminGroup"]),
+*/
+    function(req, res, next) {
+        if (req.body.groups == undefined || req.body.groups.length == 0)
+            return next(req.app.getError(400, "Missing parameter groups:[]"));
+        if (req.body.title == undefined || req.body.title == "")
+            return next(req.app.getError(400, "Missing parameter title:string"));
+        if (req.body.message == undefined || req.body.message == "")
+            return next(req.app.getError(400, "Missing parameter message:string"));
+        next();
+    },
+    function(req, res, next) {
+        var fcm = new FCM(gcmApiKey);
+        for (var groupID in req.body.groups) {
+            console.log(groupID);
+            Groups.findOne({_id: req.body.groups[groupID]}, function(err, group) {
+                if (err || !group)
+                    return;
+                else {
+                    for (var userID in group.members) {
+                        User.findOne({_id: group.members[userID]}, function(err, user) {
+                            if (err || !user || user.pushNotificationToken == "" || user.notify.accept == false) return;
+                            else {
+                                console.log("test");
+                                var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+                                    to: user.notify.token,
+                                    notification: {
+                                        title: req.body.title,
+                                        body: req.body.message
+                                    },
+                                    data: {  //you can send only notification or only data(or include both)
+                                        'title': req.body.title,
+                                        'message': req.body.message,
+                                        'referTo': req.body.referTo
+                                    }
+                                };
+                                fcm.send(message, function(err){
+                                    if (err) {
+                                        console.log(err);
+                                        return;
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+
+            });
+        }
+        return res.status(200).json({
+            message: "Notifications send"
+        });
+    }
+);
+
 
 router.get('/',
     expressjwt({ secret: process.env.jwtSecretKey}),
@@ -41,6 +104,7 @@ router.get('/',
                 .exec(),
             Events.find(query).count().exec()
         ]).spread(function(events, count) {
+            console.log(events);
             res.status(200).json({ message : "OK", data : { count: count, limit: limit, events: events }});
         }, function(err) {
             return next(err);
@@ -72,7 +136,7 @@ router.post('/:id/subscribe',
     function (req, res, next) {
         User.findOne({_id: req.user.id})
             .exec(function(err, user) {
-               if (err) return next(err);
+                if (err) return next(err);
                 else if (!user) return next(400, "User must reload himself");
                 else {
                     if (user.participations.indexOf(req.params.id) != -1)
@@ -80,7 +144,7 @@ router.post('/:id/subscribe',
                     else {
                         Events.findOne({_id: req.params.id})
                             .exec(function(err, event) {
-                               if (err) return next(err);
+                                if (err) return next(err);
                                 else if (!event) return next(req.app.getError(404, 'Event not found'));
                                 else {
                                     event.participants.push(user._id);
@@ -94,7 +158,7 @@ router.post('/:id/subscribe',
                                             user    : user
                                         }
                                     });
-                               }
+                                }
                             });
                     }
                 }
@@ -139,5 +203,7 @@ router.post('/',
         });
     }
 );
+
+
 
 module.exports = router;

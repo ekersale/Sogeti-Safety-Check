@@ -4,4 +4,35 @@
     ion-slide.swiper-slide {
         margin:auto !important;
     }
+
+  .cardSeparator {
+    border-bottom: 5px solid #dedede;
+  }
+
+  .cardSeparator.item-block:last-child {
+    border-bottom: none;
+  }
+
+  .item-block .item-inner {
+    border-bottom: 0px;
+  }
+
+  img {
+    margin:auto;
+  }
+
+  ion-img img {
+     min-width: 0 !important;
+     min-height: 0 !important;
+   }
+
+  .img-loaded + ion-spinner {
+    display:none;
+  }
+
+
+  .noMoreContent {
+    min-height: 0px !important;
+  }
+
 }

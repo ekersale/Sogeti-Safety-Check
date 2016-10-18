@@ -19,6 +19,10 @@ var userSchema = new Schema({
     phone           : {type: String, default: ''},
     function        : {type: String, default: ''},
     state           : {type: String, default: ''},
+    notify          : {
+        accept      : {type: Boolean, default: true},
+        token       : {type: String, default: ''}
+    },
     living          : {
         latitude    : {type: Number, default: 0},
         longitude   : {type: Number, default: 0}

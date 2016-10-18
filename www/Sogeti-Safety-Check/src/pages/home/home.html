@@ -1,10 +1,10 @@
 <ion-header style="background:rgb(239, 69, 39);" >
-    <ion-searchbar [showCancelButton]="true"></ion-searchbar>
+    <ion-searchbar [showCancelButton]="true" type="text" (ionInput)="searchEvent($event)"></ion-searchbar>
 </ion-header>
 <ion-content class="home">
-  <ion-list  [virtualScroll]="events" approxItemHeight="500px">
-    <ion-item *virtualItem="let event" text-wrap>
-    <ion-card>
+  <ion-list>
+    <ion-item  *ngFor="let event of events" text-wrap class="cardSeparator" >
+    <ion-card >
       <ion-item>
         <ion-avatar item-left>
           <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
@@ -13,9 +13,9 @@
         <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
       </ion-item>
 
-      <ion-slides [options]="mySlideOptions">
+      <ion-slides [options]="mySlideOptions" >
         <ion-slide *ngFor="let item of event.images" style="margin:auto;">
-          <ion-img src="{{item.relativePath}}"></ion-img>
+          <ion-img [src]="item.relativePath" ></ion-img>
         </ion-slide>
       </ion-slides>
       <ion-card-content >
@@ -44,7 +44,7 @@
     </ion-card>
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" >
     <ion-infinite-scroll-content loadingSpinner="bubbles"
                                  loadingText="Loading more events..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>

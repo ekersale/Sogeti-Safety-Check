@@ -7,6 +7,9 @@ var Users = require("../models/users");
 var authHelper = require("../authHelper");
 var CryptoJS = require('crypto-js');
 var randomstring = require('randomstring');
+var expressjwt = require("express-jwt");
+
+
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
 var transporter = nodemailer.createTransport(smtpTransport({
@@ -252,6 +255,23 @@ router.get('/session',
                         data        : {
                             token   : jwt.sign({id: user._id}, process.env.jwtSecretKey),
                             userID  : user._id
+                        }
+                    });
+            });
+    }
+);
+
+router.get('/isUserAuth',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    function(req, res, next) {
+        Users.findOne({_id : req.user.id})
+            .exec(function(err, user) {
+                if (err) return next(err);
+                else if (!user) return next(req.app.getError(404, 'User not found'));
+                else return res.status(200).json({
+                        message: "OK",
+                        data    : {
+                            user: user
                         }
                     });
             });

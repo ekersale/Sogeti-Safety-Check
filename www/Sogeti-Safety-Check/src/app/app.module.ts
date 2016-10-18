@@ -12,6 +12,8 @@ import { TabHomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import {TabProfilePage} from '../pages/profile/profile'
 import {TabChatPage} from '../pages/chat/chat';
+import {HttpModule} from '@angular/http';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +27,11 @@ import {TabChatPage} from '../pages/chat/chat';
     TabsPage,
     TabHomePage,
     TabProfilePage,
-    TabChatPage
+    TabChatPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

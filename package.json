@@ -22,6 +22,7 @@
     "mongo-express": "^0.31.2",
     "mongoose": "^4.6.0",
     "morgan": "~1.7.0",
+    "node-gcm": "^0.14.4",
     "node-outlook": "^1.1.6",
     "nodemailer": "^2.6.4",
     "nodemailer-smtp-transport": "^2.7.2",

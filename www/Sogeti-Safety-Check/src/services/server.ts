@@ -5,8 +5,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 import {md5} from './md5';
-//import {NativeStorage} from 'ionic-native';
-import {Platform} from 'ionic-angular';
+import {App} from 'ionic-angular';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 
@@ -18,38 +17,65 @@ export class APIService {
   private userID;
   private token;
 
-  constructor(private http: Http, platform: Platform) {
+  constructor(private http: Http, private _app : App) {
     this.token = window.localStorage.getItem('token');
     this.userID = window.localStorage.getItem('userID');
     if (this.token && this.userID) {
       this.header.append('Authorization', `Bearer ${this.token}`);
     }
-      /*platform.ready().then(() => {
-        this.getHeader();
-      });*/
   }
 
-  DisplayServerError(toastCtrl, err) {
-    if (err.status == 0)
-      toastCtrl.create({
-        message: "Server unreachable please contact the administrator.",
-        duration: 4000,
-        position: 'bottom'
-      }).present();
+  DisplayServerError(toastCtrl, err, Page) {
+    let app  = this._app.getRootNav();
+    switch (err.status) {
+      case 0 :
+        toastCtrl.create({
+          message: "Server unreachable please contact the administrator.",
+          duration: 4000,
+          position: 'bottom'
+        }).present();
+        break;
+      case 401 :
+        this.removeCredentials();
+        app.setRoot(Page);
+        break;
+      default:
+        toastCtrl.create({
+          message: "Unhandled error, please report to administrator",
+          duration: 4000,
+          position: 'bottom'
+        }).present();
+        break;
+    }
   }
 
-  public getConnexion(username, password): Observable<any> {
-    password = md5(password);
-    return this.http.get(`${this.serverAdd}session?email=${username}&password=${password}`);
+  setCredentials(data) {
+
+    this.header.append('Authorization', `Bearer ${data.data.token}`);
+    this.userID = data.data.userID;
+
+    window.localStorage.setItem("userID", data.data.userID);
+    window.localStorage.setItem("token", data.data.token);
   }
 
-  public postRegistration(username, password): Observable<any> {
-    password = md5(password);
-    return this.http.post(`${this.serverAdd}registration`, { email: username, password: password });
+  removeCredentials() {
+    window.localStorage.removeItem("userID");
+    window.localStorage.removeItem("token");
+  }
+
+
+  public getConnexion(userInfo): Observable<any> {
+    let password = md5(userInfo.password.value);
+    return this.http.get(`${this.serverAdd}session?email=${userInfo.username.value}&password=${password}`).map((res:Response) => res.json());
+  }
+
+  public postRegistration(userInfos): Observable<any> {
+    let password = md5(userInfos.password.value);
+    return this.http.post(`${this.serverAdd}registration`, { email: userInfos.username.value, password: password }).map((res:Response) => res.json());
   }
 
   public getEmailRecover(email): Observable<any> {
-    return this.http.get(`${this.serverAdd}recoverPwd?email=${email}`);
+    return this.http.get(`${this.serverAdd}recoverPwd?email=${email}`).map((res:Response) => res.json());
   }
 
   sendRegistrationUserInfo(userInfos): Observable<any> {
@@ -64,49 +90,38 @@ export class APIService {
       "state": userInfos.state.value,
       "profileImg": userInfos.base64Image.value
     };
-    return this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header});
+    return this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header}).map((res:Response) => res.json());
   }
 
-  public isUserLog(): boolean {
-    console.log('token ' + this.token);
-    console.log('userID ' + this.userID);
-    return (this.token != null && this.userID != null);
-  }
+  public isUserLog(): Observable<any> {
 
-  getHeader() {
-/*    NativeStorage.getItem('Credentials')
-        .then(
-            data => {
-              those.header.append('Authorization', 'Bearer ' + data.token);
-              those.userID = data.userID;
-            },
-            error => console.error(error)
-        );*/
-  }
-
-  setCredentials(data) {
-
-    this.header.append('Authorization', `Bearer ${data.data.token}`);
-    this.userID = data.data.userID;
-
-    window.localStorage.setItem("userID", data.data.userID);
-    window.localStorage.setItem("token", data.data.token);
-      /*NativeStorage.setItem('Credentials', {token: data.data.token, userID: data.data.userID})
-          .then(
-          error => console.error('Error storing item', error)
-      );*/
+    return this.http.get(`${this.serverAdd}isUserAuth`,  {headers: this.header}).map((res:Response) => res.json());
   }
 
   public getUserInfo(): Observable<any> {
-    return this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header});
+    return this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header}).map((res:Response) => res.json());
   }
 
   public getChatHistory(): Observable<any> {
-    return this.http.get(`${this.serverAdd}users/${this.userID}/chat`, {headers: this.header});
+    return this.http.get(`${this.serverAdd}users/${this.userID}/chat`, {headers: this.header}).map((res:Response) => res.json());
   }
 
-  public getEvents(page) : Observable<any> {
-    return this.http.get(`${this.serverAdd}events?page=${page}`, {headers: this.header}).map((res:Response) => res.json());
+  public getEvents(page, query) : Observable<any>  {
+    if (query == null)
+      return this.http.get(`${this.serverAdd}events?page=${page}`, {headers: this.header}).map((res:Response) => res.json());
+    else
+      return this.http.get(`${this.serverAdd}events?page=${page}&q=${query}`, {headers: this.header}).map((res:Response) => res.json());
   }
+
+  public postTokenPushNotification(token, accept) : Observable<any> {
+    var obj = {
+      notify : {
+        accept : (!accept || accept == true) ? true : false,
+        token : token
+      }
+    };
+    return this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header}).map((res:Response) => res.json());
+  }
+
 }
 

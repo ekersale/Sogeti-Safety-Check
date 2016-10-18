@@ -10,8 +10,8 @@
   <ion-item class="contacts">
     <a href="tel: {{phone}}"><button ion-button   round color="sogeti" style="margin-left: 0 !important;"><ion-icon name="call"></ion-icon></button></a>
     <a href="sms:{{phone}}"><button ion-button  round color="sogeti"><ion-icon name="chatbubbles"></ion-icon></button></a>
-    <a href="{{phone}}"><button ion-button   round color="sogeti"><ion-icon name="chatboxes"></ion-icon></button></a>
     <a href="mailto:{{email}}"><button ion-button    round color="sogeti"><ion-icon name="mail"></ion-icon></button></a>
+    <button ion-button round color="sogeti" (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
   </ion-item>
   <div class="more-info">
     <ion-item class="boxes" style="border-left:none; border-right: none;">

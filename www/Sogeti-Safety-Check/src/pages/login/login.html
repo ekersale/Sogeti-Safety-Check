@@ -1,6 +1,6 @@
 <ion-header >
   <ion-navbar>
-      <ion-title item-left>Login</ion-title>
+    <ion-title item-left>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,15 +14,17 @@
     <span class="LogOrSign" translate="OR"> or </span>
     <span class="LogOrSign" translate="SIGN" (click)="goToRegistration()" >Sign Up</span>
   </div>
-  <ion-item  padding-vertical class="padding-more">
-    <ion-icon name="mail" item-left></ion-icon>
-    <ion-input #email type="email" value="" placeholder="example@sogeti.com" class="RemoveUnderLine" ></ion-input>
-  </ion-item>
-  <ion-item  padding-vertical class="padding-more">
-    <ion-icon name="lock" item-left></ion-icon>
-    <ion-input #password type="password" value="" placeholder="********" ></ion-input>
-  </ion-item>
-  <button ion-button full color="sogeti" padding-vertical (click)="login(email.value, password.value)" >Login</button>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-item  padding-vertical class="padding-more">
+      <ion-icon name="mail" item-left></ion-icon>
+      <ion-input  type="email" value="" placeholder="example@sogeti.com" [formControl]="loginForm.controls['username']" class="RemoveUnderLine" ></ion-input>
+    </ion-item>
+    <ion-item  padding-vertical class="padding-more">
+      <ion-icon name="lock" item-left></ion-icon>
+      <ion-input  type="password" value="" placeholder="********" [formControl]="loginForm.controls['password']"></ion-input>
+    </ion-item>
+    <button ion-button full color="sogeti" padding-vertical type="submit" [disabled]="!loginForm.valid" >Login</button>
+  </form>
   <div style="text-align:center; margin-top: 5%;">
     <span class="ForgotPwd" translate="FORGOTPASS"  (click)="goToRecover()">Forgot password ?</span>
   </div>

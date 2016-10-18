@@ -3,24 +3,33 @@
 .profile {
   background-color: #e9ebee;
   font-family: 'SanFranciscoTextDisplay';
+
+  ion-avatar ion-img.img-loaded {
+    /*width: 2.4em;
+    height: 2.5em;*/
+  }
+
+  ion-img img {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+
   ion-item.img
   {
     text-align:center;
     background-color: transparent;
 
-    img {
+   img {
       margin: auto;
       width: 47vw;
+      height: 47vw;
       min-width: 0;
       min-height: 0;
-      height: auto;
       border-radius: 50%; // half for rounding */
       object-fit: cover; /* Scale the image - Center and crop image*/
       object-position: center; /* Center the image within the element - Center and crop image*/
       margin: auto;
-      /*
-      width: 50%;
-      */
     }
 
     ion-label {
