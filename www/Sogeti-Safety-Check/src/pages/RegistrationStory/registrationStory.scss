@@ -6,7 +6,11 @@
 
 .RegistrationStory {
   background-color: #e9ebee;
-  font-family: 'SanFranciscoTextLight' ;
+  font-family: 'SanFranciscoTextLight' !important ;
+
+  p {
+    font-family: 'SanFranciscoTextLight' ;
+  }
 
   ion-item {
     background: transparent;

@@ -1,0 +1,98 @@
+page-alert-modal {
+  .toolbar-title {
+    color: white;
+    font-family: "OpenSansLight";
+  }
+
+  p {
+    font-family: "OpenSansLight";
+    margin-bottom: 10%;
+  }
+
+  .bar-button-default {
+    color: #424242 !important;
+  }
+
+  .toolbar-background {
+    background:rgb(239, 69, 39);
+  }
+
+  ion-content {
+    background-color: #e9ebee !important;
+    text-align: center;
+  }
+
+
+  input {
+    background: transparent;
+    border: none;
+    width: 100%;
+  }
+
+  input:focus {
+    outline:none;
+  }
+
+
+  .androidItem {
+    margin-bottom: 10px;
+
+
+    .item-input {
+      background-color: white;
+    }
+
+    .item-inner {
+      border-bottom: none !important;
+      border-left: solid #d8d8d8 1px;
+      margin-left: 9px !important;
+      padding-left: 10px;
+    }
+
+    .input-wrapper#lbl-1 {
+      display: none;
+    }
+
+    .input-wrapper ion-select {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 0px;
+    }
+
+    .item.item-toggle
+    {
+      background: transparent;
+      .item-inner {
+        border-left: 0;
+      }
+    }
+  }
+
+  .iOSItem {
+    background-color: transparent;
+    margin-bottom: 10px;
+
+    .input-wrapper#lbl-1 {
+      display: none;
+    }
+
+    .input-wrapper ion-select {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 0px;
+    }
+
+    .item-input {
+      background-color: transparent;
+    }
+
+    .item.item-toggle
+    {
+      background: transparent;
+      .item-inner {
+        border-left: 0;
+      }
+    }
+  }
+
+}

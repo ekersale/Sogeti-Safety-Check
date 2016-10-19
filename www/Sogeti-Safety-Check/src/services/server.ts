@@ -114,13 +114,26 @@ export class APIService {
   }
 
   public postTokenPushNotification(token, accept) : Observable<any> {
-    var obj = {
+    let obj = {
       notify : {
         accept : (!accept || accept == true) ? true : false,
         token : token
       }
     };
     return this.http.put(`${this.serverAdd}users/${this.userID}`, obj, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public getUserGroups() : Observable<any> {
+    return this.http.get(`${this.serverAdd}users/${this.userID}/groups`, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public sendPushNotification(controls) : Observable<any> {
+    let obj = {
+        groups  : controls.groups.value,
+        title   : controls.title.value,
+        message : controls.message.value
+    };
+    return this.http.post(`${this.serverAdd}events/push`, obj, {headers: this.header}).map((res:Response) => res.json());
   }
 
 }

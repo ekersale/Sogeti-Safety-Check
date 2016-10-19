@@ -13,6 +13,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import {TabProfilePage} from '../pages/profile/profile'
 import {TabChatPage} from '../pages/chat/chat';
 import {HttpModule} from '@angular/http';
+import {AlertModal} from "../pages/alert-modal/alert-modal";
+import {EventEditorModal} from "../pages/event-editor-modal/event-editor-modal";
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import {HttpModule} from '@angular/http';
     TabHomePage,
     TabProfilePage,
     TabChatPage,
+    AlertModal,
+    EventEditorModal
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -45,7 +49,9 @@ import {HttpModule} from '@angular/http';
     TabsPage,
     TabHomePage,
     TabProfilePage,
-    TabChatPage
+    TabChatPage,
+    AlertModal,
+    EventEditorModal
   ],
   providers: []
 })

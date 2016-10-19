@@ -510,6 +510,8 @@
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/login/login.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/profile/profile.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/chat/chat.js",
+  "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/alert-modal/alert-modal.js",
+  "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/event-editor-modal/event-editor-modal.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/home/home.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/tabs/tabs.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/app/app.component.js",
@@ -554,6 +556,9 @@
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/profile/profile.ngfactory.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/node_modules/ionic-angular/components/item/item-sliding.ngfactory.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/chat/chat.ngfactory.js",
+  "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/node_modules/ionic-angular/components/toolbar/toolbar.ngfactory.js",
+  "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/alert-modal/alert-modal.ngfactory.js",
+  "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/pages/event-editor-modal/event-editor-modal.ngfactory.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/app/app.module.ngfactory.js",
   "/Users/ekersale/Sogeti-Safety-Check/www/Sogeti-Safety-Check/.tmp/app/main.prod.ts"
 ]

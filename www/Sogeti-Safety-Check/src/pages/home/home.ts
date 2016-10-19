@@ -4,9 +4,10 @@
 
 import {Component} from '@angular/core';
 import {APIService} from "../../services/server";
-import {InfiniteScroll, ToastController} from "ionic-angular";
+import {InfiniteScroll, ToastController, ModalController} from "ionic-angular";
 import {LoginPage} from '../login/login';
-import {Push} from "ionic-native";
+import {AlertModal} from "../alert-modal/alert-modal";
+import {EventEditorModal} from "../event-editor-modal/event-editor-modal";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class TabHomePage {
   };
   private scroll: boolean = true;
 
-  constructor(private api : APIService, private toastCtrl : ToastController) {
+  constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController) {
     this.api.getEvents(this.page, null).subscribe(
       data => {
         if (data.data.count <= data.data.events.length)
@@ -39,32 +40,6 @@ export class TabHomePage {
         console.log(error);
       }
     );
-
-    let push = Push.init({
-      android: {
-        senderID: "231350961258"
-      },
-      ios: {
-        alert: "true",
-        badge: false,
-        sound: "true"
-      },
-      windows: {}
-    });
-
-    push.on('registration', (data) => {
-      this.api.postTokenPushNotification(data.registrationId, true).subscribe();
-    });
-    push.on('notification', (data) => {
-      alert('message ' + data.message);
-    });
-    push.on('data', (data) => {
-      console.log(data);
-    });
-    push.on('error', (e) => {
-      alert(e.message);
-    });
-
   }
 
 
@@ -114,5 +89,13 @@ export class TabHomePage {
         this.api.DisplayServerError(this.toastCtrl, error, LoginPage);
       }
     )
+  }
+
+  showAlertModal() {
+    this.modalCtrl.create(AlertModal).present();
+  }
+
+  showEventCreation() {
+    this.modalCtrl.create(EventEditorModal).present();
   }
 }

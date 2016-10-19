@@ -246,4 +246,24 @@ router.delete('/:id',
             });
     });
 
+
+router.get('/:id/groups',
+    expressjwt({secret: process.env.jwtSecretKey}),
+    permissions(["me", "adminGroups"]),
+    function(req, res, next) {
+        Users.findOne({_id: req.params.id })
+            .populate("groups")
+            .exec(function(err, user) {
+                if (err) return next(err);
+                else if (!user) return next(req.app.getError(404, "Invalid token, user not found"));
+                else return res.status(200).json({
+                        message : "OK",
+                        data    : {
+                            groups : user.groups
+                        }
+                    });
+            });
+    }
+);
+
 module.exports = router;
