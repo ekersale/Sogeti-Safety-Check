@@ -45,9 +45,10 @@
       <ion-icon name="mail" item-left></ion-icon>
       <input placeholder="Alert message" type="text" [formControl]="alertForm.controls['message']" />
     </ion-item>
+
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
       <ion-icon name="mail" item-left></ion-icon>
-      <input placeholder="Alert message" type="text" [formControl]="alertForm.controls['message']" />
+      <input placeholder="Alert message" type="text" [formControl]="alertForm.controls['message']" id="fileInput" />
     </ion-item>
 
     <button ion-button full type="submit" [disabled]="!alertForm.valid" color="sogeti" style="margin-top:10%;">

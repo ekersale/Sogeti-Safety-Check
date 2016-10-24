@@ -3,6 +3,12 @@
     <ion-title>
       Event creation
     </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="preview()" [disabled]="!eventForm.valid">
+        <span color="primary" showWhen="ios">Preview</span>
+        <ion-icon name="eye" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <span color="primary" showWhen="ios">Cancel</span>
@@ -15,18 +21,89 @@
 
 
 <ion-content padding>
-  <ion-icon name="flag-outline" color="sogeti" style="font-size: 15rem; text-align:center;"></ion-icon>
+  <ion-icon name="ios-flag-outline" color="sogeti" style="font-size: 15rem; text-align:center;"></ion-icon>
+
+
   <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
-      <ion-label color="sogeti" floating>Event title</ion-label>
-      <ion-input [formControl]="eventForm.controls['title']" ></ion-input>
+      <ion-label color="sogeti" fixed>Title</ion-label>
+      <ion-input [formControl]="eventForm.controls['title']" placeholder="Event title"></ion-input>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Title</ion-label>
+      <ion-input [formControl]="eventForm.controls['title']" placeholder="Event title"></ion-input>
+    </ion-item>
+
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
+      <ion-label color="sogeti" fixed>Start</ion-label>
+      <ion-datetime displayFormat="DDD-DD-MMMM HH:mm" pickerFormat="DD MMMM YYYY HH:mm" [formControl]="eventForm.controls['dateStart']"></ion-datetime>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Start</ion-label>
+      <ion-datetime displayFormat="DDD-DD-MMMM HH:mm" pickerFormat="DD MMMM YYYY HH:mm" [formControl]="eventForm.controls['dateStart']"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
+      <ion-label color="sogeti" fixed>End</ion-label>
+      <ion-datetime displayFormat="DDD-DD-MMMM HH:mm" pickerFormat="DD MMMM YYYY HH:mm" [formControl]="eventForm.controls['dateEnd']"></ion-datetime>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>End</ion-label>
+      <ion-datetime displayFormat="DDD-DD-MMMM HH:mm" pickerFormat="DD MMMM YYYY HH:mm" [formControl]="eventForm.controls['dateEnd']"></ion-datetime>
+    </ion-item>
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
+      <ion-label color="sogeti" fixed>Description</ion-label>
+      <ion-textarea placeholder="Enter event description here" [formControl]="eventForm.controls['message']" rows="4"></ion-textarea>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Description</ion-label>
+      <ion-textarea placeholder="Enter event description here" rows="4" [formControl]="eventForm.controls['message']"></ion-textarea>
+    </ion-item>
+
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
+      <ion-label color="sogeti" fixed>Notification</ion-label>
+      <ion-toggle color="sogeti" [formControl]="eventForm.controls['notification']"></ion-toggle>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Notification</ion-label>
+      <ion-toggle color="sogeti" [formControl]="eventForm.controls['notification']"></ion-toggle>
+    </ion-item>
+
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Target</ion-label>
+      <ion-select [formControl]="eventForm.controls['groups']" *ngFor="let group of groups" multiple="true">
+        <ion-option value="{{group._id}}" >{{group.name}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
-      <ion-label color="sogeti" floating>Start At</ion-label>
-      <ion-input type="date" [formControl]="eventForm.controls['dateStart']" ></ion-input>
-      <ion-label color="sogeti" floating>End At</ion-label>
-      <ion-input type="date" [formControl]="eventForm.controls['dateEnd']" ></ion-input>
+      <ion-label color="sogeti" fixed>Target</ion-label>
+      <ion-select [formControl]="eventForm.controls['groups']" *ngFor="let group of groups" multiple="true">
+        <ion-option value="{{group._id}}" >{{group.name}}</ion-option>
+      </ion-select>
     </ion-item>
+
+
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate imgInput androidItem imgInput" showWhen="android, windows">
+      <h2 color="sogeti" item-left>Images</h2>
+      <input type="file" multiple [formControl]="eventForm.controls['filesInput']" #inputFilesAndroid (change)="fileChange(inputFilesAndroid)" accept="image/*"/>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
+      <h2 color="sogeti">Images</h2>
+      <input type="file"  multiple [formControl]="eventForm.controls['filesInput']" #inputFilesIOS (change)="fileChange(inputFilesIOS)"  accept="image/*"/>
+    </ion-item>
+
+
+    <ion-list style="text-align:center;">
+      <ion-img *ngFor="let selected of file_srcs" src="{{selected}}" style=" max-height:200px; margin-top: 5px; "></ion-img>
+    </ion-list>
+
+
+
     <button ion-button full type="submit" [disabled]="!eventForm.valid" color="sogeti" style="margin-top:10%;">
       <ion-label>Send</ion-label>
     </button>

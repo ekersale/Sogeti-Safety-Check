@@ -15,6 +15,7 @@ import {TabChatPage} from '../pages/chat/chat';
 import {HttpModule} from '@angular/http';
 import {AlertModal} from "../pages/alert-modal/alert-modal";
 import {EventEditorModal} from "../pages/event-editor-modal/event-editor-modal";
+import {PreviewEvent} from "../pages/preview-event/preview-event";
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {EventEditorModal} from "../pages/event-editor-modal/event-editor-modal";
     TabProfilePage,
     TabChatPage,
     AlertModal,
-    EventEditorModal
+    EventEditorModal,
+    PreviewEvent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -51,7 +53,8 @@ import {EventEditorModal} from "../pages/event-editor-modal/event-editor-modal";
     TabProfilePage,
     TabChatPage,
     AlertModal,
-    EventEditorModal
+    EventEditorModal,
+    PreviewEvent
   ],
   providers: []
 })

@@ -12,6 +12,7 @@ var Events = require('../../models/events');
 var Media = require('../../models/media');
 var User = require('../../models/users');
 var Groups = require('../../models/groupes');
+var shortid = require('shortid');
 
 var gcmApiKey = 'AIzaSyBQnYq835Gdnsz4lb5qX5v8EseRhrxOZNQ'; // GCM API KEY OF YOUR GOOGLE CONSOLE PROJECT
 var FCM = require("fcm-node");
@@ -170,26 +171,35 @@ router.post('/',
     expressjwt({ secret: process.env.jwtSecretKey}),
     permissions(["me", "adminGroup"]),
     function(req, res, next) {
+
         var event = new Events();
         for (var key in req.body) {
-            if (key == "images") {
-                for (var i = 0; i < req.body.images.length; ++i) {
+            if (key == "images" && req.body[key] != "") {
+                for (var i = 0; i < req.body.images.length; i++) {
                     var media = new Media();
-                    media.relativePath = req.body.images[i];
+                    var filename = shortid.generate() + ".jpeg";
+                    media.name = "[Events] " + req.body.title;
+                    media.absolutePath = '/home/Sogeti/uploads/events/images/' + filename;
+                    media.relativePath = 'http://198.27.65.200:3000/uploads/events/images/' + filename;
                     media.author = req.user.id;
-                    media.name = "[Events] " + req.body.name;
-                    media.save();
+                    media.save(function(err) {
+                        console.log(err);
+                        if (err) return next(err);
+                    });
+                    var base64Data = req.body.images[i].replace(/^data:image\/jpeg;base64,/, "");
                     event.images.push(media._id);
+                    require("fs").writeFile(media.absolutePath, base64Data, 'base64', function (err) {
+                        if (err) event.images.pop();
+                    });
                 }
             }
             else {
-                console.log(key);
+                if (key == "start_at" || key =="end_at")
+                    req.body[key] = Date.parse(req.body[key]);
                 event[key] = req.body[key];
             }
         }
         event.author = req.user.id;
-        event.start_at = Date.now();
-        event.end_at = Date.UTC(2016, 10, 26, 20, 20);
         event.save(function(err) {
             if (err)
                 return next(err);

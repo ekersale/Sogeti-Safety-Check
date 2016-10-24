@@ -1,0 +1,59 @@
+page-preview-event {
+  .toolbar-title {
+    color: white;
+    font-family: "OpenSansLight";
+  }
+
+  p {
+    font-family: "OpenSansLight";
+    margin-bottom: 10%;
+  }
+
+  .bar-button-default {
+    color: #424242 !important;
+  }
+
+  .toolbar-background {
+    background:rgb(239, 69, 39);
+  }
+
+  ion-content {
+    background-color: #e9ebee !important;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  ion-slide.swiper-slide {
+    margin:auto !important;
+  }
+
+  .cardSeparator {
+    border-bottom: 5px solid #dedede;
+  }
+
+  .cardSeparator.item-block:last-child {
+    border-bottom: none;
+  }
+
+  .item-block .item-inner {
+    border-bottom: 0px;
+  }
+
+  img {
+    margin:auto;
+  }
+
+  ion-img img {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .img-loaded + ion-spinner {
+    display:none;
+  }
+
+
+  .noMoreContent {
+    min-height: 0px !important;
+  }
+}

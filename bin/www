@@ -9,7 +9,6 @@ process.env.jwtSecretKey = '234619F40F12BC5825938FBEBA02725F3A50C4B5468CED70872C
 
 var app = require('../app');
 var http = require('http');
-var mongoose = require('mongoose');
 
 
 /**

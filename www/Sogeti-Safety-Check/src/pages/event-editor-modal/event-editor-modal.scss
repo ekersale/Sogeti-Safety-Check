@@ -36,7 +36,7 @@ page-event-editor-modal {
     .item-inner {
       border-bottom: none !important;
       border-left: solid #d8d8d8 1px;
-      margin-left: 9px !important;
+      margin-left: -8px !important;
       padding-left: 10px;
     }
 
@@ -58,6 +58,13 @@ page-event-editor-modal {
       }
     }
   }
+
+  .imgInput {
+    .item-inner {
+      margin-left: 40px !important;
+    }
+  }
+
 
   .iOSItem {
     background-color: transparent;

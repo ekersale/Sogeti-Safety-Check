@@ -79,7 +79,6 @@ export class APIService {
   }
 
   sendRegistrationUserInfo(userInfos): Observable<any> {
-    console.log(userInfos.base64Image.value);
     var obj =  {
       "name": {
         "first": userInfos.firstName.value,
@@ -136,5 +135,16 @@ export class APIService {
     return this.http.post(`${this.serverAdd}events/push`, obj, {headers: this.header}).map((res:Response) => res.json());
   }
 
+  public postNewEvent(eventInfos) : Observable<any> {
+    let obj = {
+      images      : eventInfos.images,
+      name        : eventInfos.event.title.value,
+      message     : eventInfos.event.message.value,
+      target      : eventInfos.event.groups.value,
+      start_at    : eventInfos.event.dateStart.value,
+      end_at      : eventInfos.event.dateEnd.value
+    };
+    return this.http.post(`${this.serverAdd}events`, obj, {headers: this.header}).map((res:Response) => res.json());
+  }
 }
 
