@@ -90,6 +90,7 @@ router.get('/',
         Promise.all([
             Events.find(query)
                 .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
+                .sort('-created_at')
                 .populate([
                     {
                         path: "images", model: "media", select: "relativePath -_id"
@@ -105,7 +106,6 @@ router.get('/',
                 .exec(),
             Events.find(query).count().exec()
         ]).spread(function(events, count) {
-            console.log(events);
             res.status(200).json({ message : "OK", data : { count: count, limit: limit, events: events }});
         }, function(err) {
             return next(err);
@@ -177,7 +177,7 @@ router.post('/',
             if (key == "images" && req.body[key] != "") {
                 for (var i = 0; i < req.body.images.length; i++) {
                     var media = new Media();
-                    var filename = shortid.generate() + ".jpeg";
+                    var filename = shortid.generate();
                     media.name = "[Events] " + req.body.title;
                     media.absolutePath = '/home/Sogeti/uploads/events/images/' + filename;
                     media.relativePath = 'http://198.27.65.200:3000/uploads/events/images/' + filename;
@@ -186,7 +186,7 @@ router.post('/',
                         console.log(err);
                         if (err) return next(err);
                     });
-                    var base64Data = req.body.images[i].replace(/^data:image\/jpeg;base64,/, "");
+                    var base64Data = req.body.images[i].replace(/^data:image\/\w+;base64,/, "");
                     event.images.push(media._id);
                     require("fs").writeFile(media.absolutePath, base64Data, 'base64', function (err) {
                         if (err) event.images.pop();

@@ -59,12 +59,63 @@ page-event-editor-modal {
     }
   }
 
-  .imgInput {
+  .innerSpecialBorder {
     .item-inner {
-      margin-left: 40px !important;
+      border-left: none;
+    }
+
+  }
+
+  .androidItem.innerSpecialBorder {
+    .item-inner {
+      border-left: none;
+      border-left: solid #d8d8d8 1px;
     }
   }
 
+  .imgInput {
+
+    .button {
+      color:grey !important;
+      background:transparent !important;
+      border:none;
+      width: 62%;
+      margin: 9px 8px 9px 0 !important;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none ;
+      box-shadow: none;
+
+    }
+
+    .button-ios {
+      margin: 0px 8px 9px 0 !important;
+    }
+
+    .label-md {
+      margin: 0px;
+    }
+
+    .button-inner {
+      justify-content: flex-start;
+    }
+
+    h2 {
+      display: inline-block;
+      width: 100px;
+      margin: 9px 8px 9px 0px !important;
+    }
+
+    .label-ios {
+      margin: 0px;
+    }
+  }
+
+  .mapStyle {
+    .item-inner {
+      margin-left : 33px !important;
+      text-align:center;
+    }
+  }
 
   .iOSItem {
     background-color: transparent;
@@ -90,6 +141,25 @@ page-event-editor-modal {
       .item-inner {
         border-left: 0;
       }
+    }
+  }
+
+  .listImgPreview {
+
+    .item {
+      padding: 0;
+    }
+
+    .item-inner {
+      padding: 0 !important;
+    }
+
+    ion-label {
+      margin: 0 !important;
+    }
+
+    ion-img {
+      margin: 0 !important;
     }
   }
 }

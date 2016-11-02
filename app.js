@@ -13,6 +13,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users/users');
 var sites = require('./routes/sites/sites');
 var events = require('./routes/events/events');
+var geoloc = require('./routes/locations/locations');
 
 var app = express();
 
@@ -68,7 +69,7 @@ app.use('/users', users);
 app.use('/events', events);
 app.use('/locations', sites);
 app.use('/doc', express.static(__dirname + '/docAPI'));
-
+app.use('/geoloc', geoloc);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

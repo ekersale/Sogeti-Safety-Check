@@ -7,12 +7,15 @@ import {Http, Headers, Response} from '@angular/http';
 import {md5} from './md5';
 import {App} from 'ionic-angular';
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
+import 'rxjs';
 
 
 @Injectable()
 export class APIService {
   private serverAdd = "http://198.27.65.200:3000/";
+  private GoogleAPIKey = "AIzaSyBtI1hW2w4apiZMjb-HLWWOy6nsw3KWWRY";
+  private googleGeolocAPI = "https://maps.googleapis.com/maps/api/geocode/json?";
+  private googleAutocompleteAPI = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?";
   private header = new Headers();
   private userID;
   private token;
@@ -145,6 +148,26 @@ export class APIService {
       end_at      : eventInfos.event.dateEnd.value
     };
     return this.http.post(`${this.serverAdd}events`, obj, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public putUserPosition(position) : Observable<any> {
+    return this.http.put(`${this.serverAdd}users/${this.userID}`,
+      {
+        geoloc : {
+          latitude    : position.latitude,
+          longitude   : position.longitude
+        }
+      }, {headers: this.header}).map((res:Response) => res.json());
+
+  }
+
+  public getGeolocByCoord(position) : Observable<any> {
+      return this.http.get(`${this.googleGeolocAPI}latlng=${position.latitude},${position.longitude}&components=country:FR&key=${this.GoogleAPIKey}`).map((res:Response) => res.json());
+  }
+
+  public getGeolocByPlace(place) : Observable<any> {
+    var uri = encodeURI(place);
+    return this.http.get(`${this.serverAdd}geoloc/search?q=${place}`).map((res:Response) => res.json());
   }
 }
 

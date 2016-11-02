@@ -4,11 +4,14 @@
 
 import {Component} from '@angular/core';
 import {APIService} from "../../services/server";
-import {InfiniteScroll, ToastController, ModalController} from "ionic-angular";
+import {InfiniteScroll, ToastController, ModalController, NavController} from "ionic-angular";
 import {LoginPage} from '../login/login';
 import {AlertModal} from "../alert-modal/alert-modal";
 import {EventEditorModal} from "../event-editor-modal/event-editor-modal";
-
+import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/timer';
+import {EventsDetails} from "../events-details/events-details";
 
 @Component({
     templateUrl: 'home.html',
@@ -26,8 +29,16 @@ export class TabHomePage {
   };
   private scroll: boolean = true;
 
-  constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController) {
-    this.api.getEvents(this.page, null).subscribe(
+  constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController, private navCtrl : NavController) {
+    this.updateEvents();
+    Observable.timer(60000, 600000).subscribe(t => {
+      this.updateEvents();
+    }); //(60000, 600000)
+  }
+
+  updateEvents() {
+    this.events = [];
+    this.api.getEvents(1, null).subscribe(
       data => {
         if (data.data.count <= data.data.events.length)
           this.scroll = false;
@@ -42,14 +53,15 @@ export class TabHomePage {
     );
   }
 
-
   doInfinite(infiniteScroll : InfiniteScroll) {
-    console.log(infiniteScroll);
-    if (this.scroll == false)
+    console.log(this.scroll);
+    if (this.scroll == false) {
       infiniteScroll.enable(false);
-    else {
-      infiniteScroll.enable(true);
+      return;
     }
+/*    else {
+      infiniteScroll.enable(true);
+    }*/
     console.log('doInfinite, start is currently '+ this.page);
     this.page++;
     this.api.getEvents(this.page, null).subscribe(
@@ -71,7 +83,6 @@ export class TabHomePage {
   }
 
   searchEvent(event) {
-    console.log("coucou");
     if (!event.target.value || event.target.value.length == 0) {
       this.page = 1;
     }
@@ -97,5 +108,10 @@ export class TabHomePage {
 
   showEventCreation() {
     this.modalCtrl.create(EventEditorModal).present();
+  }
+
+  openCardDetails(event) {
+    console.log(event);
+    this.modalCtrl.create(EventsDetails, {event : event}).present();
   }
 }

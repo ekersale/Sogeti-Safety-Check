@@ -87,19 +87,35 @@
       </ion-select>
     </ion-item>
 
-
-    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate imgInput androidItem imgInput" showWhen="android, windows">
-      <h2 color="sogeti" item-left>Images</h2>
-      <input type="file" multiple [formControl]="eventForm.controls['filesInput']" #inputFilesAndroid (change)="fileChange(inputFilesAndroid)" accept="image/*"/>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem innerSpecialBorder" showWhen="android, windows">
+      <ion-label color="sogeti" fixed item-left>Address</ion-label>
+      <ion-input type="text" (focus)="openMapModal()" [value]="addressInput.description" placeholder="Find address"></ion-input>
     </ion-item>
-    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
-      <h2 color="sogeti">Images</h2>
-      <input type="file"  multiple [formControl]="eventForm.controls['filesInput']" #inputFilesIOS (change)="fileChange(inputFilesIOS)"  accept="image/*"/>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem innerSpecialBorder" showWhen="ios">
+      <ion-label color="sogeti" fixed >Address</ion-label>
+      <ion-input type="text" (focus)="openMapModal()" [value]="addressInput.description" placeholder="Find address"></ion-input>
     </ion-item>
 
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem imgInput innerSpecialBorder" showWhen="android, windows">
+      <h2 color="sogeti" fixed item-left>Images</h2>
+      <button floating ion-button type="button" (click)="inputFiles.click()">{{triggerFileInput}}</button>
+    </ion-item>
+    <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem imgInput innerSpecialBorder" showWhen="ios">
+      <h2 color="sogeti" fixed>Images</h2>
+      <button floating ion-button type="button" (click)="inputFiles.click()">{{triggerFileInput}}</button>
+    </ion-item>
+    <input type="file"  multiple [formControl]="eventForm.controls['filesInput']" #inputFiles (change)="fileChange(inputFiles)" style="display: none;" accept="image/*"/>
 
-    <ion-list style="text-align:center;">
-      <ion-img *ngFor="let selected of file_srcs" src="{{selected}}" style=" max-height:200px; margin-top: 5px; "></ion-img>
+
+    <ion-list style="text-align:center;" class="listImgPreview">
+      <ion-item-sliding *ngFor="let selected of file_srcs">
+        <ion-item >
+          <ion-img  src="{{selected}}" style=" max-height:200px; margin-top: 5px; "></ion-img>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="danger" (click)="removeItemImage(selected)"><ion-icon trash></ion-icon> Delete</button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
 
 

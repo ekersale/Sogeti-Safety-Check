@@ -34,10 +34,13 @@ export class LoginPage {
   onSubmit() {
       this.api.getConnexion(this.loginForm.controls).subscribe(
         data => {
-            this.api.setCredentials(data);
+          console.log(data);
+          this.api.setCredentials(data);
             this.navCtrl.setRoot(TabsPage, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         err => {
+          console.log(err.message);
+          console.log(err.status);
           if (err.status == 0)
             this.api.DisplayServerError(this.toastCtrl, err, this);
           else

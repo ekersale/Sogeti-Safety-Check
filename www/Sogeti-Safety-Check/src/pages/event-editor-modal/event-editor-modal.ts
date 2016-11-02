@@ -1,9 +1,9 @@
 import {Component } from '@angular/core';
-import {ViewController, NavController} from 'ionic-angular';
+import {ViewController, NavController, ModalController} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {APIService} from "../../services/server";
 import {PreviewEvent} from "../preview-event/preview-event";
-
+import {GoogleMapModal} from '../google-map-modal/google-map-modal'
 /*
   Generated class for the EventEditorModal page.
 
@@ -21,8 +21,10 @@ export class EventEditorModal {
   file_srcs : string[] = [];
   sendAlert : Boolean = false;
   groups = [];
+  triggerFileInput : string = 'NO IMAGE SELECTED';
+  addressInput : string = '';
 
-  constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService) {
+  constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService, public modalCtrl : ModalController) {
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
         console.log(this.groups);
@@ -59,7 +61,8 @@ export class EventEditorModal {
   }
 
   fileChange(input) {
-    console.log(input.files);
+    if (input.files.length <= 0)
+      return;
     this.file_srcs = [];
     for (var i = 0; i < input.files.length; i++) {
       var img = document.createElement("img");
@@ -70,5 +73,34 @@ export class EventEditorModal {
         }, false);
         reader.readAsDataURL(input.files[i]);
     }
+    if (input.files.length == 1)
+      this.triggerFileInput = input.files.length + ' IMAGE SELECTED';
+    else
+      this.triggerFileInput = input.files.length + ' IMAGES SELECTED';
+    console.log(this.triggerFileInput);
+  }
+
+  removeItemImage(item) {
+    for(let i = 0; i < this.file_srcs.length; i++) {
+      if(this.file_srcs[i] == item){
+        this.file_srcs.splice(i, 1);
+      }
+    }
+    if (this.file_srcs.length == 1)
+      this.triggerFileInput = this.file_srcs.length + ' IMAGE SELECTED';
+    else if (this.file_srcs.length > 1)
+      this.triggerFileInput = this.file_srcs.length + ' IMAGES SELECTED';
+    else
+      this.triggerFileInput = "NO IMAGE SELECTED";
+
+  }
+
+  openMapModal() {
+    let MapModal = this.modalCtrl.create(GoogleMapModal);
+    MapModal.onDidDismiss(data => {
+      console.log(data);
+      this.addressInput = data.place;
+    });
+    MapModal.present();
   }
 }

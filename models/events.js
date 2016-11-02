@@ -10,7 +10,7 @@ var eventsSchema = new Schema({
     name            : {type: String, required: true, default: ""},
     zone            : {
         latitude    : Number,
-        longitude   : Number,
+        longitude   : Number
     },
     participants    : [{ type: ObjectId, ref: "users" }],
     author          : { type: ObjectId, ref: "users"},
@@ -18,6 +18,7 @@ var eventsSchema = new Schema({
     images          : [{ type: ObjectId, ref: "media"}],
     admin           : { type: ObjectId, ref: "groups"},
     target          : [{type: ObjectId, ref: "groups"}],
+    comments        : [String],
     start_at        : Date,
     end_at          : Date,
     created_at      : Date,

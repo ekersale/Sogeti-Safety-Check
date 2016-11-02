@@ -1,0 +1,58 @@
+page-events-details {
+
+
+  ion-content {
+    padding: 0px !important;
+    background-color: #e9ebee !important;
+  }
+
+  .scroll-content {
+    padding: 0px !important;
+  }
+
+  .card-md {
+    margin:0px 0px 0px 0px !important;
+    width: 100%;
+  }
+
+  ion-slide {
+    margin:auto;
+  }
+
+  img {
+    margin:auto;
+  }
+
+  ion-img img {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .input-cover {
+    position: static;
+
+  }
+
+
+  ion-footer {
+    ion-toolbar {
+      min-height: 43px !important;
+
+      ion-textarea {
+        border-radius: 6px;
+        background: #ececec;
+        border: 1px solid rgb(204, 204, 204);
+
+        .text-input {
+          overflow: scroll !important;
+          max-height: 200px;
+        }
+
+        textarea {
+          margin: 5px 8px 5px 8px !important;
+          max-height: 200px;
+        }
+      }
+    }
+  }
+}

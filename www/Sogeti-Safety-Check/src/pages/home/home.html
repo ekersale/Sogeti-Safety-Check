@@ -5,7 +5,7 @@
   <ion-list>
     <ion-item  *ngFor="let event of events" text-wrap class="cardSeparator" >
     <ion-card >
-      <ion-item>
+      <ion-item (click)="openCardDetails(event)">
         <ion-avatar item-left>
           <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
         </ion-avatar>
@@ -13,33 +13,35 @@
         <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
       </ion-item>
 
-      <ion-slides [options]="mySlideOptions" >
+      <ion-slides [options]="mySlideOptions" (click)="openCardDetails(event)">
         <ion-slide *ngFor="let item of event.images" style="margin:auto;">
           <ion-img [src]="item.relativePath" ></ion-img>
         </ion-slide>
       </ion-slides>
-      <ion-card-content >
+      <ion-card-content (click)="openCardDetails(event)" >
         <p>{{event.message}}</p>
       </ion-card-content>
 
-      <ion-row>
-        <ion-col>
-          <button primary clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
-          </button>
+      <ion-row >
+        <ion-col style="margin-left: 10px;">
+          <p>7 present</p>
         </ion-col>
-        <ion-col>
-          <button primary clear small>
-            <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
-          </button>
+        <ion-col style="text-align:right; margin-right: 10px;">
+          <p>20 comments</p>
         </ion-col>
-        <ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
-        </ion-col>
+      </ion-row>
+      <ion-row style="border-top: 1px solid #cecece;">
+        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+          <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
+          I come
+        </button></ion-col>
+        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+          <ion-icon name="text" style="margin-right: 5px;"></ion-icon>
+          Comments</button></ion-col>
+        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" >
+          <ion-icon name="ios-information-circle" style="margin-right: 5px; "></ion-icon>
+          Contact
+        </button></ion-col>
       </ion-row>
     </ion-card>
     </ion-item>

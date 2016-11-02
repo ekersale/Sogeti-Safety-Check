@@ -16,6 +16,10 @@ import {HttpModule} from '@angular/http';
 import {AlertModal} from "../pages/alert-modal/alert-modal";
 import {EventEditorModal} from "../pages/event-editor-modal/event-editor-modal";
 import {PreviewEvent} from "../pages/preview-event/preview-event";
+import {GoogleMapModal} from "../pages/google-map-modal/google-map-modal";
+import {APIService} from "../services/server";
+import {EventsDetails} from "../pages/events-details/events-details";
+import { Elastic }  from 'angular2-elastic';
 
 
 @NgModule({
@@ -33,11 +37,14 @@ import {PreviewEvent} from "../pages/preview-event/preview-event";
     TabChatPage,
     AlertModal,
     EventEditorModal,
-    PreviewEvent
+    PreviewEvent,
+    GoogleMapModal,
+    EventsDetails
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    Elastic
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,8 +61,10 @@ import {PreviewEvent} from "../pages/preview-event/preview-event";
     TabChatPage,
     AlertModal,
     EventEditorModal,
-    PreviewEvent
+    PreviewEvent,
+    GoogleMapModal,
+    EventsDetails
   ],
-  providers: []
+  providers: [APIService]
 })
 export class AppModule {}

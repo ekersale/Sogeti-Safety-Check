@@ -17,6 +17,7 @@
     "express": "~4.13.4",
     "express-jwt": "^5.0.0",
     "fs": "0.0.1-security",
+    "google-locations": "^0.2.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.1.9",
     "mongo-express": "^0.31.2",

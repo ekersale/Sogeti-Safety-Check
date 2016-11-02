@@ -7,8 +7,10 @@ import {Keyboard} from "ionic-native";
 import {APIService} from '../services/server';
 
 import { LoginPage } from '../pages/login/login';
+import { Geolocation, PositionError, Geoposition } from 'ionic-native';
 
-
+import { Observable } from "rxjs/Observable";
+import 'rxjs';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`,
@@ -23,6 +25,12 @@ export class MyApp {
       data => this.rootPage = TabsPage,
       err => this.rootPage = LoginPage
    );
+
+    Geolocation.getCurrentPosition().then(
+      pos => {
+        this.api.putUserPosition((pos as Geoposition).coords).subscribe();
+      }
+    );
 
     platform.ready().then(() => {
       Keyboard.hideKeyboardAccessoryBar(false);
