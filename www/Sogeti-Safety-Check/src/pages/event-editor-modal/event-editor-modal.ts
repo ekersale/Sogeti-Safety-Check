@@ -65,7 +65,6 @@ export class EventEditorModal {
       return;
     this.file_srcs = [];
     for (var i = 0; i < input.files.length; i++) {
-      var img = document.createElement("img");
       var reader = new FileReader();
           reader.addEventListener("load", (event) => {
             this.file_srcs.push((event.target as FileReader).result);

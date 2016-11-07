@@ -7,9 +7,8 @@ import {Keyboard} from "ionic-native";
 import {APIService} from '../services/server';
 
 import { LoginPage } from '../pages/login/login';
-import { Geolocation, PositionError, Geoposition } from 'ionic-native';
+import { Geolocation, Geoposition } from 'ionic-native';
 
-import { Observable } from "rxjs/Observable";
 import 'rxjs';
 
 @Component({

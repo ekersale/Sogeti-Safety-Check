@@ -15,7 +15,6 @@ export class APIService {
   private serverAdd = "http://198.27.65.200:3000/";
   private GoogleAPIKey = "AIzaSyBtI1hW2w4apiZMjb-HLWWOy6nsw3KWWRY";
   private googleGeolocAPI = "https://maps.googleapis.com/maps/api/geocode/json?";
-  private googleAutocompleteAPI = "https://maps.googleapis.com/maps/api/place/autocomplete/xml?";
   private header = new Headers();
   private userID;
   private token;
@@ -167,7 +166,15 @@ export class APIService {
 
   public getGeolocByPlace(place) : Observable<any> {
     var uri = encodeURI(place);
-    return this.http.get(`${this.serverAdd}geoloc/search?q=${place}`).map((res:Response) => res.json());
+    return this.http.get(`${this.serverAdd}geoloc/search?q=${uri}`).map((res:Response) => res.json());
+  }
+
+  public getComments(eventID) : Observable<any> {
+    return this.http.get(`${this.serverAdd}events/${eventID}/comments`, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public postComment(eventID, message) : Observable<any> {
+    return this.http.post(`${this.serverAdd}events/${eventID}/comments`, {message : message}, {headers: this.header}).map((res:Response) => res.json());
   }
 }
 

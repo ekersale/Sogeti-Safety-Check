@@ -1,6 +1,10 @@
 page-events-details {
 
 
+  p {
+    color: black !important;
+  }
+
   ion-content {
     padding: 0px !important;
     background-color: #e9ebee !important;
@@ -31,6 +35,25 @@ page-events-details {
   .input-cover {
     position: static;
 
+  }
+
+
+  .itemComment {
+    align-items: flex-start !important;
+
+    h2 {
+      font-weight: 500;
+    }
+
+    h6 {
+      font-size: 10px;
+      color: grey;
+    }
+
+    ion-icon {
+      font-size: 18px;
+      color:grey;
+    }
   }
 
 

@@ -13,6 +13,7 @@ var Media = require('../../models/media');
 var User = require('../../models/users');
 var Groups = require('../../models/groupes');
 var shortid = require('shortid');
+var Comments = require('../../models/comments');
 
 var gcmApiKey = 'AIzaSyBQnYq835Gdnsz4lb5qX5v8EseRhrxOZNQ'; // GCM API KEY OF YOUR GOOGLE CONSOLE PROJECT
 var FCM = require("fcm-node");
@@ -213,7 +214,177 @@ router.post('/',
         });
     }
 );
+router.post('/',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["me", "adminGroup"]),
+    function(req, res, next) {
 
+        var event = new Events();
+        for (var key in req.body) {
+            if (key == "images" && req.body[key] != "") {
+                for (var i = 0; i < req.body.images.length; i++) {
+                    var media = new Media();
+                    var filename = shortid.generate();
+                    media.name = "[Events] " + req.body.title;
+                    media.absolutePath = '/home/Sogeti/uploads/events/images/' + filename;
+                    media.relativePath = 'http://198.27.65.200:3000/uploads/events/images/' + filename;
+                    media.author = req.user.id;
+                    media.save(function(err) {
+                        console.log(err);
+                        if (err) return next(err);
+                    });
+                    var base64Data = req.body.images[i].replace(/^data:image\/\w+;base64,/, "");
+                    event.images.push(media._id);
+                    require("fs").writeFile(media.absolutePath, base64Data, 'base64', function (err) {
+                        if (err) event.images.pop();
+                    });
+                }
+            }
+            else {
+                if (key == "start_at" || key =="end_at")
+                    req.body[key] = Date.parse(req.body[key]);
+                event[key] = req.body[key];
+            }
+        }
+        event.author = req.user.id;
+        event.save(function(err) {
+            if (err)
+                return next(err);
+            else
+                return res.status(200).json({
+                    message : "OK",
+                    data    : {
+                        event: event
+                    }
+                });
+        });
+    }
+);
 
+router.get('/:id/comments',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        Events.findOne({_id: req.params.id})
+            .populate([
+                {
+                    path: "comments", model: "comments",
+                    populate : { path: 'author', model: "users", select: "profileImg _id name",
+                    populate : { path: 'profileImg', model: 'media', select: 'relativePath -_id'}}
+                }
+            ])
+            .exec(function(err, event) {
+                console.log(event);
+                if (err) return next(err);
+                else {
+                    return res.status(200).json({
+                        message     : "OK",
+                        data        : {
+                            event   : event,
+                            comments: event.comments
+                        }
+                    });
+                }
+            });
+    }
+);
+
+router.post('/:id/comments',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        if (!req.body.message || req.body.message == "")
+            return next(req.app.getError(400, "Param @message empty or not found"));
+        Events.findOne({_id: req.params.id}, function(err, event) {
+            if (err) return next(err);
+            else if (!event) return next(req.app.getError(404, "Event not found"));
+            else {
+                var comment = new Comments();
+                comment.author = req.user.id;
+                comment.message = req.body.message;
+                comment.save(function(err) {
+                    if (err) return next(err);
+                });
+                event.comments.push(comment._id);
+                event.save(function(err) {
+                    if (err) return next(err);
+                    else return res.status(200).json({
+                        message     : "OK",
+                        data        : {
+                            event   : event,
+                            comment : comment
+                        }
+                    });
+                })
+            }
+        });
+    }
+);
+
+router.put('/:id/comments/:comment',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        if (!req.body.message || req.body.message == "")
+            return next(req.app.getError(400, "Param @message empty or not found"));
+        Events.findOne({_id: req.params.id}, function(err, event) {
+            if (err) return next(err);
+            else if (!event) return next(req.app.getError(404, "Event not found"));
+            else {
+                Comments.findOne({_id: req.params.comment}, function(err, comment) {
+                    if (err) return next(err);
+                    else if (!comment) return next(req.app.getError(400, "Comment not found"));
+                    else if (comment.author != req.user.id) return next(req.app.getError(401, "Unauthorized action"));
+                    else {
+                        comment.message = req.body.message;
+                        comment.save(function(err) {
+                            if (err) return next(err);
+                            else res.status(200).json({
+                                message     : "OK",
+                                data        : {
+                                    event   : event,
+                                    comment : comment
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+        });
+    }
+);
+
+router.delete('/:id/comments/:comment',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        if (!req.body.message || req.body.message == "")
+            return next(req.app.getError(400, "Param @message empty or not found"));
+        Events.findOne({_id: req.params.id}, function(err, event) {
+            if (err) return next(err);
+            else if (!event) return next(req.app.getError(404, "Event not found"));
+            else if (event.author != req.user.id) return next(req.app.getError(401, "Unauthorized action"));
+            else {
+                var index = event.comments.indexOf(req.params.comment);
+                if (index != -1)
+                    event.comments.slice(index, 1);
+                event.save(function(err) {
+                    if (err)
+                        return next(err);
+                });
+                Comments.findOneAndRemove(function(err) {
+                    if (err)
+                        return next(err);
+                    else return res.status(200).json({
+                        message     : "OK",
+                        data        : {
+                            event   : event
+                        }
+                    });
+                });
+            }
+        });
+    }
+);
 
 module.exports = router;

@@ -18,7 +18,7 @@ var eventsSchema = new Schema({
     images          : [{ type: ObjectId, ref: "media"}],
     admin           : { type: ObjectId, ref: "groups"},
     target          : [{type: ObjectId, ref: "groups"}],
-    comments        : [String],
+    comments        : [{type: ObjectId, ref:"comments"}],
     start_at        : Date,
     end_at          : Date,
     created_at      : Date,

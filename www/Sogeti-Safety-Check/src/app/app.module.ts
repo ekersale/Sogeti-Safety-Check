@@ -20,7 +20,7 @@ import {GoogleMapModal} from "../pages/google-map-modal/google-map-modal";
 import {APIService} from "../services/server";
 import {EventsDetails} from "../pages/events-details/events-details";
 import { Elastic }  from 'angular2-elastic';
-
+import {MomentModule} from "angular2-moment";
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { Elastic }  from 'angular2-elastic';
   imports: [
     IonicModule.forRoot(MyApp),
     HttpModule,
-    Elastic
+    Elastic,
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
