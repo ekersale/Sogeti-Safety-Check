@@ -176,5 +176,17 @@ export class APIService {
   public postComment(eventID, message) : Observable<any> {
     return this.http.post(`${this.serverAdd}events/${eventID}/comments`, {message : message}, {headers: this.header}).map((res:Response) => res.json());
   }
+
+  public deleteComment(commentID, eventID) : Observable<any> {
+    return this.http.delete(`${this.serverAdd}events/${eventID}/comments/${commentID}`,  {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public postSubscribe(eventID) : Observable<any> {
+    return this.http.post(`${this.serverAdd}events/${eventID}/subscribe`, {}, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public deleteSubscribe(eventID) :  Observable<any> {
+    return this.http.delete(`${this.serverAdd}events/${eventID}/subscribe`, {headers: this.header}).map((res:Response) => res.json());
+  }
 }
 

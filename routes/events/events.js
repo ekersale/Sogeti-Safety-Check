@@ -153,13 +153,32 @@ router.post('/:id/subscribe',
                                     event.save();
                                     user.participations.push(event._id);
                                     user.save();
-                                    return res.status(200).json({
-                                        message     : "OK",
-                                        data        : {
-                                            event   : event,
-                                            user    : user
-                                        }
-                                    });
+                                    Events.findOne({_id: req.params.id})
+                                        .populate([
+                                            {
+                                                path: "images", model: "media", select: "relativePath -_id"
+                                            },
+                                            {
+                                                path: "participants", model: "users", select: "name id profileImg",
+                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                            },
+                                            {
+                                                path: "author", model: "users", select: "name id profileImg",
+                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                            }
+                                        ])
+                                        .exec(function(err, event) {
+                                            if (err) return next(err);
+                                            else if (!event) return next(req.app.getError(404, "Event not found"));
+                                            else return res.status(200).json({
+                                                message     : "OK",
+                                                data        : {
+                                                    event   : event,
+                                                    user    : user
+                                                }
+                                            });
+                                        });
+
                                 }
                             });
                     }
@@ -168,52 +187,64 @@ router.post('/:id/subscribe',
     }
 );
 
-router.post('/',
-    expressjwt({ secret: process.env.jwtSecretKey}),
-    permissions(["me", "adminGroup"]),
-    function(req, res, next) {
 
-        var event = new Events();
-        for (var key in req.body) {
-            if (key == "images" && req.body[key] != "") {
-                for (var i = 0; i < req.body.images.length; i++) {
-                    var media = new Media();
-                    var filename = shortid.generate();
-                    media.name = "[Events] " + req.body.title;
-                    media.absolutePath = '/home/Sogeti/uploads/events/images/' + filename;
-                    media.relativePath = 'http://198.27.65.200:3000/uploads/events/images/' + filename;
-                    media.author = req.user.id;
-                    media.save(function(err) {
-                        console.log(err);
-                        if (err) return next(err);
-                    });
-                    var base64Data = req.body.images[i].replace(/^data:image\/\w+;base64,/, "");
-                    event.images.push(media._id);
-                    require("fs").writeFile(media.absolutePath, base64Data, 'base64', function (err) {
-                        if (err) event.images.pop();
-                    });
+router.delete('/:id/subscribe',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function (req, res, next) {
+        Events.findOne({_id: req.params.id})
+            .exec(function(err, event) {
+                if (err) return next(err);
+                else if (!event) return next(req.app.getError(404, "Event not found"));
+                else {
+                   if (event.participants.indexOf(req.user.id) == 1)
+                       return next(req.app.getError(409, "User not participating to this event"));
+                    else {
+                        User.findOne({_id: req.user.id})
+                            .exec(function(err, user) {
+                                if (err) return next(err);
+                                else if (!user) return next(req.app.getError(404, "User not found"));
+                                else {
+                                    user.participations.splice(user.participations.indexOf(req.params.id), 1);
+                                    user.save(function(err) {
+                                        if (err) return next(err);
+                                    });
+                                    event.participants.splice(event.participants.indexOf(req.user.id), 1);
+                                    event.save(function(err) {
+                                        if (err) return next(err);
+                                    });
+                                    Events.findOne({_id: req.params.id})
+                                        .populate([
+                                            {
+                                                path: "images", model: "media", select: "relativePath -_id"
+                                            },
+                                            {
+                                                path: "participants", model: "users", select: "name id profileImg",
+                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                            },
+                                            {
+                                                path: "author", model: "users", select: "name id profileImg",
+                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                            }
+                                        ])
+                                        .exec(function(err, event) {
+                                            if (err) return next(err);
+                                            else if (!event) return next(req.app.getError(404, "Event not found"));
+                                            else return res.status(200).json({
+                                                    message     : "OK",
+                                                    data        : {
+                                                        event   : event
+                                                    }
+                                                });
+                                        });
+                                }
+                            });
+                   }
                 }
-            }
-            else {
-                if (key == "start_at" || key =="end_at")
-                    req.body[key] = Date.parse(req.body[key]);
-                event[key] = req.body[key];
-            }
-        }
-        event.author = req.user.id;
-        event.save(function(err) {
-            if (err)
-                return next(err);
-            else
-                return res.status(200).json({
-                    message : "OK",
-                    data    : {
-                        event: event
-                    }
-                });
-        });
+            });
     }
 );
+
 router.post('/',
     expressjwt({ secret: process.env.jwtSecretKey}),
     permissions(["me", "adminGroup"]),
@@ -308,13 +339,26 @@ router.post('/:id/comments',
                 event.comments.push(comment._id);
                 event.save(function(err) {
                     if (err) return next(err);
-                    else return res.status(200).json({
-                        message     : "OK",
-                        data        : {
-                            event   : event,
-                            comment : comment
-                        }
-                    });
+                    else {
+                        Comments.findOne({_id: comment._id})
+                            .populate([
+                                {
+                                    path: 'author', model: "users", select: "profileImg _id name",
+                                    populate : { path: 'profileImg', model: 'media', select: 'relativePath -_id'}
+                                }
+                            ])
+                            .exec(function(err, cmt) {
+                                if (err)
+                                    return next(err);
+                                else
+                                    return res.status(200).json({
+                                        message     : "OK",
+                                        data        : {
+                                            comment : cmt
+                                        }
+                                    });
+                            });
+                    }
                 })
             }
         });
@@ -358,8 +402,6 @@ router.delete('/:id/comments/:comment',
     expressjwt({ secret: process.env.jwtSecretKey}),
     permissions(["logged"]),
     function(req, res, next) {
-        if (!req.body.message || req.body.message == "")
-            return next(req.app.getError(400, "Param @message empty or not found"));
         Events.findOne({_id: req.params.id}, function(err, event) {
             if (err) return next(err);
             else if (!event) return next(req.app.getError(404, "Event not found"));
@@ -367,12 +409,12 @@ router.delete('/:id/comments/:comment',
             else {
                 var index = event.comments.indexOf(req.params.comment);
                 if (index != -1)
-                    event.comments.slice(index, 1);
+                    event.comments.splice(index, 1);
                 event.save(function(err) {
                     if (err)
                         return next(err);
                 });
-                Comments.findOneAndRemove(function(err) {
+                Comments.findOneAndRemove({_id: req.params.comment},function(err) {
                     if (err)
                         return next(err);
                     else return res.status(200).json({

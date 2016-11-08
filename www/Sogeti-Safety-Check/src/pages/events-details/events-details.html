@@ -39,11 +39,15 @@
     </ion-col>
   </ion-row>
   <ion-row style="border-top: 1px solid #cecece;">
-    <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+    <ion-col style="width: 33%;" *ngIf="hasSuscribed() == false"><button ion-button full clear small color="sogeti" (click)="subscribeEvent()" >
       <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
-      I come
+      Subscribe
     </button></ion-col>
-    <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+    <ion-col style="width: 33%;" *ngIf="hasSuscribed() == true"><button ion-button full clear small color="blue" (click)="unsubscribeEvent()" >
+      <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
+      Unsubscribe
+    </button></ion-col>
+    <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="focus(focusable)">
       <ion-icon name="text" style="margin-right: 5px;"></ion-icon>
       Comments</button></ion-col>
     <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" >
@@ -52,24 +56,26 @@
     </button></ion-col>
   </ion-row>
 </ion-card>
-  <ion-list>
+  <ion-list no-lines>
     <ion-item *ngIf="error != ''">{{error}}</ion-item>
-    <ion-item *ngFor="let comment of comments" text-wrap class="itemComment" >
-      <ion-avatar item-left>
-        <ion-img item-top [src]="comment.author.profileImg.relativePath"></ion-img>
-      </ion-avatar>
-      <h2 style="font-size: 13px;">{{comment.author.name.first}} {{comment.author.name.last}}</h2>
-      <p>{{comment.message}}</p>
-      <h6>{{comment.created_at | amTimeAgo:true }} ago</h6>
-      <ion-icon item-right name="close" *ngIf="comment.author._id == currentUser"></ion-icon>
+    <div  *ngFor="let comment of comments; let i = index " >
+    <ion-item text-wrap class="itemComment animated fadeIn item-remove-animate" [style.animation-delay]="(((i + 1) / 10) > 1) ? 0 + 's' : ((i + 1) / 10) + 's' " >
+        <ion-avatar item-left>
+          <ion-img item-top [src]="comment.author.profileImg.relativePath"></ion-img>
+        </ion-avatar>
+        <h2 style="font-size: 13px;">{{comment.author.name.first}} {{comment.author.name.last}}</h2>
+        <p>{{comment.message}} {{i}}</p>
+        <h6>{{comment.created_at | amTimeAgo:true }} ago</h6>
+        <ion-icon item-right name="close" *ngIf="comment.author._id == currentUser" (click)="removeComment(comment)"></ion-icon>
     </ion-item>
+    </div>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-  <ion-toolbar no-border-top>
-    <ion-textarea fz-elastic rows="1" [formControl]="commentForm.controls['message']" ></ion-textarea>
+  <ion-toolbar no-border-top >
+    <ion-textarea fz-elastic rows="1" [formControl]="commentForm.controls['message']" #focusable></ion-textarea>
     <ion-buttons end>
       <button ion-button clear color="sogeti" type="submit" [disabled]="!commentForm.valid">
         Publish
