@@ -6,6 +6,7 @@
   "scripts": {
     "build": "ionic-app-scripts build --dev",
     "watch": "ionic-app-scripts watch",
+    "build-ios": "ionic-app-scripts build --ios",
     "serve:before": "watch",
     "emulate:before": "build",
     "deploy:before": "build",

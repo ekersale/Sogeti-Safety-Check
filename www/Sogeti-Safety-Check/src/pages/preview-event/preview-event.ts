@@ -32,7 +32,7 @@ export class PreviewEvent {
 
   ionViewDidLoad() {
     console.log('Hello PreviewEvent Page');
-    this.api.getUserInfo().subscribe(
+    this.api.getUserInfo(null).subscribe(
       data => {
         this.user = data.data.user.profileImg.relativePath;
         console.log(this.user);

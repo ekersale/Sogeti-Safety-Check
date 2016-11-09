@@ -5,12 +5,12 @@
   <ion-list>
     <ion-item  *ngFor="let event of events" text-wrap class="cardSeparator" >
     <ion-card >
-      <ion-item (click)="openCardDetails(event)">
+      <ion-item>
         <ion-avatar item-left>
-          <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
+          <ion-img src="{{event.author.profileImg.relativePath}}" (click)="openProfile(event.author._id)"></ion-img>
         </ion-avatar>
-        <h2>{{event.name}}</h2>
-        <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
+        <h2 (click)="openCardDetails(event)">{{event.name}}</h2>
+        <p (click)="openCardDetails(event)">{{event.start_at | date : 'dd/MM/yyyy'}}</p>
       </ion-item>
 
       <ion-slides [options]="mySlideOptions" (click)="openCardDetails(event)">
@@ -31,14 +31,18 @@
         </ion-col>
       </ion-row>
       <ion-row style="border-top: 1px solid #cecece;">
-        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false"><button ion-button full clear small color="sogeti" (click)="subscribeEvent(event)">
           <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
-          I come
+          Subscribe
         </button></ion-col>
-        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti">
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true"><button ion-button full clear small color="blue" (click)="unsubscribeEvent(event)" >
+          <ion-icon name="thumbs-down" style="margin-right: 5px;"></ion-icon>
+          Unsubscribe
+        </button></ion-col>
+        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="openModelComment(event)">
           <ion-icon name="text" style="margin-right: 5px;"></ion-icon>
           Comments</button></ion-col>
-        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" >
+        <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="openProfile(event.author._id)">
           <ion-icon name="ios-information-circle" style="margin-right: 5px; "></ion-icon>
           Contact
         </button></ion-col>

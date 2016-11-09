@@ -150,35 +150,38 @@ router.post('/:id/subscribe',
                                 else if (!event) return next(req.app.getError(404, 'Event not found'));
                                 else {
                                     event.participants.push(user._id);
-                                    event.save();
-                                    user.participations.push(event._id);
-                                    user.save();
-                                    Events.findOne({_id: req.params.id})
-                                        .populate([
-                                            {
-                                                path: "images", model: "media", select: "relativePath -_id"
-                                            },
-                                            {
-                                                path: "participants", model: "users", select: "name id profileImg",
-                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
-                                            },
-                                            {
-                                                path: "author", model: "users", select: "name id profileImg",
-                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
-                                            }
-                                        ])
-                                        .exec(function(err, event) {
-                                            if (err) return next(err);
-                                            else if (!event) return next(req.app.getError(404, "Event not found"));
-                                            else return res.status(200).json({
-                                                message     : "OK",
-                                                data        : {
-                                                    event   : event,
-                                                    user    : user
-                                                }
-                                            });
-                                        });
-
+                                    event.save(function(err) {
+                                        if (err) return next(err);
+                                        else {
+                                            user.participations.push(event._id);
+                                            user.save();
+                                            Events.findOne({_id: req.params.id})
+                                                .populate([
+                                                    {
+                                                        path: "images", model: "media", select: "relativePath -_id"
+                                                    },
+                                                    {
+                                                        path: "participants", model: "users", select: "name id profileImg",
+                                                        populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                                    },
+                                                    {
+                                                        path: "author", model: "users", select: "name id profileImg",
+                                                        populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                                    }
+                                                ])
+                                                .exec(function(err, event) {
+                                                    if (err) return next(err);
+                                                    else if (!event) return next(req.app.getError(404, "Event not found"));
+                                                    else return res.status(200).json({
+                                                            message     : "OK",
+                                                            data        : {
+                                                                event   : event,
+                                                                user    : user
+                                                            }
+                                                        });
+                                                });
+                                        }
+                                    });
                                 }
                             });
                     }
@@ -192,7 +195,58 @@ router.delete('/:id/subscribe',
     expressjwt({ secret: process.env.jwtSecretKey}),
     permissions(["logged"]),
     function (req, res, next) {
-        Events.findOne({_id: req.params.id})
+        Events.findOne({_id: req.params.id, participants: req.user.id})
+            .exec(function(err, event) {
+                if (err) return next(err);
+                else if (!event) return next(req.app.getError(409, "User not participating"));
+                else {
+                    event.participants.splice(event.participants.indexOf(req.user.id), 1);
+                    User.findOne({_id: req.user.id})
+                        .exec(function(err, user) {
+                            if (err) return next(err);
+                            else if(!user) return next(req.app.getError(404, "User not found"));
+                            else {
+                                user.participations.splice(user.participations.indexOf(req.params.id), 1);
+                                user.save(function(err) {
+                                    if (err) return next(err);
+                                    else {
+                                        event.save(function(err) {
+                                            if (err) return next(err);
+                                            else Events.findOne({_id: req.params.id})
+                                                .populate([
+                                                    {
+                                                        path: "images", model: "media", select: "relativePath -_id"
+                                                    },
+                                                    {
+                                                        path: "participants", model: "users", select: "name id profileImg",
+                                                        populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                                    },
+                                                    {
+                                                        path: "author", model: "users", select: "name id profileImg",
+                                                        populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+                                                    }
+                                                ])
+                                                .exec(function(err, event) {
+                                                    if (err) return next(err);
+                                                    else if (!event) return next(req.app.getError(404, "Event not found"));
+                                                    else {
+                                                        return res.status(200).json({
+                                                            message     : "OK",
+                                                            data        : {
+                                                                event   : event
+                                                            }
+                                                        })
+                                                    }
+                                                });
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                }
+            });
+
+/*        Events.findOne({_id: req.params.id})
             .exec(function(err, event) {
                 if (err) return next(err);
                 else if (!event) return next(req.app.getError(404, "Event not found"));
@@ -241,7 +295,7 @@ router.delete('/:id/subscribe',
                             });
                    }
                 }
-            });
+            });*/
     }
 );
 

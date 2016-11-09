@@ -20,7 +20,7 @@ export class EventsDetails {
   private wobbleState : string = "active";
   @ViewChild(Content) content: Content;
 
-  constructor(public viewCtrl: ViewController, public data : NavParams, platform : Platform,
+  constructor(public viewCtrl: ViewController, public data : NavParams, private platform : Platform,
               private api : APIService, private fb : FormBuilder, private zone : NgZone)
   {
     this.event = data.get('event');
@@ -28,15 +28,21 @@ export class EventsDetails {
       Keyboard.hideKeyboardAccessoryBar(true);
     }
 
-    console.log(this.hasSuscribed());
   }
 
-  hasSuscribed() {
+  ionViewWillEnter() {
+    if (this.data.get('focus') == true) {
+      this.focus();
+    }
+  }
+
+  hasSuscribed(event) {
     let _id = window.localStorage.getItem('userID');
-    let result = this.event.participants.filter(function(o){
-      return o._id == _id;
+    let result = event.participants.filter(function(o){
+      console.log(o._id == _id || o == _id);
+      return o._id == _id || o == _id;
     });
-    return result ? true : false;
+    return result.length > 0 ? true : false;
   }
 
   ionViewDidLoad() {
@@ -76,7 +82,8 @@ export class EventsDetails {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss();
+    this.event.comments = this.comments;
+    this.viewCtrl.dismiss({event : this.event});
     Keyboard.hideKeyboardAccessoryBar(false);
   }
 
@@ -86,15 +93,15 @@ export class EventsDetails {
     });
   }
 
-  focus(focusable) {
-    focusable.setFocus();
-    focusable.click();
+  focus() {
+    Keyboard.show();
   }
 
   subscribeEvent() {
     this.api.postSubscribe(this.event._id).subscribe(
       data => {
-        this.event = data.data.event;
+        console.log(data);
+        this.event.participants = data.data.event.participants;
       },
       error => console.log(error)
     );
@@ -102,7 +109,7 @@ export class EventsDetails {
 
   unsubscribeEvent() {
     this.api.deleteSubscribe(this.event._id).subscribe(
-      data => this.event = data.data.event,
+      data => {this.event.participants = data.data.event.participants;},
       error => console.log(error)
     )
   }

@@ -1,5 +1,8 @@
-<ion-header hidden="true">
-  <ion-searchbar></ion-searchbar>
+<ion-header style="background:rgb(239, 69, 39);" *ngIf="displayReturnButton == true">
+  <button ion-button clear (click)="dismiss()" >
+    <ion-icon name="arrow-back" style="color:white; font-size: 1.8em;"></ion-icon>
+    <div style="margin-left: 10px;color: white;">Home</div>
+  </button>
 </ion-header>
 <ion-content class="profile">
   <ion-item class="img">
@@ -37,39 +40,25 @@
     <ion-item><h1>Mes participations</h1></ion-item>
 
     <ion-list>
-      <ion-item *ngFor="let item of events" (click)="eventSelected(item)" text-wrap>
-        <ion-card>
+      <ion-item *ngFor="let item of events" (click)="openCardDetails(item)" text-wrap>
+        <ion-card >
           <ion-item>
             <ion-avatar item-left>
               <ion-img src="{{item.author.profileImg.relativePath}}"></ion-img>
             </ion-avatar>
-            <h2 style="text-align: left;">{{item.name}}</h2>
+            <h2 style="text-align:left;">{{item.name}}</h2>
             <p>{{item.start_at | date : 'dd/MM/yyyy'}}</p>
           </ion-item>
-
-          <ion-img src="{{item.images[0].relativePath}}"></ion-img>
-
-          <ion-card-content text-wrap >
-            <p style="word-wrap: break-word">{{item.message}}</p>
+          <ion-card-content >
+            <p>{{item.message}}</p>
           </ion-card-content>
 
-          <ion-row>
-            <ion-col>
-              <button primary clear small>
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>12 Likes</div>
-              </button>
+          <ion-row (click)="openCardDetails(item)">
+            <ion-col style="margin-left: 10px;">
+              <p>{{item.participants.length}} present</p>
             </ion-col>
-            <ion-col>
-              <button primary clear small>
-                <ion-icon name="text"></ion-icon>
-                <div>4 Comments</div>
-              </button>
-            </ion-col>
-            <ion-col center text-center>
-              <ion-note>
-                11h ago
-              </ion-note>
+            <ion-col style="text-align:right; margin-right: 10px;">
+              <p>{{item.comments.length}} comments</p>
             </ion-col>
           </ion-row>
         </ion-card>

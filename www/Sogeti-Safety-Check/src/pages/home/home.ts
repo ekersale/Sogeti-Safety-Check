@@ -12,6 +12,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/timer';
 import {EventsDetails} from "../events-details/events-details";
+import {TabProfilePage} from '../profile/profile'
 
 @Component({
     templateUrl: 'home.html',
@@ -30,7 +31,6 @@ export class TabHomePage {
   private scroll: boolean = true;
 
   constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController, private navCtrl : NavController) {
-    this.updateEvents();
     Observable.timer(60000, 600000).subscribe(t => {
       this.updateEvents();
     }); //(60000, 600000)
@@ -51,6 +51,11 @@ export class TabHomePage {
         console.log(error);
       }
     );
+  }
+
+  ionViewWillEnter() {
+    this.events = [];
+    this.updateEvents();
   }
 
   doInfinite(infiniteScroll : InfiniteScroll) {
@@ -111,7 +116,48 @@ export class TabHomePage {
   }
 
   openCardDetails(event) {
-    console.log(event);
-    this.modalCtrl.create(EventsDetails, {event : event}).present();
+    var EventDetailModal = this.modalCtrl.create(EventsDetails, {event : event, focus: false});
+    EventDetailModal.onDidDismiss(data => {
+      event = data.event;
+    });
+    EventDetailModal.present();
+  }
+
+  hasSuscribed(event) {
+    let _id = window.localStorage.getItem('userID');
+    let result = event.participants.filter(function(o){
+      return o._id == _id;
+    });
+    return result.length > 0 ? true : false;
+  }
+
+  subscribeEvent(event) {
+    this.api.postSubscribe(event._id).subscribe(
+      data => {
+        console.log(data);
+        event.participants = data.data.event.participants;
+      },
+      error => console.log(error)
+    );
+  }
+
+  unsubscribeEvent(event) {
+    this.api.deleteSubscribe(event._id).subscribe(
+      data => {event.participants = data.data.event.participants;},
+      error => console.log(error)
+    )
+  }
+
+  openModelComment(event) {
+    var EventDetailModal = this.modalCtrl.create(EventsDetails, {event : event, focus: true});
+    EventDetailModal.onDidDismiss(data => {
+      event = data.event;
+    });
+    EventDetailModal.present();
+  }
+
+  openProfile(id) {
+    console.log(id);
+    this.modalCtrl.create(TabProfilePage, {userID: id}).present();
   }
 }

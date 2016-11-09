@@ -99,8 +99,11 @@ export class APIService {
     return this.http.get(`${this.serverAdd}isUserAuth`,  {headers: this.header}).map((res:Response) => res.json());
   }
 
-  public getUserInfo(): Observable<any> {
-    return this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header}).map((res:Response) => res.json());
+  public getUserInfo(id): Observable<any> {
+    if (!id)
+      return this.http.get(`${this.serverAdd}users/${this.userID}`, {headers: this.header}).map((res:Response) => res.json());
+    else
+      return this.http.get(`${this.serverAdd}users/${id}`, {headers: this.header}).map((res:Response) => res.json());
   }
 
   public getChatHistory(): Observable<any> {

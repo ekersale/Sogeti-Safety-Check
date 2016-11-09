@@ -34,7 +34,7 @@ export class GoogleMapModal{
   }
 
   dismiss() {
-      this.viewCtrl.dismiss({ position : "coucou" });
+      this.viewCtrl.dismiss({ });
   }
 
   getItems() {
