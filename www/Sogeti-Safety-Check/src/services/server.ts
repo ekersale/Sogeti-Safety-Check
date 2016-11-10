@@ -133,9 +133,9 @@ export class APIService {
 
   public sendPushNotification(controls) : Observable<any> {
     let obj = {
-        groups  : controls.groups.value,
-        title   : controls.title.value,
-        message : controls.message.value
+      groups  : controls.groups.value,
+      title   : controls.title.value,
+      message : controls.message.value
     };
     return this.http.post(`${this.serverAdd}events/push`, obj, {headers: this.header}).map((res:Response) => res.json());
   }
@@ -164,7 +164,7 @@ export class APIService {
   }
 
   public getGeolocByCoord(position) : Observable<any> {
-      return this.http.get(`${this.googleGeolocAPI}latlng=${position.latitude},${position.longitude}&components=country:FR&key=${this.GoogleAPIKey}`).map((res:Response) => res.json());
+    return this.http.get(`${this.googleGeolocAPI}latlng=${position.latitude},${position.longitude}&components=country:FR&key=${this.GoogleAPIKey}`).map((res:Response) => res.json());
   }
 
   public getGeolocByPlace(place) : Observable<any> {
@@ -190,6 +190,17 @@ export class APIService {
 
   public deleteSubscribe(eventID) :  Observable<any> {
     return this.http.delete(`${this.serverAdd}events/${eventID}/subscribe`, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public postAlertEvent(controls, place) {
+    return this.http.post(`${this.serverAdd}events/alerts`,
+      { title       : controls.title.value,
+        message     : controls.message.value,
+        date        : controls.date.value,
+        place       : place,
+        notification: controls.notification.value,
+        groups      : controls.groups.value,
+      }, {headers: this.header}).map((res:Response) => res.json());
   }
 }
 

@@ -21,6 +21,7 @@ import {APIService} from "../services/server";
 import {EventsDetails} from "../pages/events-details/events-details";
 import { Elastic }  from 'angular2-elastic';
 import {MomentModule} from "angular2-moment";
+import {AlertEventModal} from '../pages/alert-event-modal/alert-event-modal';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MomentModule} from "angular2-moment";
     EventEditorModal,
     PreviewEvent,
     GoogleMapModal,
-    EventsDetails
+    EventsDetails,
+    AlertEventModal
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -64,7 +66,8 @@ import {MomentModule} from "angular2-moment";
     EventEditorModal,
     PreviewEvent,
     GoogleMapModal,
-    EventsDetails
+    EventsDetails,
+    AlertEventModal
   ],
   providers: [APIService]
 })

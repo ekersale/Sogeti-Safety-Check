@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/timer';
 import {EventsDetails} from "../events-details/events-details";
 import {TabProfilePage} from '../profile/profile'
+import {AlertEventModal} from '../alert-event-modal/alert-event-modal';
 
 @Component({
     templateUrl: 'home.html',
@@ -159,5 +160,9 @@ export class TabHomePage {
   openProfile(id) {
     console.log(id);
     this.modalCtrl.create(TabProfilePage, {userID: id}).present();
+  }
+
+  showAlertEventModal() {
+    this.modalCtrl.create(AlertEventModal).present();
   }
 }

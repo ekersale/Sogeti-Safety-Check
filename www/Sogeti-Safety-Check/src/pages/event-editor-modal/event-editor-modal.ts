@@ -27,7 +27,6 @@ export class EventEditorModal {
   constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService, public modalCtrl : ModalController) {
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
-        console.log(this.groups);
       },
       err => alert(err)
     );

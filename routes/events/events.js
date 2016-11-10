@@ -18,11 +18,14 @@ var Comments = require('../../models/comments');
 var gcmApiKey = 'AIzaSyBQnYq835Gdnsz4lb5qX5v8EseRhrxOZNQ'; // GCM API KEY OF YOUR GOOGLE CONSOLE PROJECT
 var FCM = require("fcm-node");
 
+var GoogleLocations = require('google-locations');
+var locations = new GoogleLocations('AIzaSyBtI1hW2w4apiZMjb-HLWWOy6nsw3KWWRY');
+
 router.post('/push',
     expressjwt({ secret: process.env.jwtSecretKey}),
-/*
-    permissions(["adminGroup"]),
-*/
+    /*
+     permissions(["adminGroup"]),
+     */
     function(req, res, next) {
         if (req.body.groups == undefined || req.body.groups.length == 0)
             return next(req.app.getError(400, "Missing parameter groups:[]"));
@@ -246,56 +249,56 @@ router.delete('/:id/subscribe',
                 }
             });
 
-/*        Events.findOne({_id: req.params.id})
-            .exec(function(err, event) {
-                if (err) return next(err);
-                else if (!event) return next(req.app.getError(404, "Event not found"));
-                else {
-                   if (event.participants.indexOf(req.user.id) == 1)
-                       return next(req.app.getError(409, "User not participating to this event"));
-                    else {
-                        User.findOne({_id: req.user.id})
-                            .exec(function(err, user) {
-                                if (err) return next(err);
-                                else if (!user) return next(req.app.getError(404, "User not found"));
-                                else {
-                                    user.participations.splice(user.participations.indexOf(req.params.id), 1);
-                                    user.save(function(err) {
-                                        if (err) return next(err);
-                                    });
-                                    event.participants.splice(event.participants.indexOf(req.user.id), 1);
-                                    event.save(function(err) {
-                                        if (err) return next(err);
-                                    });
-                                    Events.findOne({_id: req.params.id})
-                                        .populate([
-                                            {
-                                                path: "images", model: "media", select: "relativePath -_id"
-                                            },
-                                            {
-                                                path: "participants", model: "users", select: "name id profileImg",
-                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
-                                            },
-                                            {
-                                                path: "author", model: "users", select: "name id profileImg",
-                                                populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
-                                            }
-                                        ])
-                                        .exec(function(err, event) {
-                                            if (err) return next(err);
-                                            else if (!event) return next(req.app.getError(404, "Event not found"));
-                                            else return res.status(200).json({
-                                                    message     : "OK",
-                                                    data        : {
-                                                        event   : event
-                                                    }
-                                                });
-                                        });
-                                }
-                            });
-                   }
-                }
-            });*/
+        /*        Events.findOne({_id: req.params.id})
+         .exec(function(err, event) {
+         if (err) return next(err);
+         else if (!event) return next(req.app.getError(404, "Event not found"));
+         else {
+         if (event.participants.indexOf(req.user.id) == 1)
+         return next(req.app.getError(409, "User not participating to this event"));
+         else {
+         User.findOne({_id: req.user.id})
+         .exec(function(err, user) {
+         if (err) return next(err);
+         else if (!user) return next(req.app.getError(404, "User not found"));
+         else {
+         user.participations.splice(user.participations.indexOf(req.params.id), 1);
+         user.save(function(err) {
+         if (err) return next(err);
+         });
+         event.participants.splice(event.participants.indexOf(req.user.id), 1);
+         event.save(function(err) {
+         if (err) return next(err);
+         });
+         Events.findOne({_id: req.params.id})
+         .populate([
+         {
+         path: "images", model: "media", select: "relativePath -_id"
+         },
+         {
+         path: "participants", model: "users", select: "name id profileImg",
+         populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+         },
+         {
+         path: "author", model: "users", select: "name id profileImg",
+         populate : { path: 'profileImg', model: "media", select: "relativePath -_id" }
+         }
+         ])
+         .exec(function(err, event) {
+         if (err) return next(err);
+         else if (!event) return next(req.app.getError(404, "Event not found"));
+         else return res.status(200).json({
+         message     : "OK",
+         data        : {
+         event   : event
+         }
+         });
+         });
+         }
+         });
+         }
+         }
+         });*/
     }
 );
 
@@ -355,7 +358,7 @@ router.get('/:id/comments',
                 {
                     path: "comments", model: "comments",
                     populate : { path: 'author', model: "users", select: "profileImg _id name",
-                    populate : { path: 'profileImg', model: 'media', select: 'relativePath -_id'}}
+                        populate : { path: 'profileImg', model: 'media', select: 'relativePath -_id'}}
                 }
             ])
             .exec(function(err, event) {
@@ -482,5 +485,91 @@ router.delete('/:id/comments/:comment',
         });
     }
 );
+
+router.post("/alerts",
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        if (req.body.groups == undefined || req.body.groups.length == 0)
+            return next(req.app.getError(400, "Missing parameter groups:[]"));
+        if (req.body.title == undefined || req.body.title == "")
+            return next(req.app.getError(400, "Missing parameter title:string"));
+        if (req.body.message == undefined || req.body.message == "")
+            return next(req.app.getError(400, "Missing parameter message:string"));
+        if (req.body.place == undefined || req.body.place.id == "")
+            return next(req.app.getError(400, "Missing parameter place:{}"));
+        if (req.body.date == undefined) {
+            req.body.date = Date.now();
+        }
+        next();
+    },
+    function(req, res, next) {
+        getGoogleImg(req.body.place, req, next);
+    },
+    function(req, res, next) {
+        var event = new Events();
+        event.author = req.user.id;
+        event.name = req.body.title;
+        event.message = req.body.message;
+        var media = new Media();
+        media.relativePath = req.body.place.image;
+        media.name = "[Alert] " + req.body.title;
+        media.author = req.user.id;
+        media.save(function(err) {
+            if (err) return next(err);
+        });
+        event.images.push(media._id);
+        event.target = req.body.groups;
+        event.start_at = req.body.date;
+        event.save(function(err) {
+            console.log(err);
+            if (err) return next(err);
+            else res.status(200).json({
+                message     : "OK"
+            });
+        })
+    }
+);
+
+function getGoogleImg(place, req, next) {
+    locations.details({placeid: place.place.place_id}, function(err, response) {
+        if (err) return next(err);
+        else {
+            var urlEncoded = GMapCircle(response.result.geometry.location.lat, response.result.geometry.location.lng, (place.perimeterValue == undefined) ? 0 : place.perimeterValue);
+            var MapFill   = 'E85F0E';    // fill colour of our circle
+            var MapBorder = '91A93A';    // border colour of our circle
+            var MapWidth  = 640;         // map image width (max 640px)
+            var MapHeight = 480;
+
+            var url = "https://maps.googleapis.com/maps/api/staticmap?" + 'center=' + response.result.geometry.location.lat +
+                ',' + response.result.geometry.location.lng + '&size=' + MapWidth + 'x' + MapHeight + '&maptype=roadmap&path=fillcolor:0x' +
+                MapFill + '33%7Ccolor:0x' + MapBorder + '00%7Cenc:' + urlEncoded + '&sensor=false';
+            req.body.place.image = url;
+            next();
+        }
+    });
+}
+
+var polyline = require("polyline");
+
+function GMapCircle(latitude,longitude, radius) {
+    var R   = 6371;
+    var Detail = 8;
+    var pi  = Math.PI;
+
+    var Lat  = (latitude * pi) / 180;
+    var Lng  = (longitude * pi) / 180;
+    var d    = radius / R;
+
+    var points = [];
+    for(var i = 0; i <= 360; i+=Detail){
+        var brng = i * pi / 180;
+        var pLat = Math.asin(Math.sin(Lat)*Math.cos(d) + Math.cos(Lat)*Math.sin(d)*Math.cos(brng));
+        var pLng = ((Lng + Math.atan2(Math.sin(brng)*Math.sin(d)*Math.cos(Lat), Math.cos(d)-Math.sin(Lat)*Math.sin(pLat))) * 180) / pi;
+        pLat = (pLat * 180) / pi;
+        points.push([pLat,pLng]);
+    }
+    return polyline.encode(points);
+}
 
 module.exports = router;
