@@ -111,10 +111,11 @@ export class APIService {
   }
 
   public getEvents(page, query) : Observable<any>  {
+
     if (query == null)
       return this.http.get(`${this.serverAdd}events?page=${page}`, {headers: this.header}).map((res:Response) => res.json());
-    else
-      return this.http.get(`${this.serverAdd}events?page=${page}&q=${query}`, {headers: this.header}).map((res:Response) => res.json());
+    query = encodeURI(query);
+    return this.http.get(`${this.serverAdd}events?page=${page}&q=${query}`, {headers: this.header}).map((res:Response) => res.json());
   }
 
   public postTokenPushNotification(token, accept) : Observable<any> {
@@ -201,6 +202,10 @@ export class APIService {
         notification: controls.notification.value,
         groups      : controls.groups.value,
       }, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public getParticipants(eventID) {
+    return this.http.get(`${this.serverAdd}events/${eventID}/participants`, {headers: this.header}).map((res:Response) => res.json());
   }
 }
 

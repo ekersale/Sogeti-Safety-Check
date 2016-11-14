@@ -12,7 +12,7 @@
   <h3>{{function}}</h3>
   <ion-item class="contacts">
     <a href="tel: {{phone}}"><button ion-button   round color="sogeti" style="margin-left: 0 !important;"><ion-icon name="call"></ion-icon></button></a>
-    <a href="sms:{{phone}}"><button ion-button  round color="sogeti"><ion-icon name="chatbubbles"></ion-icon></button></a>
+    <a href="sms:{{phone}}" target="_system"><button ion-button  round color="sogeti"><ion-icon name="chatbubbles"></ion-icon></button></a>
     <a href="mailto:{{email}}"><button ion-button    round color="sogeti"><ion-icon name="mail"></ion-icon></button></a>
     <button ion-button round color="sogeti" (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
   </ion-item>
@@ -37,10 +37,10 @@
     </ion-item>
   </div>
   <div class="eventsParticipation">
-    <ion-item><h1>Mes participations</h1></ion-item>
-
-    <ion-list>
-      <ion-item *ngFor="let item of events" (click)="openCardDetails(item)" text-wrap>
+    <ion-item><h1>My participations</h1></ion-item>
+    <ion-list no-lines>
+      <div *ngFor="let item of events">
+      <ion-item *ngIf="item.type == 0" (click)="openCardDetails(item)" text-wrap>
         <ion-card >
           <ion-item>
             <ion-avatar item-left>
@@ -53,7 +53,7 @@
             <p>{{item.message}}</p>
           </ion-card-content>
 
-          <ion-row (click)="openCardDetails(item)">
+          <ion-row>
             <ion-col style="margin-left: 10px;">
               <p>{{item.participants.length}} present</p>
             </ion-col>
@@ -63,6 +63,37 @@
           </ion-row>
         </ion-card>
       </ion-item>
+      </div>
+    </ion-list>
+  </div>
+  <div class="eventsParticipation">
+    <ion-item><h1>Safety</h1></ion-item>
+    <ion-list no-lines>
+      <div *ngFor="let item of events">
+        <ion-item *ngIf="item.type == 1" (click)="openCardDetails(item)" text-wrap>
+          <ion-card >
+            <ion-item>
+              <ion-avatar item-left>
+                <ion-img src="{{item.author.profileImg.relativePath}}"></ion-img>
+              </ion-avatar>
+              <h2 style="text-align:left;">{{item.name}}</h2>
+              <p>{{item.start_at | date : 'dd/MM/yyyy'}}</p>
+            </ion-item>
+            <ion-card-content >
+              <p>{{item.message}}</p>
+            </ion-card-content>
+
+            <ion-row>
+              <ion-col style="margin-left: 10px;">
+                <p>{{item.participants.length}} safe</p>
+              </ion-col>
+              <ion-col style="text-align:right; margin-right: 10px;">
+                <p>{{item.comments.length}} comments</p>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-item>
+      </div>
     </ion-list>
   </div>
 </ion-content>

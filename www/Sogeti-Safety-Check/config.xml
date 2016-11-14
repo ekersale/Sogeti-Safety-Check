@@ -12,7 +12,6 @@
   <allow-intent href="sms:*" launch-external="yes"/>
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
-  <allow-intent href="unsafe:sms:*"/>
   <system.webServer>
     <httpProtocol>
       <customHeaders>
@@ -46,6 +45,8 @@
   </platform>
   <platform name="ios">
     <allow-intent href="itms:*"/>
+    <access origin="maps:*" launch-external="yes" />
+    <allow-intent href="maps:*" />
     <allow-intent href="itms-apps:*"/>
     <allow-intent href="sms:*" launch-external="yes"/>
     <allow-navigation href="sms:*"/>

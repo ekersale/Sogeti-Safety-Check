@@ -4,7 +4,7 @@
 
 import {Component} from '@angular/core';
 import {APIService} from "../../services/server";
-import {InfiniteScroll, ToastController, ModalController, NavController} from "ionic-angular";
+import {InfiniteScroll, ToastController, ModalController, NavController, PopoverController} from "ionic-angular";
 import {LoginPage} from '../login/login';
 import {AlertModal} from "../alert-modal/alert-modal";
 import {EventEditorModal} from "../event-editor-modal/event-editor-modal";
@@ -14,6 +14,7 @@ import 'rxjs/add/observable/timer';
 import {EventsDetails} from "../events-details/events-details";
 import {TabProfilePage} from '../profile/profile'
 import {AlertEventModal} from '../alert-event-modal/alert-event-modal';
+import {UserPopOver} from "../user-pop-over/user-pop-over";
 
 @Component({
     templateUrl: 'home.html',
@@ -31,7 +32,8 @@ export class TabHomePage {
   };
   private scroll: boolean = true;
 
-  constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController, private navCtrl : NavController) {
+  constructor(private api : APIService, private toastCtrl : ToastController, private modalCtrl : ModalController,
+              private navCtrl : NavController, private popoverCtrl : PopoverController) {
     Observable.timer(60000, 600000).subscribe(t => {
       this.updateEvents();
     }); //(60000, 600000)
@@ -164,5 +166,11 @@ export class TabHomePage {
 
   showAlertEventModal() {
     this.modalCtrl.create(AlertEventModal).present();
+  }
+
+  openPopOverParticipants(event) {
+    this.popoverCtrl.create(UserPopOver, {
+      event: event
+    }).present();
   }
 }

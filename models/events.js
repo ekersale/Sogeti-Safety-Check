@@ -19,6 +19,7 @@ var eventsSchema = new Schema({
     admin           : { type: ObjectId, ref: "groups"},
     target          : [{type: ObjectId, ref: "groups"}],
     comments        : [{type: ObjectId, ref:"comments"}],
+    type            : {type:Number, min: 0, max: 1, required: true},
     start_at        : Date,
     end_at          : Date,
     created_at      : Date,

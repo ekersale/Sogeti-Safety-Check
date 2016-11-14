@@ -9,53 +9,67 @@
 
 <ion-content padding>
   <ion-card >
-  <ion-item>
-    <ion-avatar item-left>
-      <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
-    </ion-avatar>
-    <h2>{{event.name}}</h2>
-    <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
-  </ion-item>
+    <ion-item>
+      <ion-avatar item-left>
+        <ion-img src="{{event.author.profileImg.relativePath}}"></ion-img>
+      </ion-avatar>
+      <h2  *ngIf="event.type==0">[Event] {{event.name}}</h2>
+      <h2  *ngIf="event.type==1" style="color:red;">[Alert] {{event.name}}</h2>
+      <p>{{event.start_at | date : 'dd/MM/yyyy'}}</p>
+    </ion-item>
     <ion-card-content >
       <p>{{event.message}}</p>
     </ion-card-content>
-  <ion-slides [options]="mySlideOptions">
-    <ion-slide *ngFor="let item of event.images" style="margin:auto;">
-      <ion-img [src]="item.relativePath" ></ion-img>
-    </ion-slide>
-  </ion-slides>
+    <ion-slides [options]="mySlideOptions" *ngIf="event.type == 0">
+      <ion-slide *ngFor="let item of event.images" style="margin:auto;">
+        <ion-img [src]="item.relativePath" ></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides [options]="mySlideOptions" *ngIf="event.type == 1" (click)="openGoogleMap()">
+      <ion-slide *ngFor="let item of event.images" style="margin:auto;">
+        <ion-img [src]="item.relativePath" ></ion-img>
+      </ion-slide>
+    </ion-slides>
 
-
-  <ion-row >
-    <ion-col style="margin-left: 10px;">
-      <p>{{event.participants.length}} present</p>
-    </ion-col>
-    <ion-col style="text-align:right; margin-right: 10px;">
-      <p>{{comments.length}} comments</p>
-    </ion-col>
-  </ion-row>
-  <ion-row style="border-top: 1px solid #cecece;">
-    <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false"><button ion-button full clear small color="sogeti" (click)="subscribeEvent()" >
-      <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
-      Subscribe
-    </button></ion-col>
-    <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true"><button ion-button full clear small color="blue" (click)="unsubscribeEvent()" >
-      <ion-icon name="thumbs-down" style="margin-right: 5px;"></ion-icon>
-      Unsubscribe
-    </button></ion-col>
-    <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="focus(focusable)">
-      <ion-icon name="text" style="margin-right: 5px;"></ion-icon>
-      Comments</button></ion-col>
-    <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" >
-      <ion-icon name="ios-information-circle" style="margin-right: 5px; "></ion-icon>
-      Contact
-    </button></ion-col>
-  </ion-row>
-</ion-card>
+    <ion-row >
+      <ion-col style="margin-left: 10px;" (click)="openPopOverParticipants()">
+        <p *ngIf="event.type == 0" >{{event.participants.length}} present</p>
+        <p *ngIf="event.type == 1" >{{event.participants.length}} safe</p>
+      </ion-col>
+      <ion-col style="text-align:right; margin-right: 10px;">
+        <p>{{comments.length}} comments</p>
+      </ion-col>
+    </ion-row>
+    <ion-row style="border-top: 1px solid #cecece;">
+      <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false && event.type == 0"><button ion-button full clear small color="sogeti" (click)="subscribeEvent()">
+        <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
+        Subscribe
+      </button></ion-col>
+      <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true && event.type == 0"><button ion-button full clear small color="blue" (click)="unsubscribeEvent()" >
+        <ion-icon name="thumbs-down" style="margin-right: 5px;"></ion-icon>
+        Unsubscribe
+      </button></ion-col>
+      <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false && event.type == 1"><button ion-button full clear small color="sogeti" (click)="subscribeEvent()">
+        <ion-icon name="happy" style="margin-right: 5px;"></ion-icon>
+        Safe
+      </button></ion-col>
+      <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true && event.type == 1"><button ion-button full clear small color="blue" (click)="unsubscribeEvent()" >
+        <ion-icon name="sad" style="margin-right: 5px;"></ion-icon>
+        Unsafe
+      </button></ion-col>
+      <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="focus(focusable)">
+        <ion-icon name="text" style="margin-right: 5px;"></ion-icon>
+        Comments</button></ion-col>
+      <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="openProfile(event.author._id)">
+        <ion-icon name="ios-information-circle" style="margin-right: 5px; "></ion-icon>
+        Contact
+      </button></ion-col>
+    </ion-row>
+  </ion-card>
   <ion-list no-lines>
     <ion-item *ngIf="error != ''">{{error}}</ion-item>
     <div  *ngFor="let comment of comments; let i = index " >
-    <ion-item text-wrap class="itemComment animated fadeIn item-remove-animate" [style.animation-delay]="(((i + 1) / 10) > 1) ? 0 + 's' : ((i + 1) / 10) + 's' " >
+      <ion-item text-wrap class="itemComment animated fadeIn item-remove-animate" [style.animation-delay]="(((i + 1) / 10) > 1) ? 0 + 's' : ((i + 1) / 10) + 's' " >
         <ion-avatar item-left>
           <ion-img item-top [src]="comment.author.profileImg.relativePath"></ion-img>
         </ion-avatar>
@@ -63,20 +77,20 @@
         <p>{{comment.message}}</p>
         <h6>{{comment.created_at | amTimeAgo:true }} ago</h6>
         <ion-icon item-right name="close" *ngIf="comment.author._id == currentUser" (click)="removeComment(comment)"></ion-icon>
-    </ion-item>
+      </ion-item>
     </div>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-  <ion-toolbar no-border-top >
-    <ion-textarea fz-elastic rows="1" [formControl]="commentForm.controls['message']" #focusable></ion-textarea>
-    <ion-buttons end>
-      <button ion-button clear color="sogeti" type="submit" [disabled]="!commentForm.valid">
-        Publish
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar no-border-top >
+      <ion-textarea fz-elastic rows="1" [formControl]="commentForm.controls['message']" #focusable></ion-textarea>
+      <ion-buttons end>
+        <button ion-button clear color="sogeti" type="submit" [disabled]="!commentForm.valid">
+          Publish
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
   </form>
 </ion-footer>

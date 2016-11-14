@@ -87,6 +87,7 @@ router.get('/',
         var limit = parseInt((req.query.limit != undefined && req.query.limit > 0) ? req.query.limit : 20);
         var query = {};
         if (req.query.q != undefined) {
+            req.query.q = decodeURI(req.query.q);
             query.$or = [
                 { 'name': { $regex: new RegExp(req.query.q, "i") }}
             ];
@@ -132,6 +133,29 @@ router.get('/:id',
                         }
                     });
             });
+    }
+);
+
+router.get('/:id/participants',
+    expressjwt({ secret: process.env.jwtSecretKey}),
+    permissions(["logged"]),
+    function(req, res, next) {
+        Events.findOne({_id : req.params.id})
+            .populate([
+                { path: 'participants', model: 'users', select: 'name profileImg _id',
+                    populate : { path: 'profileImg', model: 'media', select: 'relativePath -_id' }
+                }
+            ])
+            .exec(function(err, event) {
+                if (err) return next(err);
+                else if (!event) return next(req.app.getError(404, "Event not found"));
+                else return res.status(200).json({
+                        message     :'OK',
+                        data        : {
+                            participants: event.participants
+                        }
+                });
+        });
     }
 );
 
@@ -335,6 +359,7 @@ router.post('/',
             }
         }
         event.author = req.user.id;
+        event.type = 0;
         event.save(function(err) {
             if (err)
                 return next(err);
@@ -519,6 +544,8 @@ router.post("/alerts",
             if (err) return next(err);
         });
         event.images.push(media._id);
+        event.type = 1;
+        event.zone = req.body.zone;
         event.target = req.body.groups;
         event.start_at = req.body.date;
         event.save(function(err) {
@@ -545,6 +572,9 @@ function getGoogleImg(place, req, next) {
                 ',' + response.result.geometry.location.lng + '&size=' + MapWidth + 'x' + MapHeight + '&maptype=roadmap&path=fillcolor:0x' +
                 MapFill + '33%7Ccolor:0x' + MapBorder + '00%7Cenc:' + urlEncoded + '&sensor=false';
             req.body.place.image = url;
+            req.body.zone= {};
+            req.body.zone.longitude = response.result.geometry.location.lng;
+            req.body.zone.latitude = response.result.geometry.location.lat;
             next();
         }
     });

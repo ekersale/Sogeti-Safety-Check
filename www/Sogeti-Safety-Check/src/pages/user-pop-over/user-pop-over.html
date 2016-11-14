@@ -1,0 +1,9 @@
+<h2 >People</h2>
+<ion-list inset>
+  <ion-item *ngFor="let user of presents" (click)="openProfile(user._id)">
+    <ion-avatar item-left>
+      <img src="{{user.profileImg.relativePath}}">
+    </ion-avatar>
+    <h2>{{user.name.first}} {{user.name.last}}</h2>
+  </ion-item>
+</ion-list>

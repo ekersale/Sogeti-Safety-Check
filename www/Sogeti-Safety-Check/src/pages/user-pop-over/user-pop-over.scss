@@ -1,0 +1,36 @@
+page-user-pop-over {
+
+
+
+  h2 {
+    text-align: center;
+    font-size: 18px;
+    font-family: 'SanFranciscoTextDisplay';
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d8d8d8 !important;
+
+
+  }
+  ion-list {
+    border-radius: 0px !important;
+    margin: 10px !important;
+
+    h2 {
+      font-size: 1.4rem !important;
+      border-bottom: none !important;
+      padding: 0px;
+    }
+
+  }
+}
+
+ion-popover {
+  color:red;
+  ion-backdrop {
+    opacity: 0.50 !important;
+  }
+  .popover-content {
+    top:10% !important;
+  }
+}
+

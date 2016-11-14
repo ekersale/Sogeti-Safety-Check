@@ -22,6 +22,7 @@ import {EventsDetails} from "../pages/events-details/events-details";
 import { Elastic }  from 'angular2-elastic';
 import {MomentModule} from "angular2-moment";
 import {AlertEventModal} from '../pages/alert-event-modal/alert-event-modal';
+import {UserPopOver} from '../pages/user-pop-over/user-pop-over'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {AlertEventModal} from '../pages/alert-event-modal/alert-event-modal';
     PreviewEvent,
     GoogleMapModal,
     EventsDetails,
-    AlertEventModal
+    AlertEventModal,
+    UserPopOver
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -67,7 +69,8 @@ import {AlertEventModal} from '../pages/alert-event-modal/alert-event-modal';
     PreviewEvent,
     GoogleMapModal,
     EventsDetails,
-    AlertEventModal
+    AlertEventModal,
+    UserPopOver
   ],
   providers: [APIService]
 })

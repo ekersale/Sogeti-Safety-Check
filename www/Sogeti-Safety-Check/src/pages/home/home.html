@@ -9,7 +9,8 @@
         <ion-avatar item-left>
           <ion-img src="{{event.author.profileImg.relativePath}}" (click)="openProfile(event.author._id)"></ion-img>
         </ion-avatar>
-        <h2 (click)="openCardDetails(event)">{{event.name}}</h2>
+        <h2 (click)="(event)" *ngIf="event.type==0">[Event] {{event.name}}</h2>
+        <h2 (click)="openCardDetails(event)" *ngIf="event.type==1" style="color:red;">[Alert] {{event.name}}</h2>
         <p (click)="openCardDetails(event)">{{event.start_at | date : 'dd/MM/yyyy'}}</p>
       </ion-item>
 
@@ -22,22 +23,34 @@
         <p>{{event.message}}</p>
       </ion-card-content>
 
-      <ion-row (click)="openCardDetails(event)">
-        <ion-col style="margin-left: 10px;">
-          <p>{{event.participants.length}} present</p>
+
+
+      <ion-row>
+        <ion-col style="margin-left: 10px;" (click)="openPopOverParticipants(event)">
+          <p *ngIf="event.type == 0" >{{event.participants.length}} present</p>
+          <p *ngIf="event.type == 1" >{{event.participants.length}} safe</p>
         </ion-col>
-        <ion-col style="text-align:right; margin-right: 10px;">
+
+        <ion-col style="text-align:right; margin-right: 10px;" (click)="openCardDetails(event)">
           <p>{{event.comments.length}} comments</p>
         </ion-col>
       </ion-row>
       <ion-row style="border-top: 1px solid #cecece;">
-        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false"><button ion-button full clear small color="sogeti" (click)="subscribeEvent(event)">
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false && event.type == 0"><button ion-button full clear small color="sogeti" (click)="subscribeEvent(event)">
           <ion-icon name="thumbs-up" style="margin-right: 5px;"></ion-icon>
           Subscribe
         </button></ion-col>
-        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true"><button ion-button full clear small color="blue" (click)="unsubscribeEvent(event)" >
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true && event.type == 0"><button ion-button full clear small color="blue" (click)="unsubscribeEvent(event)" >
           <ion-icon name="thumbs-down" style="margin-right: 5px;"></ion-icon>
           Unsubscribe
+        </button></ion-col>
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == false && event.type == 1"><button ion-button full clear small color="sogeti" (click)="subscribeEvent(event)">
+          <ion-icon name="happy" style="margin-right: 5px;"></ion-icon>
+          Safe
+        </button></ion-col>
+        <ion-col style="width: 33%;" *ngIf="hasSuscribed(event) == true && event.type == 1"><button ion-button full clear small color="blue" (click)="unsubscribeEvent(event)" >
+          <ion-icon name="sad" style="margin-right: 5px;"></ion-icon>
+          Unsafe
         </button></ion-col>
         <ion-col style="width: 33%;"><button ion-button full clear small color="sogeti" (click)="openModelComment(event)">
           <ion-icon name="text" style="margin-right: 5px;"></ion-icon>

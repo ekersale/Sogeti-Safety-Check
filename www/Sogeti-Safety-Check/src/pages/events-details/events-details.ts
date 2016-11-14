@@ -1,8 +1,10 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {ViewController, NavParams, Platform, Content} from 'ionic-angular';
+import {ViewController, NavParams, Platform, Content, ModalController, PopoverController} from 'ionic-angular';
 import { Keyboard } from 'ionic-native';
 import {APIService} from "../../services/server";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {TabProfilePage} from '../profile/profile';
+import {UserPopOver} from '../user-pop-over/user-pop-over'
 
 @Component({
   selector: 'page-events-details',
@@ -21,7 +23,8 @@ export class EventsDetails {
   @ViewChild(Content) content: Content;
 
   constructor(public viewCtrl: ViewController, public data : NavParams, private platform : Platform,
-              private api : APIService, private fb : FormBuilder, private zone : NgZone)
+              private api : APIService, private fb : FormBuilder, private zone : NgZone,
+              private modalCtrl : ModalController, private popoverCtrl: PopoverController)
   {
     this.event = data.get('event');
     if (platform.is('ios')) {
@@ -39,7 +42,6 @@ export class EventsDetails {
   hasSuscribed(event) {
     let _id = window.localStorage.getItem('userID');
     let result = event.participants.filter(function(o){
-      console.log(o._id == _id || o == _id);
       return o._id == _id || o == _id;
     });
     return result.length > 0 ? true : false;
@@ -100,7 +102,6 @@ export class EventsDetails {
   subscribeEvent() {
     this.api.postSubscribe(this.event._id).subscribe(
       data => {
-        console.log(data);
         this.event.participants = data.data.event.participants;
       },
       error => console.log(error)
@@ -112,5 +113,27 @@ export class EventsDetails {
       data => {this.event.participants = data.data.event.participants;},
       error => console.log(error)
     )
+  }
+
+  openProfile(id) {
+    this.modalCtrl.create(TabProfilePage, {userID: id}).present();
+  }
+
+
+  openGoogleMap() {
+    console.log("open map");
+    let coords = this.event.zone.latitude + "," +  this.event.zone.longitude;
+    if (this.platform.is('ios')) {
+      window.open("maps://maps.apple.com/?q=" + coords, '_system');
+    }
+    else {
+      window.open("geo:" + coords);
+    }
+  }
+
+  openPopOverParticipants() {
+    this.popoverCtrl.create(UserPopOver, {
+      event: this.event
+    }).present();
   }
 }
