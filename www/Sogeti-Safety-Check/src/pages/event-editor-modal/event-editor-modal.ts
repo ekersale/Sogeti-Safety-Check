@@ -27,6 +27,7 @@ export class EventEditorModal {
   constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService, public modalCtrl : ModalController) {
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
+        console.log(data);
       },
       err => alert(err)
     );
@@ -46,7 +47,7 @@ export class EventEditorModal {
 
   onSubmit() {
       this.api.postNewEvent({event: this.eventForm.controls, images : this.file_srcs}).subscribe(
-        data => console.log(data),
+        data => this.viewCtrl.dismiss(),
         error => alert(error)
       );
   }

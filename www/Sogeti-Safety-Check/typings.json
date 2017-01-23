@@ -1,5 +1,6 @@
 {
   "globalDependencies": {
-    "google.maps": "registry:dt/google.maps#3.25.0+20161019131407"
+    "google.maps": "registry:dt/google.maps#3.25.0+20161019131407",
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
   }
 }

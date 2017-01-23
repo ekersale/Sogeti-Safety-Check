@@ -106,6 +106,7 @@ router.get('/',
         }
         Promise.all([
             Users.find(query, { credentials: 0, chat: 0, contacts: 0 })
+                .populate("profileImg", "relativePath")
                 .skip((req.query.page != undefined && req.query.page > 0 ) ? (req.query.page - 1) * limit : 0).limit(limit)
                 .exec(),
             Users.find(query).count().exec()
@@ -254,6 +255,7 @@ router.get('/:id/groups',
         Users.findOne({_id: req.params.id })
             .populate("groups")
             .exec(function(err, user) {
+                console.log(user);
                 if (err) return next(err);
                 else if (!user) return next(req.app.getError(404, "Invalid token, user not found"));
                 else return res.status(200).json({

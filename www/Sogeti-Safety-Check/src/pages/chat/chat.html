@@ -1,79 +1,16 @@
 <ion-header style="background:rgb(239, 69, 39);">
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchInput" (ionInput)="getItems($event)"></ion-searchbar>
 </ion-header>
-<ion-content class="home">
-    <ion-list>
-        <ion-item-sliding>
-            <ion-item>
-                <ion-avatar item-left>
-                    <img src="img/slimer.png">
-                </ion-avatar>
-                <h2>Slimer</h2>
-            </ion-item>
-            <ion-item-options side="left">
-                <button primary>
-                    <ion-icon name="text"></ion-icon>
-                    Text
-                </button>
-                <button secondary>
-                    <ion-icon name="call"></ion-icon>
-                    Call
-                </button>
-            </ion-item-options>
-            <ion-item-options side="right">
-                <button primary>
-                    <ion-icon name="mail"></ion-icon>
-                    Email
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-            <ion-item>
-                <ion-avatar item-left>
-                    <img src="img/slimer.png">
-                </ion-avatar>
-                <h2>Slimer</h2>
-            </ion-item>
-            <ion-item-options side="left">
-                <button primary>
-                    <ion-icon name="text"></ion-icon>
-                    Text
-                </button>
-                <button secondary>
-                    <ion-icon name="call"></ion-icon>
-                    Call
-                </button>
-            </ion-item-options>
-            <ion-item-options side="right">
-                <button primary>
-                    <ion-icon name="mail"></ion-icon>
-                    Email
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-            <ion-item>
-                <ion-avatar item-left>
-                    <img src="img/slimer.png">
-                </ion-avatar>
-                <h2>Slimer</h2>
-            </ion-item>
-            <ion-item-options side="left">
-                <button primary>
-                    <ion-icon name="text"></ion-icon>
-                    Text
-                </button>
-                <button secondary>
-                    <ion-icon name="call"></ion-icon>
-                    Call
-                </button>
-            </ion-item-options>
-            <ion-item-options side="right">
-                <button primary>
-                    <ion-icon name="mail"></ion-icon>
-                    Email
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
+<ion-content class="chat">
+  <p class="title" *ngIf="searchItems.length <= 0">To start a conversation search a contact first!</p>
+  <ion-list>
+    <button ion-item *ngFor="let item of searchItems" (click)="addConversation(item)">
+      <ion-avatar item-left>
+        <img class="profileImg" src="{{item.profileImg.relativePath}}">
+      </ion-avatar>
+      <h2>{{item.name.first}} {{item.name.last}}</h2>
+      <h3>{{item.email}}</h3>
+      <p>Click to start conversation.</p>
+    </button>
+  </ion-list>
 </ion-content>

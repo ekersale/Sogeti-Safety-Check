@@ -8,8 +8,8 @@ process.env.jwtSecretKey = '234619F40F12BC5825938FBEBA02725F3A50C4B5468CED70872C
 
 
 var app = require('../app');
-var http = require('http');
-
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 /**
  * Get port from environment and store in Express.
@@ -23,11 +23,34 @@ app.set('port', port);
  * Listen on provided port, on all network interfaces.
  */
 
+var clients = [];
 
+io.on('connection', function(socket){
+  clients.push({socket: socket, client: socket.handshake.query.client});
 
-app.listen(port, function(){
-  console.log("All right ! I'm using port " + port  + ".");
+  socket.on('disconnect', function () {
+    var index = clients.map(function(obj, index) {
+      if(obj.client == socket.handshake.query.client) {
+        return index;
+      }
+    }).filter(isFinite);
+    if (index >= 0)
+      clients.splice(index, 1);
+  });
+
+  io.on('sendMessage', function(data) {
+    console.log(data);
+  });
+
 });
+
+
+
+http.listen(port);
+
+/*app.listen(port, function(){
+  console.log("All right ! I'm using port " + port  + ".");
+});*/
 
 app.get('*', function(req, res, next) {
   var err = new Error();
