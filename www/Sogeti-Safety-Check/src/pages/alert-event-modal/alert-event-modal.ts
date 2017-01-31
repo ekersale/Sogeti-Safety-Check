@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, ViewController, ModalController} from 'ionic-angular';
-import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {GoogleMapModal} from "../google-map-modal/google-map-modal";
 import {APIService} from "../../services/server";
 
@@ -27,9 +27,6 @@ export class AlertEventModal {
       },
       err => alert(err)
     );
-  }
-
-  ionViewDidLoad() {
     this.AlertEvenForm = this.fb.group({
       'title': ['', Validators.compose([Validators.required])],
       'message': ['', Validators.compose([Validators.required])],

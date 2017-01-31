@@ -4,7 +4,7 @@
       Event creation
     </ion-title>
     <ion-buttons start>
-      <button ion-button (click)="preview()" [disabled]="!eventForm.valid">
+      <button *ngIf="eventForm" ion-button (click)="preview()" [disabled]="!eventForm.valid">
         <span color="primary" showWhen="ios">Preview</span>
         <ion-icon name="eye" showWhen="android,windows"></ion-icon>
       </button>
@@ -24,7 +24,7 @@
   <ion-icon name="ios-flag-outline" color="sogeti" style="font-size: 15rem; text-align:center;"></ion-icon>
 
 
-  <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="eventForm" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
       <ion-label color="sogeti" fixed>Title</ion-label>
       <ion-input [formControl]="eventForm.controls['title']" placeholder="Event title"></ion-input>

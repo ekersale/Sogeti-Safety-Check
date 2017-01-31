@@ -10,8 +10,7 @@ import {LoginPage} from "../login/login"
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  templateUrl: 'register.html',
-  providers: [APIService]
+  templateUrl: 'register.html'
 })
 
 export class RegistrationPage {
@@ -24,16 +23,13 @@ export class RegistrationPage {
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               private fb : FormBuilder) {
+    this.registrationForm = this.fb.group({
+      'username' : ['', Validators.compose([Validators.required])],
+      'password' : ['', Validators.compose([Validators.required])]});
   }
 
   ionViewWillEnter() {
     this.viewCtrl.setBackButtonText('Login');
-  }
-
-  ionViewDidLoad() {
-    this.registrationForm = this.fb.group({
-      'username' : ['', Validators.compose([Validators.required])],
-      'password' : ['', Validators.compose([Validators.required])]});
   }
 
   onSubmit() {

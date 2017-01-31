@@ -7,7 +7,7 @@
     <ion-card >
       <ion-item>
         <ion-avatar item-left>
-          <ion-img src="{{event.author.profileImg.relativePath}}" (click)="openProfile(event.author._id)"></ion-img>
+          <img src="{{event.author.profileImg.relativePath}}" (click)="openProfile(event.author._id)" />
         </ion-avatar>
         <h2 (click)="(event)" *ngIf="event.type==0">[Event] {{event.name}}</h2>
         <h2 (click)="openCardDetails(event)" *ngIf="event.type==1" style="color:red;">[Alert] {{event.name}}</h2>
@@ -16,7 +16,7 @@
 
       <ion-slides [options]="mySlideOptions" (click)="openCardDetails(event)">
         <ion-slide *ngFor="let item of event.images" style="margin:auto;">
-          <ion-img [src]="item.relativePath" ></ion-img>
+          <img [src]="item.relativePath" />
         </ion-slide>
       </ion-slides>
       <ion-card-content (click)="openCardDetails(event)" >

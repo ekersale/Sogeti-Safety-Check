@@ -10,8 +10,7 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 */
 @Component({
   selector: 'page-alert-modal',
-  templateUrl: 'alert-modal.html',
-  providers: [APIService]
+  templateUrl: 'alert-modal.html'
 })
 export class AlertModal {
 

@@ -2,15 +2,25 @@
     <ion-searchbar [(ngModel)]="searchInput" (ionInput)="getItems($event)"></ion-searchbar>
 </ion-header>
 <ion-content class="chat">
-  <p class="title" *ngIf="searchItems.length <= 0">To start a conversation search a contact first!</p>
-  <ion-list>
-    <button ion-item *ngFor="let item of searchItems" (click)="addConversation(item)">
+  <p class="title" *ngIf="searchItems.length <= 0 && conversations.length <= 0">To start a conversation search a contact first!</p>
+  <ion-list *ngIf="searchItems.length > 0">
+    <ion-item *ngFor="let item of searchItems" (click)="addConversation(item)">
       <ion-avatar item-left>
         <img class="profileImg" src="{{item.profileImg.relativePath}}">
       </ion-avatar>
       <h2>{{item.name.first}} {{item.name.last}}</h2>
       <h3>{{item.email}}</h3>
       <p>Click to start conversation.</p>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <button ion-item *ngFor="let item of conversations" (click)="showConversation(item)">
+      <ion-avatar item-left>
+        <img class="profileImg" src="{{item.participants[0].profileImg.relativePath}}">
+      </ion-avatar>
+      <h2>{{item.participants[0].name.first}} {{item.participants[0].name.last}}</h2>
+      <p *ngIf="item && item.history.length > 0" ><span *ngIf="api.getUserID() == item.history[0].author._id">Vous : </span>{{item.history[0].message}}</p>
+      <p *ngIf="!item || item.history.length <= 0">Click to start a conversation!</p>
     </button>
   </ion-list>
 </ion-content>

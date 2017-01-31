@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-icon name="notifications-outline" color="sogeti" style="font-size: 15rem; text-align:center;"></ion-icon>
   <p>Be aware that alerts will be sent to all members of chosen group. Please do not annoy your colleagues without a good reason!</p>
-  <form [formGroup]="alertForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="alertForm" [formGroup]="alertForm" (ngSubmit)="onSubmit()">
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate androidItem" showWhen="android, windows">
       <ion-icon name="people" item-left></ion-icon>
       <ion-label>Groups target</ion-label>

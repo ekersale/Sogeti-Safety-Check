@@ -18,10 +18,6 @@ export class UserPopOver {
     this.event = params.get('event');
   }
 
-  ionViewDidLoad() {
-    console.log('Hello UserPopOver Page');
-  }
-
   ionViewWillEnter() {
     this.api.getParticipants(this.params.get('event')._id).subscribe(
       data => {

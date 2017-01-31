@@ -25,8 +25,13 @@ app.set('port', port);
 
 var clients = [];
 
+var Users = require('../models/users');
+var Chat = require('../models/chat');
+
 io.on('connection', function(socket){
   clients.push({socket: socket, client: socket.handshake.query.client});
+
+  var authorID = socket.handshake.query.client;
 
   socket.on('disconnect', function () {
     var index = clients.map(function(obj, index) {
@@ -38,8 +43,45 @@ io.on('connection', function(socket){
       clients.splice(index, 1);
   });
 
-  io.on('sendMessage', function(data) {
-    console.log(data);
+  socket.on('sendMsg', function(data) {
+    Users.findOne({_id: authorID})
+        .populate("profileImg", "relativePath")
+        .exec(function(err, author) {
+          if (err || !author) return;
+          else {
+            var res = {author: author, message: data.message, date: new Date()};
+            Chat.findOne({_id: data.id}, function(err, chat) {
+              if (err || !chat) return;
+              else {
+                chat.history.push(res);
+                chat.save();
+              }
+            });
+            for (var i = 0; i < data.client.length; ++i) {
+              Users.findOne({_id: data.client[i]._id})
+                  .populate("profileImg", "relativePath")
+                  .exec(function(err, client) {
+                    if (err || !client) return;
+                    else {
+                      var index = clients.map(function(obj, index) {
+                        if(obj.client == client._id) {
+                          return index;
+                        }
+                      }).filter(isFinite);
+                      console.log(index);
+                      if (index >= 0 || index.length > 0)
+                      {
+                        for (var v = 0; v < index.length; v++) {
+                          clients[index[v]].socket.emit("recvMsg", res);
+                        }
+                      }
+                    }
+                  });
+            }
+          }
+        })
+
+
   });
 
 });

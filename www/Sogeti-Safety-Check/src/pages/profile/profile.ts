@@ -10,8 +10,7 @@ import {App} from 'ionic-angular';
 import {EventsDetails} from '../events-details/events-details'
 
 @Component({
-  templateUrl: 'profile.html',
-  providers: [APIService]
+  templateUrl: 'profile.html'
 })
 
 

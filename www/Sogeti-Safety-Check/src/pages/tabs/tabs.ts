@@ -11,8 +11,7 @@ import { LocalNotifications } from 'ionic-native';
 
 
 @Component({
-  templateUrl: 'tabs.html',
-  providers: [APIService]
+  templateUrl: 'tabs.html'
 })
 export class TabsPage {
   tabOne: any = TabHomePage;

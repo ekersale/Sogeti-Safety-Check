@@ -1,0 +1,27 @@
+<ion-header >
+  <ion-navbar class="title">
+    <ion-title>{{talkName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="messages">
+  <div *ngIf="talkDetail && talkDetail.history.length > 0">
+    <div *ngFor="let item of talkDetail.history" [ngClass]="(item.author._id == api.getUserID()) ? 'messageMe' : 'messageOther'">
+      <img *ngIf="(item.author._id != api.getUserID())" [src]="item.author.profileImg.relativePath">
+      <span>{{item.message}}</span>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer keyboard-attach="true">
+  <ion-toolbar no-border-top >
+      <div style="display: flex;">
+          <ion-textarea fz-elastic rows="1" #focusable placeholder="Type a message"></ion-textarea>
+          <button ion-button icon-only clear color="sogeti" type="submit" class="button-submit" (click)="sendMessage(focusable)">
+            <ion-icon name="send" showWhen="android"></ion-icon>
+            <ion-icon name="send-outline" showWhen="ios,windows"></ion-icon>
+          </button>
+      </div>
+  </ion-toolbar>
+</ion-footer>

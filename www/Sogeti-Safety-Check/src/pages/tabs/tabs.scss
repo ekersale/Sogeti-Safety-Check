@@ -2,6 +2,17 @@
   color: white !important;
 }
 
+.searchbar-wp {
+  padding: 9px !important;
+}
+
+.tabs-md {
+  .tab-button[aria-selected=true] {
+    .tab-button-icon {
+      color: #0a304e !important;
+    }
+  }
+}
 
 .tabs {
 
@@ -16,11 +27,20 @@
     box-shadow: none;
   }
 
+  .searchbar-wp {
+    .searchbar-input-container {
+      border: 2px solid transparent;
+    }
+
+    background: transparent !important;
+
+  }
+
   .show-tabbar {
     background: rgb(239, 69, 39) !important;
   }
 
-  .tab-button[aria-selected=true] {
+  .tab-button-icon {
     color: white !important;
   }
 

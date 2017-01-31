@@ -17,6 +17,12 @@ page-alert-modal {
     background:rgb(239, 69, 39);
   }
 
+
+  ion-item {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+
   ion-content {
     background-color: #e9ebee !important;
     text-align: center;

@@ -3,7 +3,8 @@ import {ViewController, NavController, ModalController} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {APIService} from "../../services/server";
 import {PreviewEvent} from "../preview-event/preview-event";
-import {GoogleMapModal} from '../google-map-modal/google-map-modal'
+import {GoogleMapModal} from '../google-map-modal/google-map-modal';
+
 /*
   Generated class for the EventEditorModal page.
 
@@ -12,8 +13,7 @@ import {GoogleMapModal} from '../google-map-modal/google-map-modal'
 */
 @Component({
   selector: 'page-event-editor-modal',
-  templateUrl: 'event-editor-modal.html',
-  providers: [APIService]
+  templateUrl: 'event-editor-modal.html'
 })
 export class EventEditorModal {
 
@@ -25,24 +25,21 @@ export class EventEditorModal {
   addressInput : string = '';
 
   constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService, public modalCtrl : ModalController) {
+    this.eventForm = this.fb.group({
+      'title': ['', Validators.compose([Validators.required])],
+      'dateStart': ['', Validators.compose([Validators.required])],
+      'dateEnd': ['', Validators.compose([Validators.required])],
+      'filesInput' : [''],
+      'message': ['', Validators.compose([Validators.required])],
+      'notification' : [''],
+      'groups': ['', Validators.compose([Validators.required])]
+    });
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
         console.log(data);
       },
       err => alert(err)
     );
-  }
-
-  ionViewDidLoad() {
-    this.eventForm = this.fb.group({
-        'title': ['', Validators.compose([Validators.required])],
-        'dateStart': ['', Validators.compose([Validators.required])],
-        'dateEnd': ['', Validators.compose([Validators.required])],
-        'filesInput' : [''],
-        'message': ['', Validators.compose([Validators.required])],
-        'notification' : [''],
-        'groups': ['', Validators.compose([Validators.required])]
-    });
   }
 
   onSubmit() {

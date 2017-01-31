@@ -18,7 +18,7 @@
   <ion-icon name="ios-alert-outline" color="sogeti" style="font-size: 15rem; text-align:center;"></ion-icon>
 
 
-  <form [formGroup]="AlertEvenForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="AlertEvenForm" [formGroup]="AlertEvenForm" (ngSubmit)="onSubmit()">
 
     <ion-item padding-vertical class="margin-more animated fadeIn item-remove-animate iOSItem" showWhen="ios">
       <ion-label color="sogeti" fixed>Title</ion-label>

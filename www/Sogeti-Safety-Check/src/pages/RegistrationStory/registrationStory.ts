@@ -12,8 +12,7 @@ import {LoginPage} from "../login/login"
 
 
 @Component({
-  templateUrl: 'registrationStory.html',
-  providers: [APIService],
+  templateUrl: 'registrationStory.html'
 })
 
 export class RegistrationStoryPage {
@@ -27,9 +26,6 @@ export class RegistrationStoryPage {
               private api : APIService, public alertCtrl: AlertController,
               private fb : FormBuilder, private plateform: Platform, private toastCtrl: ToastController) {
     plateform.registerBackButtonAction((e) => { e.preventDefault();}, 501);
-  }
-
-  ionViewDidLoad() {
     this.registrationForm = this.fb.group({
       'firstName': ['', Validators.compose([Validators.required])],
       'lastName': ['', Validators.compose([Validators.required])],

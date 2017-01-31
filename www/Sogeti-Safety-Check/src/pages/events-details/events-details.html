@@ -22,7 +22,7 @@
     </ion-card-content>
     <ion-slides [options]="mySlideOptions" *ngIf="event.type == 0">
       <ion-slide *ngFor="let item of event.images" style="margin:auto;">
-        <ion-img [src]="item.relativePath" ></ion-img>
+        <img [src]="item.relativePath" />
       </ion-slide>
     </ion-slides>
     <ion-slides [options]="mySlideOptions" *ngIf="event.type == 1" (click)="openGoogleMap()">
@@ -82,7 +82,7 @@
   </ion-list>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="commentForm">
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <ion-toolbar no-border-top >
       <ion-textarea fz-elastic rows="1" [formControl]="commentForm.controls['message']" #focusable></ion-textarea>

@@ -2,12 +2,13 @@
  * Created by ekersale on 27/09/2016.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 import {md5} from './md5';
 import {App} from 'ionic-angular';
 import { Observable } from "rxjs/Observable";
 import 'rxjs';
+import io from "socket.io-client";
 
 
 @Injectable()
@@ -18,6 +19,8 @@ export class APIService {
   private header = new Headers();
   private userID;
   private token;
+  private socket: SocketIOClient.Socket;
+  public recv : EventEmitter<any> = new EventEmitter();
 
   constructor(private http: Http, private _app : App) {
     this.token = window.localStorage.getItem('token');
@@ -25,7 +28,28 @@ export class APIService {
     if (this.token && this.userID) {
       this.header.append('Authorization', `Bearer ${this.token}`);
     }
+    this.socket = io(this.serverAdd, {query:"client=" + this.userID});
+    this.connectSocket();
+    this.getRecvMessage();
   }
+
+  connectSocket() {
+    this.socket.on('connect', () => {
+      console.log("socket connected");
+    });
+  }
+
+  getRecvMessage() {
+    this.socket.on('recvMsg', (data) => {
+      this.recv.emit(data);
+      console.log(data);
+    });
+  }
+
+  sendSocketMessage(data) {
+    this.socket.emit('sendMsg', data);
+  }
+
 
   DisplayServerError(toastCtrl, err, Page) {
     let app  = this._app.getRootNav();
@@ -63,6 +87,10 @@ export class APIService {
   removeCredentials() {
     window.localStorage.removeItem("userID");
     window.localStorage.removeItem("token");
+  }
+
+  public getUserID() {
+    return this.userID;
   }
 
 
@@ -206,6 +234,22 @@ export class APIService {
 
   public getParticipants(eventID) {
     return this.http.get(`${this.serverAdd}events/${eventID}/participants`, {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public getUsers(userSearch) {
+    return this.http.get(`${this.serverAdd}users?q=${userSearch}`,  {headers: this.header}).map((res:Response) => res.json());
+  }
+
+  public createTalk(contact) {
+    return this.http.post(`${this.serverAdd}chat`, {contact: contact},{headers: this.header}).map((res:Response) => res.json())
+  }
+
+  public getTalks() {
+    return this.http.get(`${this.serverAdd}chat`,  {headers: this.header}).map((res:Response) => res.json())
+  }
+
+  public getTalk(talkID) {
+    return this.http.get(`${this.serverAdd}chat/${talkID}`,  {headers: this.header}).map((res:Response) => res.json())
   }
 }
 

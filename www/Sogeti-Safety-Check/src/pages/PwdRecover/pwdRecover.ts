@@ -8,8 +8,7 @@ import { APIService } from '../../services/server';
 
 
 @Component({
-  templateUrl: 'pwdRecover.html',
-  providers: [APIService]
+  templateUrl: 'pwdRecover.html'
 })
 
 export class PwdRecuperationPage {

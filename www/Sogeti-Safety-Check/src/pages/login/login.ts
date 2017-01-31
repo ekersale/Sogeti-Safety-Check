@@ -12,8 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
-  templateUrl: 'login.html',
-  providers: [APIService]
+  templateUrl: 'login.html'
 })
 
 export class LoginPage {
@@ -22,9 +21,6 @@ export class LoginPage {
   constructor(public navCtrl: NavController, private api : APIService,
               private toastCtrl : ToastController, private fb : FormBuilder)
   {
-  }
-
-  ionViewDidLoad() {
     this.loginForm = this.fb.group({
       'username' : ['', Validators.compose([Validators.required])],
       'password' : ['', Validators.compose([Validators.required])]
@@ -34,11 +30,13 @@ export class LoginPage {
   onSubmit() {
       this.api.getConnexion(this.loginForm.controls).subscribe(
         data => {
-          console.log(data);
+          console.log("la requête est passée en success");
           this.api.setCredentials(data);
             this.navCtrl.setRoot(TabsPage, {animate: true, animation: 'ios-transition', direction:'forward'});
         },
         err => {
+          console.log(err);
+          console.log("la requête est passée en erreur");
           console.log(err.message);
           console.log(err.status);
           if (err.status == 0)

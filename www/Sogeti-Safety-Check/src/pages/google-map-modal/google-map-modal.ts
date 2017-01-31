@@ -6,8 +6,7 @@ import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'page-google-map-modal',
-  templateUrl: 'google-map-modal.html',
-  providers : [APIService],
+  templateUrl: 'google-map-modal.html'
 })
 export class GoogleMapModal{
 

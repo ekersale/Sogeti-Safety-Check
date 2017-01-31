@@ -18,8 +18,7 @@ import {UserPopOver} from "../user-pop-over/user-pop-over";
 
 @Component({
     templateUrl: 'home.html',
-    selector: 'page-home',
-    providers: [APIService],
+    selector: 'page-home'
 })
 
 export class TabHomePage {
@@ -119,6 +118,7 @@ export class TabHomePage {
   }
 
   openCardDetails(event) {
+    console.log("coucou");
     var EventDetailModal = this.modalCtrl.create(EventsDetails, {event : event, focus: false});
     EventDetailModal.onDidDismiss(data => {
       event = data.event;

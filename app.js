@@ -14,6 +14,7 @@ var users = require('./routes/users/users');
 var sites = require('./routes/sites/sites');
 var events = require('./routes/events/events');
 var geoloc = require('./routes/locations/locations');
+var chat = require('./routes/chat/chat');
 
 var app = express();
 
@@ -56,7 +57,6 @@ app.use('/uploads/events/images', express.static(__dirname + '/uploads/events/im
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -70,6 +70,7 @@ app.use('/events', events);
 app.use('/locations', sites);
 app.use('/doc', express.static(__dirname + '/docAPI'));
 app.use('/geoloc', geoloc);
+app.use('/chat', chat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

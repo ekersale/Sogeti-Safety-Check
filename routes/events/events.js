@@ -7,7 +7,6 @@ var router = express.Router();
 var expressjwt = require("express-jwt");
 var permissions = require("../../permissions");
 var Promise = require('bluebird');
-var ObjectId = require('mongoose').Types.ObjectId;
 var Events = require('../../models/events');
 var Media = require('../../models/media');
 var User = require('../../models/users');

@@ -10,8 +10,7 @@ import {APIService} from "../../services/server";
 */
 @Component({
   selector: 'page-preview-event',
-  templateUrl: 'preview-event.html',
-  providers: [APIService]
+  templateUrl: 'preview-event.html'
 })
 export class PreviewEvent {
 
@@ -26,8 +25,6 @@ export class PreviewEvent {
   constructor(public viewCtrl: ViewController, private navParams : NavParams, private api : APIService) {
     this.event = navParams.get('event');
     this.images = navParams.get('images');
-    console.log(this.event);
-
   }
 
   ionViewDidLoad() {
@@ -35,7 +32,6 @@ export class PreviewEvent {
     this.api.getUserInfo(null).subscribe(
       data => {
         this.user = data.data.user.profileImg.relativePath;
-        console.log(this.user);
       },
       error => alert(error)
     )

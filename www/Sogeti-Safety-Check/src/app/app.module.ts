@@ -19,10 +19,11 @@ import {PreviewEvent} from "../pages/preview-event/preview-event";
 import {GoogleMapModal} from "../pages/google-map-modal/google-map-modal";
 import {APIService} from "../services/server";
 import {EventsDetails} from "../pages/events-details/events-details";
-import { Elastic }  from 'angular2-elastic';
+import { ElasticModule }  from 'angular2-elastic';
 import {MomentModule} from "angular2-moment";
 import {AlertEventModal} from '../pages/alert-event-modal/alert-event-modal';
 import {UserPopOver} from '../pages/user-pop-over/user-pop-over'
+import {Talk} from '../pages/talk/talk';
 
 @NgModule({
   declarations: [
@@ -43,12 +44,13 @@ import {UserPopOver} from '../pages/user-pop-over/user-pop-over'
     GoogleMapModal,
     EventsDetails,
     AlertEventModal,
-    UserPopOver
+    UserPopOver,
+    Talk
   ],
   imports: [
     IonicModule.forRoot(MyApp),
     HttpModule,
-    Elastic,
+    ElasticModule,
     MomentModule
   ],
   bootstrap: [IonicApp],
@@ -70,7 +72,8 @@ import {UserPopOver} from '../pages/user-pop-over/user-pop-over'
     GoogleMapModal,
     EventsDetails,
     AlertEventModal,
-    UserPopOver
+    UserPopOver,
+    Talk
   ],
   providers: [APIService]
 })

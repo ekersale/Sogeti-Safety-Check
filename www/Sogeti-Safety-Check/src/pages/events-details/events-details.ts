@@ -6,10 +6,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TabProfilePage} from '../profile/profile';
 import {UserPopOver} from '../user-pop-over/user-pop-over'
 
+
 @Component({
   selector: 'page-events-details',
-  templateUrl: 'events-details.html',
-  providers: [APIService],
+  templateUrl: 'events-details.html'
 })
 
 export class EventsDetails {
@@ -26,10 +26,14 @@ export class EventsDetails {
               private api : APIService, private fb : FormBuilder, private zone : NgZone,
               private modalCtrl : ModalController, private popoverCtrl: PopoverController)
   {
+    console.log("test view detail");
     this.event = data.get('event');
     if (platform.is('ios')) {
       Keyboard.hideKeyboardAccessoryBar(true);
     }
+    this.commentForm = this.fb.group({
+      'message': ['', Validators.compose([Validators.required])]
+    });
 
   }
 
@@ -48,9 +52,6 @@ export class EventsDetails {
   }
 
   ionViewDidLoad() {
-    this.commentForm = this.fb.group({
-      'message': ['', Validators.compose([Validators.required])]
-    });
     this.currentUser = window.localStorage.getItem('userID');
     this.api.getComments(this.event._id).subscribe(
       data => {
