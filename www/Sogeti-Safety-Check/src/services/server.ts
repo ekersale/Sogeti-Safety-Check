@@ -4,6 +4,7 @@
 
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
+import { Badge } from 'ionic-native';
 import {md5} from './md5';
 import {App} from 'ionic-angular';
 import { Observable } from "rxjs/Observable";
@@ -21,6 +22,8 @@ export class APIService {
   private token;
   private socket: SocketIOClient.Socket;
   public recv : EventEmitter<any> = new EventEmitter();
+  public notificationUnread : number = 0;
+  private messageUnread = [];
 
   constructor(private http: Http, private _app : App) {
     this.token = window.localStorage.getItem('token');
@@ -42,8 +45,29 @@ export class APIService {
   getRecvMessage() {
     this.socket.on('recvMsg', (data) => {
       this.recv.emit(data);
-      console.log(data);
+      var value = this.messageUnread.filter(x => (x.author._id === data.author._id) && (data.author._id != this.userID) );
+      if (value.length == 0 && data.author._id != this.userID)
+      {
+        this.notificationUnread++;
+        this.messageUnread.push(data);
+        Badge.set(this.notificationUnread);
+      }
     });
+  }
+
+  hasUnreadMessage(chatID) {
+    return (this.messageUnread.filter(x => x.id === chatID).length > 0);
+  }
+
+  readMessage(chatID) {
+    var value = this.messageUnread.map((x, index) => (x.id === chatID) ? index : undefined).filter(isFinite)[0];
+    if (value >= 0 && this.messageUnread.length > 0)
+      this.messageUnread.splice(value, 1);
+  }
+
+  resetNotification() {
+    this.notificationUnread = 0;
+    Badge.clear();
   }
 
   sendSocketMessage(data) {

@@ -5,9 +5,9 @@
 </ion-header>
 
 
-<ion-content padding class="messages">
-  <div *ngIf="talkDetail && talkDetail.history.length > 0">
-    <div *ngFor="let item of talkDetail.history" [ngClass]="(item.author._id == api.getUserID()) ? 'messageMe' : 'messageOther'">
+<ion-content padding class="messages" #content>
+  <div  *ngIf="talkDetail && talkDetail.history.length > 0" style="margin-bottom: 25px !important;">
+    <div  *ngFor="let item of talkDetail.history" [ngClass]="(item.author._id == api.getUserID()) ? 'messageMe' : 'messageOther'">
       <img *ngIf="(item.author._id != api.getUserID())" [src]="item.author.profileImg.relativePath">
       <span>{{item.message}}</span>
     </div>

@@ -47,7 +47,6 @@ export class TabHomePage {
         for (let ev of data.data.events) {
           this.events.push(ev);
         }
-        console.log(data);
       },
       error => {
         console.log(error);
@@ -137,7 +136,6 @@ export class TabHomePage {
   subscribeEvent(event) {
     this.api.postSubscribe(event._id).subscribe(
       data => {
-        console.log(data);
         event.participants = data.data.event.participants;
       },
       error => console.log(error)

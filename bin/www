@@ -30,9 +30,9 @@ var Chat = require('../models/chat');
 
 io.on('connection', function(socket){
   clients.push({socket: socket, client: socket.handshake.query.client});
-
   var authorID = socket.handshake.query.client;
-
+  console.log("new client connected");
+  console.log(authorID);
   socket.on('disconnect', function () {
     var index = clients.map(function(obj, index) {
       if(obj.client == socket.handshake.query.client) {
@@ -49,7 +49,7 @@ io.on('connection', function(socket){
         .exec(function(err, author) {
           if (err || !author) return;
           else {
-            var res = {author: author, message: data.message, date: new Date()};
+            var res = {author: author, message: data.message, date: new Date(), id: data.id};
             Chat.findOne({_id: data.id}, function(err, chat) {
               if (err || !chat) return;
               else {

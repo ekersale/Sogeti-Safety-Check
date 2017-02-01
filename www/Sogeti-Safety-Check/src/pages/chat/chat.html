@@ -19,7 +19,9 @@
         <img class="profileImg" src="{{item.participants[0].profileImg.relativePath}}">
       </ion-avatar>
       <h2>{{item.participants[0].name.first}} {{item.participants[0].name.last}}</h2>
-      <p *ngIf="item && item.history.length > 0" ><span *ngIf="api.getUserID() == item.history[0].author._id">Vous : </span>{{item.history[0].message}}</p>
+      <p *ngIf="item && item.history.length > 0" [style.font-weight]="api.hasUnreadMessage(item._id) ? 'bold' : 'normal'">
+        <span *ngIf="api.getUserID() == item.history[0].author._id">Vous : </span>{{item.history[0].message}}
+      </p>
       <p *ngIf="!item || item.history.length <= 0">Click to start a conversation!</p>
     </button>
   </ion-list>

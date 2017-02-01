@@ -36,7 +36,17 @@ export class TabChatPage {
         error => {
           // create error popup
         }
-      )
+      );
+
+      this.api.recv.subscribe(data => {
+        var index = this.conversations.map((x, index) => {
+          if (x._id === data.id)
+            return index;
+        }).filter(isFinite)[0];
+        var value = this.conversations.splice(index, 1)[0];
+        value.history.unshift(data);
+        this.conversations.unshift(value);
+      })
     }
 
     getItems(ev : any) {
@@ -82,11 +92,11 @@ export class TabChatPage {
     }
 
     showConversation(contact) {
-      console.log(contact);
       this.navCtrl.push(Talk,{contact: contact}, {animate: true, animation: 'ios-transition'});
     }
 
     ionViewWillEnter() {
       this.getTalks();
+      this.api.resetNotification();
     }
 }

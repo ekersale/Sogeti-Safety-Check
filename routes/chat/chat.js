@@ -22,6 +22,7 @@ router.get('/',
                 }
             ])
             .populate('history.author')
+            .sort({ 'history.date':  -1 })
             .exec(function(err, talks) {
             if (err) return next(err);
             else return res.status(200).json({
