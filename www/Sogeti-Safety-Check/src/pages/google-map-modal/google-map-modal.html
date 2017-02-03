@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar showCancelButton="true" (ionInput)="searchInput()" (ionCancel)="onCancel($event)" [(ngModel)]="searchValue"  [formControl]="searchControl" color="sogeti"></ion-searchbar>
+  <ion-searchbar *ngIf="searchControl" showCancelButton="true" (ionInput)="searchInput()" (ionCancel)="onCancel($event)" [(ngModel)]="searchValue"  [formControl]="searchControl" color="sogeti"></ion-searchbar>
 </ion-header>
 
 <ion-content no-padding>

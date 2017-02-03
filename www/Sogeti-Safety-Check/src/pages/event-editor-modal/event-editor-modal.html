@@ -1,5 +1,23 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-navbar class="title toolbar toolbar-md" showWhen="android"><div class="toolbar-background toolbar-background-md" ng-reflect-klass="toolbar-background" ng-reflect-ng-class="toolbar-background-md" *ngIf="platform.is('android') == true"></div>
+    <button class="back-button disable-hover bar-button bar-button-md back-button-md bar-button-default bar-button-default-md show-back-button" ion-button="bar-button" ng-reflect-klass="back-button" ng-reflect-ng-class="back-button-md" style="transition: none; color:white!important;" (click)="dismiss()" showWhen="android">
+    <span class="button-inner" showWhen="android">
+      <ion-icon class="back-button-icon icon icon-md back-button-icon-md ion-md-arrow-back" role="img" ng-reflect-klass="back-button-icon" ng-reflect-ng-class="back-button-icon-md" aria-label="arrow back" ng-reflect-name="md-arrow-back"></ion-icon>
+      <span class="back-button-text back-button-text-md" ng-reflect-klass="back-button-text" ng-reflect-ng-class="back-button-text-md" style="transform: translateX(0px);">Event creation</span>
+    </span>
+      <div class="button-effect"></div>
+    </button>
+    <button *ngIf="eventForm" (click)="preview()" [disabled]="!eventForm.valid" style="background: transparent;
+    float: right;
+    margin: auto;
+    height: 100%;
+    font-size: 20px;
+    padding: 6px;">
+      <ion-icon name="eye" showWhen="android"></ion-icon>
+    </button>
+  </ion-navbar>
+
+  <ion-toolbar showWhen="ios,windows">
     <ion-title>
       Event creation
     </ion-title>
@@ -9,10 +27,10 @@
         <ion-icon name="eye" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons end >
       <button ion-button (click)="dismiss()">
         <span color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="close" showWhen="windows"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

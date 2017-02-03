@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 
+
 import {LoginPage} from '../pages/login/login';
 import {RegistrationStoryPage} from '../pages/RegistrationStory/registrationStory';
 import {RegistrationPage} from '../pages/register/register';

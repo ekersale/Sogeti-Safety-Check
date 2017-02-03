@@ -1,5 +1,5 @@
 import {Component } from '@angular/core';
-import {ViewController, NavController, ModalController} from 'ionic-angular';
+import {ViewController, NavController, ModalController, Platform} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {APIService} from "../../services/server";
 import {PreviewEvent} from "../preview-event/preview-event";
@@ -24,7 +24,11 @@ export class EventEditorModal {
   triggerFileInput : string = 'NO IMAGE SELECTED';
   addressInput : string = '';
 
-  constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder, private api : APIService, public modalCtrl : ModalController) {
+  constructor(public viewCtrl: ViewController, public navCtrl : NavController, private fb : FormBuilder,
+              private api : APIService, public modalCtrl : ModalController, private platform: Platform) {
+    platform.ready().then(() => {
+      this.registerBackButtonListener();
+    });
     this.eventForm = this.fb.group({
       'title': ['', Validators.compose([Validators.required])],
       'dateStart': ['', Validators.compose([Validators.required])],
@@ -36,11 +40,15 @@ export class EventEditorModal {
     });
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
-        console.log(data);
       },
       err => alert(err)
     );
   }
+
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss()});
+  }
+
 
   onSubmit() {
       this.api.postNewEvent({event: this.eventForm.controls, images : this.file_srcs}).subscribe(
@@ -73,7 +81,6 @@ export class EventEditorModal {
       this.triggerFileInput = input.files.length + ' IMAGE SELECTED';
     else
       this.triggerFileInput = input.files.length + ' IMAGES SELECTED';
-    console.log(this.triggerFileInput);
   }
 
   removeItemImage(item) {
@@ -94,7 +101,6 @@ export class EventEditorModal {
   openMapModal() {
     let MapModal = this.modalCtrl.create(GoogleMapModal);
     MapModal.onDidDismiss(data => {
-      console.log(data);
       this.addressInput = data.place;
     });
     MapModal.present();

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ViewController, ToastController} from 'ionic-angular';
+import {ViewController, ToastController, Platform} from 'ionic-angular';
 import {APIService} from "../../services/server";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 /*
@@ -17,12 +17,22 @@ export class AlertModal {
   alertForm: FormGroup;
   groups = [];
 
-  constructor(public viewCtrl: ViewController, private api : APIService, private fb : FormBuilder, private toastCtrl: ToastController) {
+  constructor(public viewCtrl: ViewController, private api : APIService, private fb : FormBuilder,
+              private toastCtrl: ToastController, private platform : Platform) {
+
+    platform.ready().then(() => {
+      this.registerBackButtonListener();
+    });
+
     this.api.getUserGroups().subscribe(data=> {
       this.groups = data.data.groups;
     },
     err => alert(err)
     );
+  }
+
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss()});
   }
 
   ionViewDidLoad() {

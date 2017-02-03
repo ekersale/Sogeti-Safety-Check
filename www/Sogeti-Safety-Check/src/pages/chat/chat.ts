@@ -65,13 +65,13 @@ export class TabChatPage {
       );
     }
 
-    addConversation(contact) {
+
+  addConversation(contact) {
       this.searchInput='';
       this.searchItems = [];
       let elem = this.conversations.filter(talk => {
         return talk.participants[0]._id == contact._id;
       });
-      console.log(elem);
       if (elem.length > 0)
       {
         this.navCtrl.push(Talk,{contact: elem[0]}, {animate: true, animation: 'ios-transition'});

@@ -109,7 +109,7 @@ export class TabHomePage {
   }
 
   showAlertModal() {
-    this.modalCtrl.create(AlertModal).present();
+    this.modalCtrl.create(AlertModal, {}).present();
   }
 
   showEventCreation() {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ViewController, NavParams} from 'ionic-angular';
+import {ViewController, NavParams, Platform} from 'ionic-angular';
 import {APIService} from "../../services/server";
 
 /*
@@ -22,10 +22,19 @@ export class PreviewEvent {
     loop: true
   };
 
-  constructor(public viewCtrl: ViewController, private navParams : NavParams, private api : APIService) {
+  constructor(public viewCtrl: ViewController, private navParams : NavParams, private api : APIService,
+              private platform: Platform) {
+    platform.ready().then(() => {
+      this.registerBackButtonListener();
+    })
     this.event = navParams.get('event');
     this.images = navParams.get('images');
   }
+
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss()});
+  }
+
 
   ionViewDidLoad() {
     console.log('Hello PreviewEvent Page');

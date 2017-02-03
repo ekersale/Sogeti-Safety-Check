@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, ViewController, ModalController} from 'ionic-angular';
+import {NavController, ViewController, ModalController, Platform} from 'ionic-angular';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {GoogleMapModal} from "../google-map-modal/google-map-modal";
 import {APIService} from "../../services/server";
@@ -18,10 +18,14 @@ export class AlertEventModal {
 
   AlertEvenForm : FormGroup;
   groups = [];
-  placeSelected;
+  placeSelected : any;
 
   constructor(public navCtrl: NavController, private viewCtrl : ViewController, private fb : FormBuilder,
-              public modalCtrl : ModalController, public api : APIService) {
+              public modalCtrl : ModalController, public api : APIService, private platform : Platform) {
+
+    platform.ready().then(() => {
+      this.registerBackButtonListener();
+    });
     this.api.getUserGroups().subscribe(data=> {
         this.groups = data.data.groups;
       },
@@ -37,15 +41,20 @@ export class AlertEventModal {
     });
   }
 
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss()});
+  }
+
+
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
   openMapModal() {
-    let MapModal = this.modalCtrl.create(GoogleMapModal);
+    let MapModal = this.modalCtrl.create(GoogleMapModal, {});
     MapModal.onDidDismiss(data => {
-      this.placeSelected = data;
-      this.AlertEvenForm.patchValue({place: data.place.description});
+      this.placeSelected = (data) ? data : {};
+      this.AlertEvenForm.patchValue({place: (data) ? data.place.description: ''});
     });
     MapModal.present();
   }

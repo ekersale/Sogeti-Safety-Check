@@ -4,7 +4,7 @@
 
 import {Component} from '@angular/core';
 import {APIService} from '../../services/server'
-import {NavController, ToastController, ModalController, NavParams, ViewController} from "ionic-angular";
+import {NavController, ToastController, ModalController, NavParams, ViewController, Platform} from "ionic-angular";
 import {LoginPage} from "../login/login"
 import {App} from 'ionic-angular';
 import {EventsDetails} from '../events-details/events-details'
@@ -25,11 +25,17 @@ export class TabProfilePage {
   public events = [];
   public displayReturnButton: boolean = false;
   constructor(private api: APIService, public navCtrl: NavController, private _app : App, private toastCtrl : ToastController,
-              private modalCtrl : ModalController, public data : NavParams, public viewCtrl : ViewController) {
+              private modalCtrl : ModalController, public data : NavParams, public viewCtrl : ViewController, private platform: Platform) {
     if (this.data.get('userID')) {
       this.displayReturnButton = true;
     }
+    platform.ready().then(() => this.registerBackButtonListener());
   }
+
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss()});
+  }
+
 
   ionViewWillEnter() {
     let request;

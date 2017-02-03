@@ -26,16 +26,23 @@ export class EventsDetails {
               private api : APIService, private fb : FormBuilder, private zone : NgZone,
               private modalCtrl : ModalController, private popoverCtrl: PopoverController)
   {
-    console.log("test view detail");
     this.event = data.get('event');
-    if (platform.is('ios')) {
-      Keyboard.hideKeyboardAccessoryBar(true);
-    }
+    platform.ready().then(() => {
+      if (platform.is('ios')) {
+        Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      this.registerBackButtonListener();
+    });
     this.commentForm = this.fb.group({
       'message': ['', Validators.compose([Validators.required])]
     });
-
   }
+
+  registerBackButtonListener() {
+    document.addEventListener('backbutton', () => { this.viewCtrl.dismiss({event : this.event})});
+  }
+
+
 
   ionViewWillEnter() {
     if (this.data.get('focus') == true) {
@@ -122,13 +129,12 @@ export class EventsDetails {
 
 
   openGoogleMap() {
-    console.log("open map");
     let coords = this.event.zone.latitude + "," +  this.event.zone.longitude;
     if (this.platform.is('ios')) {
       window.open("maps://maps.apple.com/?q=" + coords, '_system');
     }
     else {
-      window.open("geo:" + coords);
+      window.open("geo:?q=" + coords, '_system');
     }
   }
 
